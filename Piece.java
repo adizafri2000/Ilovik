@@ -38,10 +38,13 @@ public abstract class Piece {
      * Constructs a Piece object.
      * @param name the name of the piece
      * @param side the player's side owning the piece
+     * @param x x-coordinate of the piece
+     * @param y y-coordinate of the piece
      */
-    public Piece(String name,char side){
+    public Piece(String name,char side,int x,int y){
         this.name = name;
         this.side = side;
+        setCoordinates(x, y);
     }
 
     /**

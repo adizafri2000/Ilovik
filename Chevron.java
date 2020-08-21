@@ -5,8 +5,8 @@
  */
 public class Chevron extends Piece{
 
-    public Chevron(String name,char side){
-        super(name, side);
+    public Chevron(String name,char side,int x,int y){
+        super(name, side,x,y);
     }
 
     @Override
