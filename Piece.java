@@ -25,6 +25,16 @@ public abstract class Piece {
     public char side;
     
     /**
+     * Determines x-coordinate of the piece (row)
+     */
+    public int x;
+
+    /**
+     * Determines y-coordinate of the piece (column)
+     */
+    public int y;
+
+    /**
      * Constructs a Piece object.
      * @param name the name of the piece
      * @param side the player's side owning the piece
@@ -40,6 +50,25 @@ public abstract class Piece {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Sets the coordinates of this piece on the board
+     * @param x x-coordinate of the piece (row no.)
+     * @param y y-coordinate of the piece (col. no.)
+     */
+    public void setCoordinates(int x,int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Returns the coordinates of this piece in an array of format 
+     * {x-coordinate, y-coordinate}
+     * @return int array of x and y-coordinates
+     */
+    public int[] getCoordinates(){
+        return new int[] {x,y};
     }
 
     /**
