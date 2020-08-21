@@ -1,4 +1,4 @@
-//REMEMBER TO INCLUDE JAVADOCS COMMENTATION
+//REMEMBER TO INCLUDE JAVADOCS COMMENTATIONc
 
 /**
  * Piece class defines basic structure of what a Piece (Arrow, Plus, Triangle, Chevron, Sun)
@@ -10,7 +10,7 @@
  * <p>
  * <strong> 'b' for blue player</strong>
  * @author Adi
- * @version %I%
+ * @version 1.02
  */
 public abstract class Piece {
 
