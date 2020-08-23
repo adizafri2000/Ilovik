@@ -1,7 +1,6 @@
 /**
  * Chevron class defines structure of a Chevron Piece object.
  * @author Adi
- * @version %I%
  */
 public class Chevron extends Piece{
 
@@ -11,6 +10,9 @@ public class Chevron extends Piece{
         super(name, side,x,y);
     }
 
+    public boolean validMovement(){
+        return false;
+    }
 
     @Override
     public void move() {

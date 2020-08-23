@@ -1,4 +1,4 @@
-//REMEMBER TO INCLUDE JAVADOCS COMMENTATIONc
+//REMEMBER TO INCLUDE JAVADOCS COMMENTATION
 
 /**
  * Piece class defines basic structure of what a Piece (Arrow, Plus, Triangle, Chevron, Sun)
@@ -10,7 +10,6 @@
  * <p>
  * <strong> 'b' for blue player</strong>
  * @author Adi
- * @version 1.02
  */
 public abstract class Piece {
 
@@ -25,26 +24,19 @@ public abstract class Piece {
     public char side;
     
     /**
-     * Determines x-coordinate of the piece (row)
+     * Tile location of this piece
      */
-    public int x;
-
-    /**
-     * Determines y-coordinate of the piece (column)
-     */
-    public int y;
+    private Tile tile;
 
     /**
      * Constructs a Piece object.
      * @param name the name of the piece
      * @param side the player's side owning the piece
-     * @param x x-coordinate of the piece
-     * @param y y-coordinate of the piece
      */
-    public Piece(String name,char side,int x,int y){
+    public Piece(String name,char side,Tile t){
         this.name = name;
         this.side = side;
-        setCoordinates(x, y);
+        this.tile = t;
     }
 
     /**
@@ -55,23 +47,12 @@ public abstract class Piece {
         this.name = name;
     }
 
-    /**
-     * Sets the coordinates of this piece on the board
-     * @param x x-coordinate of the piece (row no.)
-     * @param y y-coordinate of the piece (col. no.)
-     */
-    public void setCoordinates(int x,int y){
-        this.x = x;
-        this.y = y;
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 
-    /**
-     * Returns the coordinates of this piece in an array of format 
-     * {x-coordinate, y-coordinate}
-     * @return int array of x and y-coordinates
-     */
-    public int[] getCoordinates(){
-        return new int[] {x,y};
+    public Tile getTile() {
+        return tile;
     }
 
     /**
