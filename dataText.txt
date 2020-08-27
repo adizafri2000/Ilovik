@@ -1,0 +1,8 @@
+bp	bt	bc	bs	bc	bt	bp	
+ba		ba		ba		ba	
+							
+							
+							
+							
+ra		ra		ra		ra	
+rp	rt	rc	rs	rc	rt	rp	
