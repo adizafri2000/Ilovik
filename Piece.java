@@ -1,87 +1,112 @@
 //REMEMBER TO INCLUDE JAVADOCS COMMENTATION
 
 /**
- * Piece class defines basic structure of what a Piece (Arrow, Plus, Triangle, Chevron, Sun)
- * would have and implemented later in subclasses. 
- * <p>
- * Pieces are owned by each player from both sides:
- * <p>
- * <strong> 'r' for red player</strong>
- * <p>
- * <strong> 'b' for blue player</strong>
+ * Abstract class Piece defines the structure of a Piece object played in the Webale Chess. 
+ * Piece objects have specific types i.e Sun, Triangle, Chevron, Plus, Arrow.
+ * A Piece belongs to a Player and marked by the side the Player represents: red/blue.
  * @author Adi
  */
-public abstract class Piece {
-
-    /**
-     * Determines the name of this piece.
-     */
-    private String name;
-
-    /**
-     * Determines player side who owns this piece.
-     */
-    public char side;
+public abstract class Piece{
     
-    /**
-     * Tile location of this piece
-     */
-    private Tile tile;
+    private String name;
+    private String iconFile;
+    private char side;
+    private boolean captured;
 
-    /**
-     * Constructs a Piece object.
-     * @param name the name of the piece
-     * @param side the player's side owning the piece
-     */
-    public Piece(String name,char side,Tile t){
-        this.name = name;
+    public Piece(char side,String iconFile){
+        this.captured = false;
         this.side = side;
-        this.tile = t;
+        this.iconFile = iconFile;
+        setName();
     }
 
     /**
-     * Sets the name of piece.
-     * @param name the name to be set for the piece
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setTile(Tile tile) {
-        this.tile = tile;
-    }
-
-    public Tile getTile() {
-        return tile;
-    }
-
-    /**
-     * Sets the player side owning this piece.
-     * @param side the side owning this piece
-     */
-    public void setSide(char side) {
-        this.side = side;
-    }
-
-    /**
-     * Returns the name of this piece.
-     * @return name of piece
+     * Retrieves the name of this piece
+     * @return the name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Returns side owning this piece.
-     * @return the side that owns the piece
+     * Retrieves the icon file name of this piece
+     * @return the iconFile
+     */
+    public String getIconFile() {
+        return iconFile;
+    }
+
+    /**
+     * Retrives the side that belongs this piece
+     * @return the side
      */
     public char getSide() {
         return side;
     }
 
     /**
-     * Specifies movement for a type of piece.
+     * Checks if this piece is captured by the enemy
+     * @return true if the piece is captured by the enemy, false if otherwise
      */
-    public abstract void move();
+    public boolean isCaptured() {
+        return captured;
+    }
 
+    /**
+     * Sets the icon file name for this respective piece
+     * @param iconFile the iconFile to set
+     */
+    public void setIconFile(String iconFile) {
+        this.iconFile = iconFile;
+    }
+
+    /**
+     * Sets the side owning this piece
+     * @param side the side to set
+     */
+    public void setSide(char side) {
+        this.side = side;
+    }
+
+    /**
+     * Sets the condition of the piee whether it is captured by the enemy
+     * @param captured the captured to set
+     */
+    public void setCaptured(boolean captured) {
+        this.captured = captured;
+    }
+
+    /**
+     * Generates the piece's name based on its side
+     * @param side
+     */
+    public void setName(){
+        this.name = Character.toString(side);
+    }
+
+    public void setName(String s){
+        this.name+=s;
+    }
+
+    /**
+     * Checks if the selected piece can move to another square specified by the player
+     * @param start Square containing the selected piece to be moved 
+     * @param end Destination square for the piece's movement
+     * @return validity of this piece to move to the end square
+     * Once Square class is created, uncomment this method and apply this one into your
+     * Piece types.
+     */
+    //public abstract boolean move(Square start, Square end);
+
+    /**
+     * Dummy function while Square class is being created. Use this method first to identify
+     * the math required for your piece to move. Once Square class is created, paste the algorithm
+     * into the above of method.
+     * @param xStart
+     * @param yStart
+     * @param xEnd
+     * @param yEnd
+     * @return
+     */
+    public abstract boolean move(int xStart, int yStart, int xEnd, int yEnd);
 }
