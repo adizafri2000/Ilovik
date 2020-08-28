@@ -16,6 +16,6 @@ public class Chevron extends Piece{
 
     @Override
     public void move() {
-        
+        //bvbebvskvbkbvksvkbfkv
     }
 }
