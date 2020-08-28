@@ -10,13 +10,19 @@ public class MoveTester {
     //Game board with 8 rows and 7 columns (7*8 board as mentioned in requirements)
     char[][] board = new char[8][7];
     static Piece p;
-    
+
     public static void main(String[] args) {
 
         MoveTester home = new MoveTester();
         Scanner input = new Scanner(System.in);
         char pieceType = ' ';
         boolean check = true;
+
+        //Since square class belum ada lagi, kita kena manually set position piece and destination dia
+        int startX;
+        int startY;
+        int endX;
+        int endY;
 
         while(check){
             System.out.print("Enter piece type's initial in LOWERCASE e.g Chevron = 'c', Triangle = 't' etc\n:");
@@ -34,12 +40,6 @@ public class MoveTester {
                 default: System.out.println("No such piece with the initial.\n");break;
             }
         }
-
-        //Since square class belum ada lagi, kita kena manually set position piece and destination dia
-        int startX;
-        int startY;
-        int endX;
-        int endY;
 
         System.out.println("Starting point coordinates");
         while (true){
@@ -59,8 +59,15 @@ public class MoveTester {
             System.out.print("Enter destination point y-coordinate between 0-7: ");
             endY = input.nextInt();
 
-            if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) break;
-            else System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+            
+            if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) 
+                break;
+            else {
+                if(endX==startX && endY==startY) 
+                    System.out.println("Destination point cannot be the same to starting point.\n");
+                else 
+                    System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+            }
         }
         
         home.clearCMD();
@@ -88,8 +95,14 @@ public class MoveTester {
                 System.out.print("Enter destination point y-coordinate between 0-7: ");
                 endY = input.nextInt();
 
-                if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) break;
-                else System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+                if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) 
+                    break;
+                else {
+                    if(endX==startX && endY==startY) 
+                        System.out.println("Destination point cannot be the same to starting point.\n");
+                    else 
+                        System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+                }
             }
             home.clearCMD();
             home.initBoard();
