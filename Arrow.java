@@ -23,4 +23,6 @@ public class Arrow extends Piece {
 		else
 			return false;
 	}
+	//number 2 later continue
+	
 }                     
