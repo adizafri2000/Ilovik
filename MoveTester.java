@@ -33,7 +33,7 @@ public class MoveTester {
                 
                 case 'c': p = new Chevron('r',"RedChevron.png");check = false;break;
                 //INSERT YOUR RESPECTIVE CONSTRUCTORS HERE KALAU NAK CHECK
-                //case 's': p = new Sun('r',"RedChevron.png");check = false;break;
+                case 's': p = new Sun('r',"RedChevron.png");check = false;break;
                 //case 't': p = new Triangle('r',"RedChevron.png");check = false;break;
                 //case 'p': p = new Plus('r',"RedChevron.png");check = false;break;
                 //case 'a': p = new Arrow('r',"RedChevron.png");check = false;break;
