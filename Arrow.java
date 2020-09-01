@@ -5,7 +5,6 @@ public class Arrow extends Piece{
 	
 	private boolean rotate;
 	
-	
 	public Arrow(char side, String iconFile,boolean rotate){
 		super(side, iconFile);
 		setName("Arrow");
