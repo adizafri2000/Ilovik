@@ -12,91 +12,57 @@ import javax.swing.JSplitPane;
 /**
  * Code ni ambik kat internet. Since program kita kena resizable, that means if main window (JFrame)
  * is resized, components dalam dia pun akan rearranged.
- */
+*/
 public class Component {
 
-    public static void main(String args[]) {
+  public static void main(String args[]) {
 
-  JFrame jFrame = new JFrame();
+    JFrame jFrame = new JFrame();
+    Container cPane = jFrame.getContentPane();
+    ComponentListener componenetListener = new ComponentListener() {
+      @Override
+      public void componentHidden(ComponentEvent event) {
+        dump("Hidden", event);
+      }
 
-  Container cPane = jFrame.getContentPane();
+      @Override
+        public void componentMoved(ComponentEvent event) {
+      dump("Moved", event);
+      }
 
-  ComponentListener componenetListener = new ComponentListener() {
+      @Override
+      public void componentResized(ComponentEvent event) {
+        dump("Resized", event);
+      }
 
-@Override
+      @Override
+      public void componentShown(ComponentEvent event) {
+        dump("Shown", event);
+      }
 
-public void componentHidden(ComponentEvent event) {
+      private void dump(String str, ComponentEvent event) {
+        System.out.println(event.getComponent().getName() + " : " + str);
+      }
+    };
 
-    dump("Hidden", event);
+    JButton lbutton = new JButton("Left");
+    lbutton.setName("Left");
+    lbutton.addComponentListener(componenetListener);
+    final JButton lright = new JButton("Right");
+    lright.setName("Right");
+    lright.addComponentListener(componenetListener);
 
-}
+    ActionListener action = new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent event) {
+        lright.setVisible(!lright.isVisible());
+      }
+    };
 
-@Override
-
-public void componentMoved(ComponentEvent event) {
-
-    dump("Moved", event);
-
-}
-
-@Override
-
-public void componentResized(ComponentEvent event) {
-
-    dump("Resized", event);
-
-}
-
-@Override
-
-public void componentShown(ComponentEvent event) {
-
-    dump("Shown", event);
-
-}
-
-private void dump(String str, ComponentEvent event) {
-
-    System.out.println(event.getComponent().getName() + " : " + str);
-
-}
-
-  };
-
-  JButton lbutton = new JButton("Left");
-
-  lbutton.setName("Left");
-
-  lbutton.addComponentListener(componenetListener);
-
-  final JButton lright = new JButton("Right");
-
-  lright.setName("Right");
-
-  lright.addComponentListener(componenetListener);
-
-  ActionListener action = new ActionListener() {
-
-@Override
-
-public void actionPerformed(ActionEvent event) {
-
-    lright.setVisible(!lright.isVisible());
-
-}
-
-  };
-
-  lbutton.addActionListener(action);
-
-  JSplitPane splitBar = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-
-    lbutton, lright);
-
-  cPane.add(splitBar, BorderLayout.CENTER);
-
-  jFrame.setSize(500, 400);
-
-  jFrame.setVisible(true);
-    }
+    lbutton.addActionListener(action);
+    JSplitPane splitBar = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, lbutton, lright);
+    cPane.add(splitBar, BorderLayout.CENTER);
+    jFrame.setSize(500, 400);
+    jFrame.setVisible(true);
+  }
 }
