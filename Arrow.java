@@ -18,6 +18,7 @@ public class Arrow extends Piece{
 	}
 
 	public boolean isRotate() {
+		
 		return rotate;
 	}
 	
@@ -46,6 +47,8 @@ public class Arrow extends Piece{
 					return false;
 			} 
 			else if ((yStart == 0) && (xEnd == xStart)){
+				//isRotate()
+				//rotate == true;
 				if((yEnd == yStart + 1) || (yEnd == yStart + 2)) 
 					return true;
 				else 
@@ -64,6 +67,7 @@ public class Arrow extends Piece{
 					return false;
 			} 
 			else if ((yStart == 7) && (xEnd == xStart)){
+				// rotate == true
 				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) 
 					return true;
 				else 
