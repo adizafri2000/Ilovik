@@ -1,11 +1,15 @@
+/**
+ * @author Puteri
+ */
 public class Arrow extends Piece{
 	
-	boolean rotate;
-	//rotate = false;
+	private boolean rotate;
 	
-	public Arrow(char side, String iconFile){
+	
+	public Arrow(char side, String iconFile,boolean rotate){
 		super(side, iconFile);
 		setName("Arrow");
+		//rotate = false;	
 	}
 	
 	@Override

@@ -1,3 +1,6 @@
+/**
+ * @author Iffah
+ */
 public class Sun extends Piece{
 	
 	public Sun(char side,String iconFile){

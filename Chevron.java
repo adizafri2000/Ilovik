@@ -1,3 +1,6 @@
+/**
+ * @author Adi
+ */
 public class Chevron extends Piece{
 
     public Chevron(char side,String iconFile){

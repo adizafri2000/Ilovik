@@ -36,7 +36,7 @@ public class MoveTester {
                 case 's': p = new Sun('r',"RedChevron.png");check = false;break;
                 //case 't': p = new Triangle('r',"RedChevron.png");check = false;break;
                 //case 'p': p = new Plus('r',"RedChevron.png");check = false;break;
-                case 'a': p = new Arrow('r',"RedChevron.png");check = false;break;
+                case 'a': p = new Arrow('r',"RedChevron.png",false);check = false;break;
                 default: System.out.println("No such piece with the initial.\n");break;
             }
         }
