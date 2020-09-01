@@ -82,6 +82,10 @@ public class Player{
 	public int getMoves(){
 		return moves;
 	}
+	
+	public void swapPiece(){
+		//swap triangle and plus
+	}
 }
 	
 	
