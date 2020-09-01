@@ -69,7 +69,7 @@ public class Arrow extends Piece {
 		else 
 			return false;
 	}
-	iconrotate something;
+	//create rotate icon method
 	/*** for number 1
 		//check whether it is in the same x-coordinate since it can only move forward
 		if(xEnd == xStart){
