@@ -27,29 +27,7 @@ public class Arrow extends Piece {
 	if (side==b){ //blue side
 		if(xEnd == xStart){
 			if (yStart == 0 && yStart < 7){
-				if(yEnd == yStart + 1) //move 1 step forward 
-					return true;
-				else if (yEnd == yStart + 2) //move 2 steps forward 
-					return true;
-				else 
-					return false;
-			} 
-			else if (yStart == 7 && yStart > 0){
-				if(yEnd == yStart - 1) //move 1 step forward 
-					return true;
-				else if (yEnd == yStart - 2) //move 2 steps forward 
-					return true;
-				else 
-					return false;				 
-			}   
-		}	 
-			else 
-				return false;
-	}
-	if (side==r){ //red side
-		if(xEnd == xStart){
-			if (yStart == 0 && yStart < 7){
-				if(yEnd == yStart + 1) || (yEnd == yStart + 2)//move 1 step forward 
+				if((yEnd == yStart + 1) || (yEnd == yStart + 2))//move 1 step forward 
 					return true;
 				//else if (yEnd == yStart + 2) //move 2 steps forward 
 					//return true;
@@ -57,7 +35,7 @@ public class Arrow extends Piece {
 					return false;
 			} 
 			else if (yStart == 7 && yStart > 0){
-				if(yEnd == yStart - 1) || (yEnd == yStart - 2)//move 1 step forward 
+				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) //move 1 step forward 
 					return true;
 				//else if (yEnd == yStart - 2) //move 2 steps forward 
 					//return true;
@@ -65,8 +43,31 @@ public class Arrow extends Piece {
 					return false;				 
 			}   
 		}	 
-			else 
-				return false;
+		else 
+			return false;
+	}
+	else{ //red side
+	//if (side==r){ 
+		if(xEnd == xStart){
+			if (yStart == 0 && yStart < 7){
+				if((yEnd == yStart + 1) || (yEnd == yStart + 2))//move 1 step forward 
+					return true;
+				//else if (yEnd == yStart + 2) //move 2 steps forward 
+					//return true;
+				else 
+					return false;
+			} 
+			else if (yStart == 7 && yStart > 0){
+				if((yEnd == yStart - 1) || (yEnd == yStart - 2))//move 1 step forward 
+					return true;
+				//else if (yEnd == yStart - 2) //move 2 steps forward 
+					//return true;
+				else 
+					return false;				 
+			}   
+		}	 
+		else 
+			return false;
 	}
 	/*** for number 1
 		//check whether it is in the same x-coordinate since it can only move forward
