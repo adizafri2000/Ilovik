@@ -28,7 +28,26 @@ public class Arrow extends Piece{
 		--> if yEnd == 7 || yEnd == 0, The boolean rotate will be true and the arrow will move to opposite direction
 		--> icon should rotate 180 degree
 	***/
-	//if (side==r){ //red side
+	// FOR RED SIDE
+	//if (side==r){ 
+			if (((yStart == 7) || (yStart == 6) || (yStart == 5) || (yStart == 4) || (yStart == 3) || (yStart == 2) || (yStart == 1)) &&(xEnd == xStart)){
+				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) 
+					return true;
+				else 
+					return false;
+			} 
+			else if ((yStart == 0) && (xEnd == xStart)){
+				if((yEnd == yStart + 1) || (yEnd == yStart + 2)) 
+					return true;
+				else 
+					return false;				 
+			}
+			else 
+				return false;
+	}
+	/***
+	FOR BLUE SIDE
+	else{ 
 			if (((yStart == 0) || (yStart == 1) || (yStart == 2) || (yStart == 3) || (yStart == 4) || (yStart == 5) || (yStart == 6)) &&(xEnd == xStart)){
 				if((yEnd == yStart + 1) || (yEnd == yStart + 2)) 
 					return true;
@@ -43,30 +62,6 @@ public class Arrow extends Piece{
 			}
 			else 
 				return false;
-	}
-	/***
-	else{ //blue side
-	//if (side==r){ 
-		if(xEnd == xStart){
-			if (yStart == 0 && yStart < 7){
-				if((yEnd == yStart + 1) || (yEnd == yStart + 2))//move 1 step forward 
-					return true;
-				//else if (yEnd == yStart + 2) //move 2 steps forward 
-					//return true;
-				else 
-					return false;
-			} 
-			else if (yStart == 7 && yStart > 0){
-				if((yEnd == yStart - 1) || (yEnd == yStart - 2))//move 1 step forward 
-					return true;
-				//else if (yEnd == yStart - 2) //move 2 steps forward 
-					//return true;
-				else 
-					return false;				 
-			}   
-		}	 
-		else 
-			return false;
 		***/
 }
 	
