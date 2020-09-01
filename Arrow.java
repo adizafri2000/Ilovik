@@ -29,14 +29,14 @@ public class Arrow extends Piece{
 		--> icon should rotate 180 degree
 	***/
 	//if (side==r){ //red side
-			if ((yStart == 0) && (yStart < 7) && (xEnd == xStart)){
-				if((yEnd == yStart + 1) || (yEnd == yStart + 2))//move 1 step forward 
+			if (((yStart == 0) || (yStart == 1) || (yStart == 2) || (yStart == 3) || (yStart == 4) || (yStart == 5) || (yStart == 6)) &&(xEnd == xStart)){
+				if((yEnd == yStart + 1) || (yEnd == yStart + 2)) 
 					return true;
 				else 
 					return false;
 			} 
-			else if ((yStart == 7) && (yStart > 0) && (xEnd == xStart)){
-				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) //move 1 step forward 
+			else if ((yStart == 7) && (xEnd == xStart)){
+				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) 
 					return true;
 				else 
 					return false;				 
