@@ -40,6 +40,8 @@ public class MoveTester {
                 default: System.out.println("No such piece with the initial.\n");break;
             }
         }
+        home.initBoard();
+        home.showBoard();
 
         System.out.println("Starting point coordinates");
         while (true){
@@ -71,7 +73,6 @@ public class MoveTester {
         }
         
         home.clearCMD();
-        home.initBoard();
         home.addPiece(startX, startY, pieceType);
         home.addPiece(endX, endY, '#');
 

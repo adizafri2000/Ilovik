@@ -3,13 +3,22 @@
  */
 public class Arrow extends Piece{
 	
+	/**
+	 * The orientation of the Arrow piece.
+	 * Arrow pieces from both sides' rotate are set as true on starting arrangement.
+	 * When respective sides' Arrow piece reach one end of the board, they rotate (move backwards)
+	 * and boolean variable is set to false.
+	 */
 	private boolean rotate;
-	
 	
 	public Arrow(char side, String iconFile,boolean rotate){
 		super(side, iconFile);
 		setName("Arrow");
 		this.rotate = rotate;
+	}
+
+	public boolean isRotate() {
+		return rotate;
 	}
 	
 	@Override
