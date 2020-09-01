@@ -8,13 +8,13 @@ import java.util.*;
  */
 public class MoveTester {
     //Game board with 8 rows and 7 columns (7*8 board as mentioned in requirements)
-    char[][] board = new char[8][7];
+    Square[][] board = new Square[8][7];
     static Piece p;
+    static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         MoveTester home = new MoveTester();
-        Scanner input = new Scanner(System.in);
         char pieceType = ' ';
         boolean check = true;
 
@@ -53,6 +53,13 @@ public class MoveTester {
             if ((startX<7 && startX>-1)&&(startY<8 && startY>-1)) break;
             else System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
         }
+        Square start = new Square.Builder().x(startX).y(startY).occupied(true).piece(p).build();
+
+        System.out.print("Add dummy piece? 'y' for yes: ");
+        boolean haih = (input.nextLine().equals("y")) ? true : false;
+        if (haih){
+            home.addDummy(start);
+        }
 
         System.out.println("\n\nDestination point coordinates");
         while (true){
@@ -71,10 +78,13 @@ public class MoveTester {
                     System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
             }
         }
+
+        
+        Square end = new Square.Builder().x(endX).y(endY).occupied(false).build();
         
         home.clearCMD();
-        home.addPiece(startX, startY, pieceType);
-        home.addPiece(endX, endY, '#');
+        home.addPiece(start);
+        //home.addPiece(endX, endY, '#');
 
         System.out.printf("Check Info:\nPiece: %c\nStarting coordinates (x,y): (%d,%d)\nDestination (x,y): (%d,%d)\n",pieceType,startX,startY,endX,endY);
         System.out.println("A '#' marks the destination square of the piece.\n\n");
@@ -82,7 +92,7 @@ public class MoveTester {
 
         home.showBoard();
 
-        boolean flag = p.move(startX, startY, endX, endY);
+        boolean flag = p.move(start,end);
         System.out.print("Valdity of movement: ");
         System.out.println(flag);
 
@@ -116,7 +126,7 @@ public class MoveTester {
 
             home.showBoard();
 
-            flag = p.move(startX, startY, endX, endY);
+            flag = p.move(start,end);
             System.out.print("Valdity of movement: ");
             System.out.println(flag);
 
@@ -132,7 +142,7 @@ public class MoveTester {
     public void initBoard(){
         for(int i=0;i<8;i++){
             for(int j=0;j<7;j++){
-                board[i][j] = ' ';
+                board[i][j] = new Square.Builder().x(j).y(i).occupied(false).build();
             }
         }
     }
@@ -142,8 +152,29 @@ public class MoveTester {
         System.out.flush();
     }
 
-    public void addPiece(int startX,int startY,char pieceType){
-        board[startY][startX] = pieceType;
+    public void addDummy(Square pos){
+        int x,y;
+        while (true){
+            System.out.print("Enter x-coordinate of dummy piece between 0-6: ");
+            x = input.nextInt();
+            System.out.print("Enter y-coordinate of dummy piece between 0-7: ");
+            y = input.nextInt();
+
+            
+            if ((x<7 && x>-1)&&(y<8 && y>-1)){
+                if(x!=pos.getX() && y!= pos.getY())
+                    break;
+                else System.out.println("Dummy piece cannot be placed on starting piece. Place it in different coordinates.\n");
+            }
+            else {
+                System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+            }
+        }
+        board[y][x].setPiece(new Chevron('b',"whatever"));
+    }
+
+    public void addPiece(Square pos){
+        board[pos.getY()][pos.getX()].setPiece(p);
     }
 
     public void showBoard(){
@@ -152,9 +183,58 @@ public class MoveTester {
         for(int i=0;i<8;i++){
             System.out.printf("%d|",i);
             for(int j=0;j<7;j++){
-                System.out.printf("%2c |",board[i][j]);
+                if (board[i][j].isOccupied())
+                    System.out.printf("%2s |",board[i][j].getPiece().getName().substring(0,3));
+                else
+                    System.out.printf("%2s |"," ");
             }
             System.out.println();
         }
     }
+
+    public void removeDummy(Square pos){
+        int x,y;
+        while (true){
+            System.out.println("Removing dummy piece");
+            System.out.print("Enter x-coordinate of dummy piece to be removed between 0-6: ");
+            x = input.nextInt();
+            System.out.print("Enter y-coordinate of dummy piece to be removed between 0-7: ");
+            y = input.nextInt();
+
+            
+            if ((x<7 && x>-1)&&(y<8 && y>-1)){
+                if(x!=pos.getX() && y!=pos.getY()){
+                    if (board[y][x].isOccupied())
+                        board[y][x].setOccupied(false);
+                    else System.out.println("No dummy piece in this coordinate. Please re-enter.\n");
+                }else System.out.println("Cannot remove original tested piece. Please re-enter.\n");
+            }
+            else {
+                System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+            }
+        }
+    }
+
+    public Square setEnd(Square start){
+        System.out.println("\n\nDestination point coordinates");
+        int endX,endY;
+        while (true){
+            System.out.print("Enter destination point x-coordinate between 0-6: ");
+            endX = input.nextInt();
+            System.out.print("Enter destination point y-coordinate between 0-7: ");
+            endY = input.nextInt();
+
+            
+            if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) 
+                break;
+            else {
+                if(endX==start.getX() && endY==start.getY()) 
+                    System.out.println("Destination point cannot be the same to starting point.\n");
+                else 
+                    System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+            }
+        }
+        return new Square.Builder().build().x(endX).y(endY).;
+    }
+    
 }

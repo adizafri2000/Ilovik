@@ -5,9 +5,9 @@ public class Arrow extends Piece{
 	
 	/**
 	 * The orientation of the Arrow piece.
-	 * Arrow pieces from both sides' rotate are set as true on starting arrangement.
+	 * Arrow pieces from both sides' rotate variable are set as false on starting arrangement.
 	 * When respective sides' Arrow piece reach one end of the board, they rotate (move backwards)
-	 * and boolean variable is set to false.
+	 * and boolean variable is set to true.
 	 */
 	private boolean rotate;
 	
@@ -39,7 +39,8 @@ public class Arrow extends Piece{
 		--> icon should rotate 180 degree
 	***/
 	// FOR RED SIDE
-	//if (side==r){ 
+	//if (side=='r'){ 
+		//if ((yStart!=0) &&(xEnd == xStart)){
 			if (((yStart == 7) || (yStart == 6) || (yStart == 5) || (yStart == 4) || (yStart == 3) || (yStart == 2) || (yStart == 1)) &&(xEnd == xStart)){
 				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) 
 					return true;

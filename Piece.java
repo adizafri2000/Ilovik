@@ -22,7 +22,7 @@ public abstract class Piece{
 
     /**
      * Retrieves the name of this piece
-     * @return the name
+     * @return piece's name
      */
     public String getName() {
         return name;
@@ -30,7 +30,7 @@ public abstract class Piece{
 
     /**
      * Retrieves the icon file name of this piece
-     * @return the iconFile
+     * @return name of file of piece's icon
      */
     public String getIconFile() {
         return iconFile;
@@ -84,6 +84,11 @@ public abstract class Piece{
         this.name = Character.toString(side);
     }
 
+    /**
+     * Appends a specified string to the end of the piece's
+     * current name.
+     * @param s String to be apppended to piece's name
+     */
     public void setName(String s){
         this.name+=s;
     }
@@ -96,7 +101,7 @@ public abstract class Piece{
      * Once Square class is created, uncomment this method and apply this one into your
      * Piece types.
      */
-    //public abstract boolean move(Square start, Square end);
+    public abstract boolean move(Square start, Square end);
 
     /**
      * Dummy function while Square class is being created. Use this method first to identify
@@ -108,5 +113,5 @@ public abstract class Piece{
      * @param yEnd
      * @return
      */
-    public abstract boolean move(int xStart, int yStart, int xEnd, int yEnd);
+    //public abstract boolean move(int xStart, int yStart, int xEnd, int yEnd);
 }
