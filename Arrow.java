@@ -44,7 +44,6 @@ public class Arrow extends Piece{
 			else 
 				return false;
 	}
-}
 	/***
 	else{ //blue side
 	//if (side==r){ 
@@ -69,23 +68,7 @@ public class Arrow extends Piece{
 		else 
 			return false;
 		***/
-//}	
-	//create rotate icon method
-	/*** for number 1
-		//check whether it is in the same x-coordinate since it can only move forward
-		if(xEnd == xStart){
-			if(yEnd == yStart + 1) //move 1 step forward 
-				return true;
-			else if (yEnd == yStart + 2) //move 2 steps forward 
-				return true;
-			else if ((yEnd == 7)||(yEnd==0)) //rotate icon
-				rotate = true;
-				
-			else 
-				return false; //more than 2 steps or less than one step
-		}
-		else
-			return false; //if the x-coordinate is not the same
-	}
-	***/
+}
+	
+	
 			                    
