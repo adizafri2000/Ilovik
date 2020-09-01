@@ -1,7 +1,7 @@
-public class Arrow extends Piece {
+public class Arrow extends Piece{
 	
 	boolean rotate;
-	rotate = false;
+	//rotate = false;
 	
 	public Arrow(char side, String iconFile){
 		super(side, iconFile);
@@ -24,29 +24,25 @@ public class Arrow extends Piece {
 		--> if yEnd == 7 || yEnd == 0, The boolean rotate will be true and the arrow will move to opposite direction
 		--> icon should rotate 180 degree
 	***/
-	if (side==b){ //blue side
-		if(xEnd == xStart){
-			if (yStart == 0 && yStart < 7){
+	//if (side==r){ //red side
+			if ((yStart == 0) && (yStart < 7) && (xEnd == xStart)){
 				if((yEnd == yStart + 1) || (yEnd == yStart + 2))//move 1 step forward 
 					return true;
-				//else if (yEnd == yStart + 2) //move 2 steps forward 
-					//return true;
 				else 
 					return false;
 			} 
-			else if (yStart == 7 && yStart > 0){
+			else if ((yStart == 7) && (yStart > 0) && (xEnd == xStart)){
 				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) //move 1 step forward 
 					return true;
-				//else if (yEnd == yStart - 2) //move 2 steps forward 
-					//return true;
 				else 
 					return false;				 
-			}   
-		}	 
-		else 
-			return false;
+			}
+			else 
+				return false;
 	}
-	else{ //red side
+}
+	/***
+	else{ //blue side
 	//if (side==r){ 
 		if(xEnd == xStart){
 			if (yStart == 0 && yStart < 7){
@@ -68,7 +64,8 @@ public class Arrow extends Piece {
 		}	 
 		else 
 			return false;
-	}
+		***/
+//}	
 	//create rotate icon method
 	/*** for number 1
 		//check whether it is in the same x-coordinate since it can only move forward
@@ -87,6 +84,4 @@ public class Arrow extends Piece {
 			return false; //if the x-coordinate is not the same
 	}
 	***/
-	
-		
-}                     
+			                    
