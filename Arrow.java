@@ -9,7 +9,7 @@ public class Arrow extends Piece{
 	public Arrow(char side, String iconFile,boolean rotate){
 		super(side, iconFile);
 		setName("Arrow");
-		//rotate = false;	
+		this.rotate = rotate;
 	}
 	
 	@Override
