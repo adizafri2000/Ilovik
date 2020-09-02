@@ -1,10 +1,14 @@
 import java.util.*;
 
 /**
+ * UPDATED VERSION
  * MoveTester ni nak test method move() masing2 dalam piece type masing2.
- * Class ni only limited to test moving one piece from one side in an empty board.
- * Takda added pieces dalam ni, just satu piece which is the type yang korang buat.
- * Kalau nak alter for better testing, ubah je then sound kat group. Jangan lupa letak comments.
+ * In program ni, korang boleh test:
+ *      1. Validity of piece from one side move to another square.
+ *      2. Validity of piece from one side moving to an occupied square of same/different side.
+ * Starting position and type of main piece is one-time set and takleh ubah later in program.
+ * Korang boleh tambah dummy pieces from mana2 side into the board jugak. Dummy pieces tu boleh remove.
+ * Default dummy piece is Chevron piece.
  */
 public class MoveTester {
     //Game board with 8 rows and 7 columns (7*8 board as mentioned in requirements)
@@ -17,12 +21,11 @@ public class MoveTester {
         MoveTester home = new MoveTester();
         char pieceType = ' ';
         boolean check = true;
+        int dummyPieces = 0;
 
         //Since square class belum ada lagi, kita kena manually set position piece and destination dia
         int startX;
         int startY;
-        int endX;
-        int endY;
 
         while(check){
             System.out.print("Enter piece type's initial in LOWERCASE e.g Chevron = 'c', Triangle = 't' etc\n:");
@@ -33,10 +36,10 @@ public class MoveTester {
                 
                 case 'c': p = new Chevron('r',"RedChevron.png");check = false;break;
                 //INSERT YOUR RESPECTIVE CONSTRUCTORS HERE KALAU NAK CHECK
-                case 's': p = new Sun('r',"RedChevron.png");check = false;break;
+                //case 's': p = new Sun('r',"RedChevron.png");check = false;break;
                 //case 't': p = new Triangle('r',"RedChevron.png");check = false;break;
                 //case 'p': p = new Plus('r',"RedChevron.png");check = false;break;
-                case 'a': p = new Arrow('r',"RedChevron.png",false);check = false;break;
+                //case 'a': p = new Arrow('r',"RedChevron.png",false);check = false;break;
                 default: System.out.println("No such piece with the initial.\n");break;
             }
         }
@@ -54,85 +57,49 @@ public class MoveTester {
             else System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
         }
         Square start = new Square.Builder().x(startX).y(startY).occupied(true).piece(p).build();
-
-        System.out.print("Add dummy piece? 'y' for yes: ");
-        boolean haih = (input.nextLine().equals("y")) ? true : false;
-        if (haih){
-            home.addDummy(start);
-        }
-
-        System.out.println("\n\nDestination point coordinates");
-        while (true){
-            System.out.print("Enter destination point x-coordinate between 0-6: ");
-            endX = input.nextInt();
-            System.out.print("Enter destination point y-coordinate between 0-7: ");
-            endY = input.nextInt();
-
-            
-            if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) 
-                break;
-            else {
-                if(endX==startX && endY==startY) 
-                    System.out.println("Destination point cannot be the same to starting point.\n");
-                else 
-                    System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
-            }
-        }
-
-        
-        Square end = new Square.Builder().x(endX).y(endY).occupied(false).build();
-        
-        home.clearCMD();
         home.addPiece(start);
-        //home.addPiece(endX, endY, '#');
-
-        System.out.printf("Check Info:\nPiece: %c\nStarting coordinates (x,y): (%d,%d)\nDestination (x,y): (%d,%d)\n",pieceType,startX,startY,endX,endY);
-        System.out.println("A '#' marks the destination square of the piece.\n\n");
-        
-
+        home.clearCMD();
         home.showBoard();
+        boolean cont = true;
 
-        boolean flag = p.move(start,end);
-        System.out.print("Valdity of movement: ");
-        System.out.println(flag);
+        do{
 
-        System.out.println("Check another destination coordinate? Enter 'y' to continue, else to end:");
-        String cont = input.next();
-        while (cont.equals("y")){
-            System.out.println("\nDestination point coordinates");
-            while (true){
-                System.out.print("Enter destination point x-coordinate between 0-6: ");
-                endX = input.nextInt();
-                System.out.print("Enter destination point y-coordinate between 0-7: ");
-                endY = input.nextInt();
+            System.out.print("Add dummy piece? 'y' for yes: ");
+            String ans = input.next();
+            boolean haih = (ans.equals("y")) ? true : false;
+            if (haih){
+                home.addDummy(start);
+                dummyPieces++;
+            }
 
-                if ((endX<7 && endX>-1)&&(endY<8 && endY>-1)) 
-                    break;
-                else {
-                    if(endX==startX && endY==startY) 
-                        System.out.println("Destination point cannot be the same to starting point.\n");
-                    else 
-                        System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+            if(dummyPieces>0){
+                System.out.print("Remove a dummy piece? 'y' for yes: ");
+                ans = input.next();
+                haih = (ans.equals("y")) ? true : false;
+                if (haih){
+                    home.removeDummy(start);
+                    dummyPieces--;
                 }
             }
-            home.clearCMD();
-            home.initBoard();
-            home.addPiece(startX, startY, pieceType);
-            home.addPiece(endX, endY, '#');
-
-            System.out.printf("Check Info:\nPiece: %c\nStarting coordinates (x,y): (%d,%d)\nDestination (x,y): (%d,%d)\n",pieceType,startX,startY,endX,endY);
-            System.out.println("A '#' marks the destination square of the piece.\n\n");
             
-
+            Square end = home.setEnd(start);
+            
+            home.clearCMD();
+    
+            System.out.printf("Check Info:\nPiece: %c\nStarting coordinates (x,y): (%d,%d)\nDestination (x,y): (%d,%d)\n",pieceType,start.getX(),start.getY(),end.getX(),end.getY());
+            //System.out.println("A '#' marks the destination square of the piece.\n\n");
+            
+    
             home.showBoard();
-
-            flag = p.move(start,end);
+    
+            boolean flag = p.move(start,end);
             System.out.print("Valdity of movement: ");
             System.out.println(flag);
-
-            System.out.println("Check another destination coordinate? Enter 'y' to continue, else to end:");
-            cont = input.next();
-        }
+    
+            System.out.print("Make adjustments? 'y' for yes: ");
+            ans = input.next();
+            cont = (ans.equals("y")) ? true : false;
+        }while(cont);
         
         System.out.println("Move testing program ended.");
 
@@ -154,23 +121,31 @@ public class MoveTester {
 
     public void addDummy(Square pos){
         int x,y;
+        String side;
         while (true){
             System.out.print("Enter x-coordinate of dummy piece between 0-6: ");
             x = input.nextInt();
             System.out.print("Enter y-coordinate of dummy piece between 0-7: ");
             y = input.nextInt();
 
-            
-            if ((x<7 && x>-1)&&(y<8 && y>-1)){
-                if(x!=pos.getX() && y!= pos.getY())
-                    break;
-                else System.out.println("Dummy piece cannot be placed on starting piece. Place it in different coordinates.\n");
+            System.out.print("Enter piece side 'r' or 'b': ");
+            side = input.next();
+
+            if((side.equals("r"))||(side.equals("b"))){
+                if ((x<7 && x>-1)&&(y<8 && y>-1)){
+                    if(!((x==pos.getX())&&(y==pos.getY())))
+                        break;
+                    else System.out.println("Dummy piece cannot be placed on starting piece. Place it in different coordinates.\n");
+                }
+                else {
+                    System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
+                }
             }
-            else {
-                System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
-            }
+            else
+                System.out.println("Only two sides are available: 'r' and 'b'. Please re-enter.\n");
+
         }
-        board[y][x].setPiece(new Chevron('b',"whatever"));
+        board[y][x].setPiece(new Chevron(side.charAt(0),"whatever"));
     }
 
     public void addPiece(Square pos){
@@ -184,7 +159,7 @@ public class MoveTester {
             System.out.printf("%d|",i);
             for(int j=0;j<7;j++){
                 if (board[i][j].isOccupied())
-                    System.out.printf("%2s |",board[i][j].getPiece().getName().substring(0,3));
+                    System.out.printf("%2s |",board[i][j].getPiece().getName().substring(0,2));
                 else
                     System.out.printf("%2s |"," ");
             }
@@ -203,9 +178,11 @@ public class MoveTester {
 
             
             if ((x<7 && x>-1)&&(y<8 && y>-1)){
-                if(x!=pos.getX() && y!=pos.getY()){
-                    if (board[y][x].isOccupied())
+                if(!((x==pos.getX())&&(y==pos.getY()))){
+                    if (board[y][x].isOccupied()){
                         board[y][x].setOccupied(false);
+                        break;
+                    }
                     else System.out.println("No dummy piece in this coordinate. Please re-enter.\n");
                 }else System.out.println("Cannot remove original tested piece. Please re-enter.\n");
             }
@@ -234,7 +211,7 @@ public class MoveTester {
                     System.out.println("Coordinates are limited to a range of integers. Please re-enter.\n");
             }
         }
-        return new Square.Builder().build().x(endX).y(endY).;
+        return board[endY][endX];
     }
     
 }

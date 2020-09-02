@@ -20,10 +20,8 @@ public class Chevron extends Piece{
             2.3 Left L movement  (x-2, y+/-1)
             2.4 Right L movement (x+2, y+/-1)
         */
-
         //1st condition: end square cannot contain peice of same side OR is not occupied
-        if ((end.getPiece().getSide()!=start.getPiece().getSide())||(!end.isOccupied())){
-            //move case 2.1
+        if((!end.isOccupied())||(end.getPiece().getSide()!=start.getPiece().getSide())){
             if((end.getY()==start.getY()-2)&&((end.getX()==start.getX()+1)||(end.getX()==start.getX()-1))) return true;
 
             //move case 2.2
@@ -35,7 +33,6 @@ public class Chevron extends Piece{
             //move case 2.4
             if((end.getX()==start.getX()+2)&&((end.getY()==start.getY()+1)||(end.getY()==start.getY()-1))) return true;
         }
-
         return false;
     }
 
