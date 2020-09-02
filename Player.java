@@ -3,7 +3,7 @@ import java.util.*;
 public class Player{
 	
 	private char side;
-	private ArrayList<Pieces> pieceList;
+	private ArrayList<Piece> pieceList;
 	private String name;
 	private boolean win;
 	private boolean turn;
@@ -15,11 +15,11 @@ public class Player{
 		numPlayer++;
 		
 		if (numPlayer == 1){
-			ArrayList<Pieces> p = new ArrayList();
+			ArrayList<Piece> p = new ArrayList();
 			//p = assign piece arrangement
 		}
 		else if (numPlayer == 2){
-			ArrayList<Pieces> p = new ArrayList();
+			ArrayList<Piece> p = new ArrayList();
 			//p = assign piece arrangement
 		}
 		else{}
@@ -31,12 +31,12 @@ public class Player{
 	}
 	
 	//set the side that is moving
-	public void setSide(String side){
+	public void setSide(char side){
 		this.side = side;
 	}
 	
 	//get the name of the piece??
-	public char getName(){
+	public String getName(){
 		return name;
 	}
 	
@@ -46,7 +46,7 @@ public class Player{
 	}
 	
 	//set piece that is wanted by the player to move
-	public void setPieces(){
+	public void setPieces(Piece piece){
 		this.piece = piece;
 	}
 	

@@ -22,8 +22,6 @@ public class MoveTester {
         char pieceType = ' ';
         boolean check = true;
         int dummyPieces = 0;
-
-        //Since square class belum ada lagi, kita kena manually set position piece and destination dia
         int startX;
         int startY;
 
@@ -35,7 +33,7 @@ public class MoveTester {
             switch(pieceType){
                 
                 case 'c': p = new Chevron('r',"RedChevron.png");check = false;break;
-                //INSERT YOUR RESPECTIVE CONSTRUCTORS HERE KALAU NAK CHECK
+                //INSERT YOUR RESPECTIVE CONSTRUCTORS HERE KALAU NAK CHECK, JANGAN LUPA UPDATE MOVE() MASING-MASING
                 //case 's': p = new Sun('r',"RedChevron.png");check = false;break;
                 //case 't': p = new Triangle('r',"RedChevron.png");check = false;break;
                 //case 'p': p = new Plus('r',"RedChevron.png");check = false;break;
