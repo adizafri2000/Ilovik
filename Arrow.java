@@ -27,7 +27,7 @@ public class Arrow extends Piece{
      * Arrow piece moves 1 or 2 steps forward each time
      * Arrow piece will turn around and heads back in the opposite direction when it reaches the other edge of the board
      */
-	public boolean move(int xStart, int yStart, int xEnd, int yEnd){
+	//public boolean move(int xStart, int yStart, int xEnd, int yEnd){
 	/*** how arrow move
 		COORDINATE FROM TOP TO BOTTOM : 0 -> 7 
 		1. Can move forward only 1 or 2 steps.
@@ -38,18 +38,18 @@ public class Arrow extends Piece{
 		--> if yEnd == 7 || yEnd == 0, The boolean rotate will be true and the arrow will move to opposite direction
 		--> icon should rotate 180 degree
 	***/
-	// FOR RED SIDE
-	//if (side=='r'){ 
+	/***
+	FOR RED SIDE
+	if (side=='r'){ 
 		//if ((yStart!=0) &&(xEnd == xStart)){
-			if (((yStart == 7) || (yStart == 6) || (yStart == 5) || (yStart == 4) || (yStart == 3) || (yStart == 2) || (yStart == 1)) &&(xEnd == xStart)){
+			
+			if ((yStart!=0) &&(xEnd == xStart)){
 				if((yEnd == yStart - 1) || (yEnd == yStart - 2)) 
 					return true;
 				else 
 					return false;
 			} 
 			else if ((yStart == 0) && (xEnd == xStart)){
-				//isRotate()
-				//rotate == true;
 				if((yEnd == yStart + 1) || (yEnd == yStart + 2)) 
 					return true;
 				else 
@@ -58,6 +58,7 @@ public class Arrow extends Piece{
 			else 
 				return false;
 	}
+	***/
 	/***
 	FOR BLUE SIDE
 	else{ 
@@ -77,7 +78,44 @@ public class Arrow extends Piece{
 			else 
 				return false;
 		***/
+	public abstract boolean move(Square start, Square end){
+		//red side 
+		if (start.getPiece().getSide() == 'r'){
+			if ((start.getY()!=0) &&(end.getX() == start.getX())){
+				if((end.getY() == start.getY() - 1) || (end.getY() == start.getY() - 2)) 
+					return true;
+				else 
+					return false;
+			} 
+			else if ((start.getY() == 0) && (end.getX( == start.getX())){
+				if((end.getY() == start.getY() + 1) || (end.getY() == start.getY() + 2)) 
+					return true;
+				else 
+					return false;				 
+			}
+			else 
+				return false;
+		}
+		//blue side
+		else{
+			if ((start.getY()!=7) &&(end.getX() == start.getX())){
+				if((end.getY() == start.getY() + 1) || (end.getY() == start.getY() + 2)) 
+					return true;
+				else 
+					return false;
+			} 
+			else if ((start.getY() == 7) && (end.getX() == start.getX())){
+				if((end.getY() == start.getY() - 1) || (end.getY() == start.getY() - 2)) 
+					return true;
+				else 
+					return false;				 
+			}
+			else 
+				return false;			
+		}
+	}
 }
+//}
 	
 	
 			                    
