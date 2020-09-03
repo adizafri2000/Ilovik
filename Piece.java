@@ -102,16 +102,4 @@ public abstract class Piece{
      * Piece types.
      */
     public abstract boolean move(Square start, Square end);
-
-    /**
-     * Dummy function while Square class is being created. Use this method first to identify
-     * the math required for your piece to move. Once Square class is created, paste the algorithm
-     * into the above of method.
-     * @param xStart
-     * @param yStart
-     * @param xEnd
-     * @param yEnd
-     * @return
-     */
-    //public abstract boolean move(int xStart, int yStart, int xEnd, int yEnd);
 }
