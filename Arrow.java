@@ -36,7 +36,7 @@ public class Arrow extends Piece{
 		--> if yEnd == 7 || yEnd == 0, The boolean rotate will be true and the arrow will move to opposite direction
 		--> icon should rotate 180 degree
 	***/
-	public abstract boolean move(Square start, Square end){
+	public boolean move(Square start, Square end){
 	//red side 
 	if((!end.isOccupied())||(end.getPiece().getSide()!=start.getPiece().getSide())){
 		if (start.getPiece().getSide() == 'r'){
@@ -77,9 +77,7 @@ public class Arrow extends Piece{
 				}
 				else 
 					return false;				 
-			}
-			else 
-				return false;			
+			}			
 		}
 		else
 			return false;
