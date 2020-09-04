@@ -22,21 +22,24 @@ public class Arrow extends Piece{
 	}
 	
 	@Override
-    /**
+	public boolean move(Square start, Square end){
+	/**
      * Arrow piece moves 1 or 2 steps forward each time
      * Arrow piece will turn around and heads back in the opposite direction when it reaches the other edge of the board
      */
-	/*** how arrow move
-		COORDINATE FROM TOP TO BOTTOM : 0 -> 7 
-		rotate = true : Moving form row 0 to row 7
-		rotate = false : Moving from row 7 to row 0
+	 
+	 /*** how arrow move
+		1. Check the end destination is not occupied or have the piece of the opposite side
+			1.1 If the piece are from the same side, return false
+		rotate = true : Moving from the opposite end of the board to the other end of the board
+		rotate = false : Moving from original position to the end of the board
 		1. Can move forward only 1 or 2 steps.
 		--> check side (blue or red)
 		--> need to check the position of the arrow
 		--> if yEnd == 7 || yEnd == 0, The boolean rotate will be true and the arrow will move to opposite direction
 		--> icon should rotate 180 degree
 	***/
-	public boolean move(Square start, Square end){
+	 
 	//red side 
 	if((!end.isOccupied())||(end.getPiece().getSide()!=start.getPiece().getSide())){
 		if (start.getPiece().getSide() == 'r'){
@@ -61,10 +64,10 @@ public class Arrow extends Piece{
 		}
 		//blue side
 		else{
-			if(rotate == true){ 
+			if(rotate == false){ 
 				if(((end.getY() == start.getY() + 1) || (end.getY() == start.getY() + 2)) &&(end.getX() == start.getX())){
 					if (end.getY() == 7)
-						rotate = false;
+						rotate = true;
 					return true;
 				}
 				else 
@@ -72,7 +75,7 @@ public class Arrow extends Piece{
 			}else
 				if(((end.getY() == start.getY() - 1) || (end.getY() == start.getY() - 2)) && (end.getX() == start.getX())){
 					if (end.getY() == 0)
-						rotate = true;
+						rotate = false;
 					return true;
 				}
 				else 
