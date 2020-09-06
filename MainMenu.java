@@ -1,6 +1,9 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.*;
+
+import javax.swing.GroupLayout;
+//import java.awt.BorderLayout;
+//import java.awt.Color;
+//import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,21 +19,32 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         //initComponents();
-        JLabel text1 = new JLabel("THIS IS A TEXT");
+        /* */
+        JLabel text1 = new JLabel("WELCOME TO OUR CHESS GAME");
         JLabel text2 = new JLabel("THIS IS ANOTHER TEXT");
         JLabel text3 = new JLabel("ANOTHER TEXT THIS IS");
         JLabel text4 = new JLabel("A TEXT IS THIS");
         jPanel1 = new JPanel();
         jPanel1.setBackground(new Color(11,55,100));
+        GroupLayout panel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(panel1Layout);
+
         text1.setForeground(Color.WHITE);
         text2.setForeground(Color.WHITE);
         text3.setForeground(Color.WHITE);
         text4.setForeground(Color.WHITE);
+
         //jPanel1.setLayout(new BorderLayout());
-        jPanel1.setLayout(new GridLayout(4,4));
+        //jPanel1.setLayout(new GridLayout(4,4));
+        text1.setSize(new Dimension());
+
         text1.setHorizontalAlignment(JLabel.CENTER);
+        
         text2.setHorizontalAlignment(JLabel.CENTER);
         jPanel1.add(text1);
+        jPanel1.add(text2);
+        jPanel1.add(text3);
+        jPanel1.add(text4);
         //jPanel1.add(text1,BorderLayout.NORTH);
         //jPanel1.add(text2,BorderLayout.SOUTH);
         //jPanel1.add(text3,BorderLayout.WEST);
@@ -51,25 +65,26 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new JPanel();
+        jPanel2 = new JPanel();
+        jLabel1 = new JLabel();
 
         //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         //jPanel1.setBackground(new java.awt.Color(204, 255, 204));104, 69, 5
-        jPanel1.setBackground(new java.awt.Color(104, 69, 5));
+        jPanel1.setBackground(new Color(104, 69, 5));
         //jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         //jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jPanel1.setName(""); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setBackground(new Color(204, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBackground(new Color(0, 0, 0));
+        jLabel1.setForeground(new Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ILOVIK'S WEBALE CHESS");
 
+        //initialize GroupLayout to which component(container)
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
