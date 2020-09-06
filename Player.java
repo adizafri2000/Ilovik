@@ -11,10 +11,33 @@ public class Player{
 	private int numPlayer = 0;
 	
 	//constructor assign pieces into each player
-	public Player(){
-		numPlayer++;
+	public Player(char side){
 		
-		if (numPlayer == 1){
+		this.side = side;
+		ArrayList<Piece> p = new ArrayList();
+		
+		Piece plus1 = new Plus();
+		p.add(plus1);
+		Piece tri1 = new Triangle();
+		p.add(tri1);
+		Piece chev1 = new Chevron();
+		p.add(chev1);
+		Piece sun = new Sun();
+		p.add(sun);
+		Piece chev2 = new Chevron();
+		p.add(chev2);
+		Piece tri2 = new Triangle();
+		p.add(tri2);
+		Piece plus2 = new Plus();
+		p.add(plus2);
+		for (int i = 0; i < 4;i++){
+			Piece arr = Arrow();
+			p.add(arr);
+		}
+		
+		//numPlayer++;
+		
+		/*if (numPlayer == 1){
 			ArrayList<Piece> p = new ArrayList();
 			//p = assign piece arrangement
 		}
@@ -22,7 +45,7 @@ public class Player{
 			ArrayList<Piece> p = new ArrayList();
 			//p = assign piece arrangement
 		}
-		else{}
+		else{}*/
 	}
 	
 	//get side that is moving
@@ -65,6 +88,8 @@ public class Player{
 	
 	//put the side in their turn
 	public void setTurn(boolean turn){
+		if (piece.move() == true)){
+			getSide() = false;
 		this.turn = turn;
 	}
 	
