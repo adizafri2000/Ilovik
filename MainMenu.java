@@ -1,6 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,10 +26,15 @@ public class MainMenu extends javax.swing.JFrame {
         text2.setForeground(Color.WHITE);
         text3.setForeground(Color.WHITE);
         text4.setForeground(Color.WHITE);
-        jPanel1.add(new BorderLayout(BorderLayout.NORTH));
-        jPanel1.add(text2);
-        jPanel1.add(text3);
-        jPanel1.add(text4);
+        //jPanel1.setLayout(new BorderLayout());
+        jPanel1.setLayout(new GridLayout(4,4));
+        text1.setHorizontalAlignment(JLabel.CENTER);
+        text2.setHorizontalAlignment(JLabel.CENTER);
+        jPanel1.add(text1);
+        //jPanel1.add(text1,BorderLayout.NORTH);
+        //jPanel1.add(text2,BorderLayout.SOUTH);
+        //jPanel1.add(text3,BorderLayout.WEST);
+        //jPanel1.add(text4,BorderLayout.EAST);
         add(jPanel1);
         setTitle("Ilovik Webale Chess");
         setVisible(true);
