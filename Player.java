@@ -3,7 +3,7 @@ import java.util.*;
 public class Player{
 	
 	private char side;
-	private ArrayList<Piece> pieceList;
+	private ArrayList<Piece> pieceList = = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));;
 	private String name;
 	private boolean win;
 	private boolean turn;
@@ -11,33 +11,42 @@ public class Player{
 	private int numPlayer = 0;
 	
 	//constructor assign pieces into each player
-	public Player(char side){
+	public Player(){
+		numPlayer++;
 		
-		this.side = side;
-		ArrayList<Piece> p = new ArrayList();
-		
-		Piece plus1 = new Plus();
-		p.add(plus1);
-		Piece tri1 = new Triangle();
-		p.add(tri1);
-		Piece chev1 = new Chevron();
-		p.add(chev1);
-		Piece sun = new Sun();
-		p.add(sun);
-		Piece chev2 = new Chevron();
-		p.add(chev2);
-		Piece tri2 = new Triangle();
-		p.add(tri2);
-		Piece plus2 = new Plus();
-		p.add(plus2);
-		for (int i = 0; i < 4;i++){
-			Piece arr = Arrow();
-			p.add(arr);
+		if (numPlayer == 1){
+			char side = 'b';
+			//ArrayList<Piece> bluePieces = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));
+			this.pieceList = pieceList;
+		}
+		if (numPlayer == 2){
+			char side = 'r';
+			//ArrayList<Piece> redPieces = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));
+			this.pieceList = pieceList;
 		}
 		
-		//numPlayer++;
+		//not sure nak buat yg mana atas or bawah sebab cara yang bawah ni tengok online takut plagiatrism
+		/*Piece plus1 = new Plus(side, "plus");
+		bluePieces.add(plus1);
+		Piece tri1 = new Triangle(side, "triangle");
+		bluePieces.add(tri1);
+		Piece chev1 = new Chevron(side, "chevron");
+		bluePieces.add(chev1);
+		Piece sun = new Sun(side, "sun");
+		bluePieces.add(sun);
+		Piece chev2 = new Chevron(side, "chevron");
+		bluePieces.add(chev2);
+		Piece tri2 = new Triangle(side, "triangle");
+		bluePieces.add(tri2);
+		Piece plus2 = new Plus(side, "plus");
+		bluePieces.add(plus2);
+		for (int i = 0; i < 4;i++){
+			Piece arr = Arrow(side, "arrow");
+			bluePieces.add(arr);
+		}
 		
-		/*if (numPlayer == 1){
+		
+		if (numPlayer == 1){
 			ArrayList<Piece> p = new ArrayList();
 			//p = assign piece arrangement
 		}
@@ -76,7 +85,7 @@ public class Player{
 	//check whether the side is winning
 	//sun is captured or not
 	public boolean isWinner(){
-		boolean c = getSide().getPieces("Sun").isCaptured();
+		boolean c = Piece.isCaptured("sun");
 		if (c == true){win = true;}
 		return win;
 	}
@@ -110,6 +119,7 @@ public class Player{
 	
 	public void swapPiece(){
 		//swap triangle and plus
+		Collections.swap(pieceList,"triangle,plus");
 	}
 }
 	
