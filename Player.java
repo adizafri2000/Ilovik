@@ -3,7 +3,7 @@ import java.util.*;
 public class Player{
 	
 	private char side;
-	private ArrayList<Piece> pieceList = = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));;
+	private ArrayList<Piece> pieceList = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));;
 	private String name;
 	private boolean win;
 	private boolean turn;
