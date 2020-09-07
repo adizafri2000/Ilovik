@@ -25,6 +25,25 @@ public class Sun extends Piece{
 			    d) lower left (x-1/y+1)
 	*/
 	@Override
+	public boolean move(Square start, Square end){
+		 if( (!end.isOccupied()) || (end.getPiece().getSide() != start.getPiece().getSide()) ){
+			//move 1 & 2
+			if ( (end.getX() == start.getX()) && ( (end.getY() == (start.getY() + 1)) || (end.getY() == (start.getY() - 1)) ) )
+				return true;
+			//move 3 & 4
+			else if ( (end.getY() == start.getY()) && ( (end.getX() == (start.getX() + 1)) || (end.getX() == (start.getX() - 1)) ) )
+				return true;
+			//move 5.a & 5.b
+			else if ( (end.getY() == (start.getY() - 1)) && ( (end.getX() == (start.getX() + 1)) || (end.getX() == (start.getX() - 1)) ) )
+				return true;
+			//move 5.c & 5.d
+			else if ( (end.getY() == (start.getY() + 1)) && ( (end.getX() == (start.getX() + 1)) || (end.getX() == (start.getX() - 1)) ) )
+				return true;
+		 }
+		 return false;
+	}
+	/*
+	@Override
     public boolean move(int xStart, int yStart, int xEnd, int yEnd){
 		if ( (xEnd == xStart) && ( (yEnd == yStart + 1) || (yEnd == yStart - 1) ) )
 			return true;
@@ -37,4 +56,5 @@ public class Sun extends Piece{
 		else
 			return false;
 	}
+	*/
 }
