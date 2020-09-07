@@ -26,7 +26,7 @@ public class MoveTester {
         int startY;
 
         while(check){
-            System.out.print("Enter piece type's initial in LOWERCASE e.g Chevron = 'c', Triangle = 't' etc\n:");
+            System.out.print("Enter piece type's initial in LOWERCASE e.g Chevron = 'c', Triangle = 't', Sun = 's' etc\n:");
             pieceType = input.next().charAt(0);
             
 
@@ -34,7 +34,7 @@ public class MoveTester {
                 
                 case 'c': p = new Chevron('r',"RedChevron.png");check = false;break;
                 //INSERT YOUR RESPECTIVE CONSTRUCTORS HERE KALAU NAK CHECK, JANGAN LUPA UPDATE MOVE() MASING-MASING
-                //case 's': p = new Sun('r',"RedChevron.png");check = false;break;
+                case 's': p = new Sun('r',"RedChevron.png");check = false;break;
                 //case 't': p = new Triangle('r',"RedChevron.png");check = false;break;
                 //case 'p': p = new Plus('r',"RedChevron.png");check = false;break;
                 case 'a': p = new Arrow('r',"RedChevron.png",false);check = false;break;
