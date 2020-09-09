@@ -3,59 +3,58 @@ import java.util.*;
 public class Player{
 	
 	private char side;
-	private ArrayList<Piece> pieceList = = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));;
+	private ArrayList<Piece> bluePieceList = new ArrayList<Piece>();
+	private ArrayList<Piece> redPieceList = new ArrayList<Piece>();
 	private String name;
 	private boolean win;
 	private boolean turn;
 	private int moves;
-	private int numPlayer = 0;
+	//private int numPlayer = 0;
 	
-	//constructor assign pieces into each player
-	public Player(){
-		numPlayer++;
-		
-		if (numPlayer == 1){
-			char side = 'b';
-			//ArrayList<Piece> bluePieces = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));
-			this.pieceList = pieceList;
-		}
-		if (numPlayer == 2){
-			char side = 'r';
-			//ArrayList<Piece> redPieces = new ArrayList(Arrays.asList(new Plus(side, "plus"),neArrayList<Piece> bluePieces = new ArrayList(){new Plus(side, "plus"),new Triangle(side, "triangle"),new Chevron(side, "chevron"),new Sun(side, "sun"),new Chevron(side, "chevron"),new Triangle(side, "triangle"),new Plus(side, "plus")));
-			this.pieceList = pieceList;
-		}
-		
-		//not sure nak buat yg mana atas or bawah sebab cara yang bawah ni tengok online takut plagiatrism
-		/*Piece plus1 = new Plus(side, "plus");
-		bluePieces.add(plus1);
-		Piece tri1 = new Triangle(side, "triangle");
-		bluePieces.add(tri1);
-		Piece chev1 = new Chevron(side, "chevron");
-		bluePieces.add(chev1);
-		Piece sun = new Sun(side, "sun");
-		bluePieces.add(sun);
-		Piece chev2 = new Chevron(side, "chevron");
-		bluePieces.add(chev2);
-		Piece tri2 = new Triangle(side, "triangle");
-		bluePieces.add(tri2);
-		Piece plus2 = new Plus(side, "plus");
-		bluePieces.add(plus2);
-		for (int i = 0; i < 4;i++){
-			Piece arr = Arrow(side, "arrow");
-			bluePieces.add(arr);
-		}
-		
-		
-		if (numPlayer == 1){
-			ArrayList<Piece> p = new ArrayList();
-			//p = assign piece arrangement
-		}
-		else if (numPlayer == 2){
-			ArrayList<Piece> p = new ArrayList();
-			//p = assign piece arrangement
-		}
-		else{}*/
+	//constructor assign side to player
+	public Player(char side){
+		this.side = side;
+		assignPlayerPieces();
 	}
+	
+	public void assignPlayerPieces(){
+		if (getSide() == 'b'){
+			
+			bluePieceList.add(new Plus('b', "Plus"));
+			bluePieceList.add(new Triangle('b', "Triangle"));
+			bluePieceList.add(new Chevron('b', "Chevron"));
+			bluePieceList.add(new Sun('b', "Sun"));
+			bluePieceList.add(new Chevron('b', "Chevron"));
+			bluePieceList.add(new Triangle('b', "Triangle"));
+			bluePieceList.add(new Plus('b', "Plus"));
+			bluePieceList.add(new Arrow('b', "Arrow"));
+			bluePieceList.add(new Arrow('b', "Arrow"));
+			bluePieceList.add(new Arrow('b', "Arrow"));
+			bluePieceList.add(new Arrow('b', "Arrow"));
+			
+			//assign to each square
+			  //code here
+		}
+		else if (getSide() == 'r'){
+			
+			redPieceList.add(new Plus('r', "Plus"));
+			redPieceList.add(new Triangle('r', "Triangle"));
+			redPieceList.add(new Chevron('r', "Chevron"));
+			redPieceList.add(new Sun('r', "Sun"));
+			redPieceList.add(new Chevron('r', "Chevron"));
+			redPieceList.add(new Triangle('r', "Triangle"));
+			redPieceList.add(new Plus('r', "Plus"));
+			redPieceList.add(new Arrow('r', "Arrow"));
+			redPieceList.add(new Arrow('r', "Arrow"));
+			redPieceList.add(new Arrow('r', "Arrow"));
+			redPieceList.add(new Arrow('r', "Arrow"));
+			
+			//assign to each square
+			  //code here 
+		}
+		
+	}
+	
 	
 	//get side that is moving
 	public char getSide(){
@@ -85,7 +84,7 @@ public class Player{
 	//check whether the side is winning
 	//sun is captured or not
 	public boolean isWinner(){
-		boolean c = Piece.isCaptured("sun");
+		boolean c = Piece.isCaptured("Sun");
 		if (c == true){win = true;}
 		return win;
 	}
@@ -95,9 +94,10 @@ public class Player{
 		return turn;
 	}
 	
+	/*
 	//put the side in their turn
 	public void setTurn(boolean turn){
-		if (piece.move() == true)){
+		if (Piece.move() == true)){
 			getSide() = false;
 		this.turn = turn;
 	}
@@ -120,7 +120,7 @@ public class Player{
 	public void swapPiece(){
 		//swap triangle and plus
 		Collections.swap(pieceList,"triangle,plus");
-	}
+	} */
 }
 	
 	
