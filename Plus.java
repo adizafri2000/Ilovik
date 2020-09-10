@@ -8,10 +8,6 @@ public class Plus extends Piece {
 		super(side,iconFile);
 		setName("Plus");
 	}
-
-	//public boolean validMovement(){
-	//	return false;
-	//}
 	
 	/**
 	* Plus piece can move anywhere from 1 to 7 squares in any direction (forward,backward,left or right) 
@@ -25,69 +21,51 @@ public class Plus extends Piece {
 	* False : Move diagonally or jump over other pieces.
 	* 
 	* Plus movement for 1 step :
-		Move foward : (yEnd == yStart + 1) , (xEnd == xStart)
-		Move backward :(yEnd == yStart - 1) , (xEnd == xStart)
-		Move to the left : (xEnd == xStart + 1) , (yEnd == yStart)
-		Move to the right : (xEnd == xStart - 1) , (yEnd == yStart)
+		Move foward : (end.getY() == start.getY() + 1) , (end.getX() == start.getX())
+		Move backward :(end.getY() == start.getY() - 1) , (end.getX() == start.getX())
+		Move to the left : (end.getX() == start.getX() + 1) , (end.getY() == start.getY())
+		Move to the right : (end.getX() == start.getX() - 1) , (end.getY() == start.getY())
 	*/
 	
 	@Override
-	public boolean move(int xStart, int yStart, int xEnd, int yEnd) {
-		if (xEnd == xStart){										
-			if (yEnd == yStart + 1) || (yEnd == yStart - 1) 		// move 1 step forward,backward
-				return true;
-			else if (yEnd == yStart + 2) || (yEnd == yStart - 2) 	// move 2 step forward,backward
-				return true;
-			else if (yEnd == yStart + 3) || (yEnd == yStart - 3) 	// move 3 step forward,backward
-				return true;
-			else if (yEnd == yStart + 4) || (yEnd == yStart - 4) 	// move 4 step forward,backward
-				return true;
-			else if (yEnd == yStart + 5) || (yEnd == yStart - 5) 	// move 5 step forward,backward
-				return true;
-			else if (yEnd == yStart + 6) || (yEnd == yStart - 6) 	// move 6 step forward,backward
-				return true;
-			else if (yEnd == yStart + 7) || (yEnd == yStart - 7) 	// move 7 step forward,backward
-				return true;	
+	public boolean move(Square start, Square end) {
+		if( (!end.isOccupied()) || (end.getPiece().getSide() != start.getPiece().getSide()) ){
+			if (end.getX() == start.getX()){										
+				if ((end.getY() == start.getY() + 1) || (end.getY() == start.getY() - 1))		// move 1 step forward,backward
+					return true;
+				else if ((end.getY() == start.getY() + 2) || (end.getY() == start.getY() - 2)) 	// move 2 step forward,backward
+					return true;
+				else if ((end.getY() == start.getY() + 3) || (end.getY() == start.getY() - 3)) 	// move 3 step forward,backward
+					return true;
+				else if ((end.getY() == start.getY() + 4) || (end.getY() == start.getY() - 4))	// move 4 step forward,backward
+					return true;
+				else if ((end.getY() == start.getY() + 5) || (end.getY() == start.getY() - 5))	// move 5 step forward,backward
+					return true;
+				else if ((end.getY() == start.getY() + 6) || (end.getY() == start.getY() - 6))	// move 6 step forward,backward
+					return true;
+				else if ((end.getY() == start.getY() + 7) || (end.getY() == start.getY() - 7))	// move 7 step forward,backward
+					return true;	
+				else
+					return false;
+			}
+			else if (end.getY() == start.getY()){				
+				if ((end.getX() == start.getX() + 1) || (end.getX() == start.getX() - 1))		// move 1 step right,left
+					return true;
+				else if ((end.getX() == start.getX() + 2) || (end.getX() == start.getX() - 2))  // move 2 step right,left
+					return true;
+				else if ((end.getX() == start.getX() + 3) || (end.getX() == start.getX() - 3))  // move 3 step right,left
+					return true;
+				else if ((end.getX() == start.getX() + 4) || (end.getX() == start.getX() - 4))	// move 4 step right,left
+					return true;
+				else if ((end.getX() == start.getX() + 5) || (end.getX() == start.getX() - 5)) 	// move 5 step right,left
+					return true;	
+				else if ((end.getX() == start.getX() + 6) || (end.getX() == start.getX() - 6))  // move 6 step right,left
+					return true;
+				else
+					return false;
+			}
 			else
 				return false;
 		}
-		else if (yEnd == yStart){				
-			if (xEnd == xStart + 1) || (xEnd == xStart - 1) 		// move 1 step right,left
-				return true;
-			else if (xEnd == xStart + 2) || (xEnd == xStart - 2)  	// move 2 step right,left
-				return true;
-			else if (xEnd == xStart + 3) || (xEnd == xStart - 3)  	// move 3 step right,left
-				return true;
-			else if (xEnd == xStart + 4) || (xEnd == xStart - 4) 	// move 4 step right,left
-				return true;
-			else if (xEnd == xStart + 5) || (xEnd == xStart - 5)  	// move 5 step right,left
-				return true;	
-			else if (xEnd == xStart + 6) || (xEnd == xStart - 6)  	// move 6 step right,left
-				return true;
-			else
-				return false;
-		}
-		else
-			return false;
 	}
-	
-	@Override
-	public boolean move(Square start, Square end){
-		
-		boolean move;
-		
-		if (start == "Plus") {
-			move = true;
-		}
-		
-		if(start.getSide() == side){
-			move = false;
-		}
-		else{
-			move = true;
-		}
-		
-		return move;
-	}
-	
 }
