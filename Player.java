@@ -20,34 +20,34 @@ public class Player{
 	public void assignPlayerPieces(){
 		if (getSide() == 'b'){
 			
-			bluePieceList.add(new Plus('b', "Plus"));
-			bluePieceList.add(new Triangle('b', "Triangle"));
-			bluePieceList.add(new Chevron('b', "Chevron"));
-			bluePieceList.add(new Sun('b', "Sun"));
-			bluePieceList.add(new Chevron('b', "Chevron"));
-			bluePieceList.add(new Triangle('b', "Triangle"));
-			bluePieceList.add(new Plus('b', "Plus"));
-			bluePieceList.add(new Arrow('b', "Arrow"));
-			bluePieceList.add(new Arrow('b', "Arrow"));
-			bluePieceList.add(new Arrow('b', "Arrow"));
-			bluePieceList.add(new Arrow('b', "Arrow"));
+			bluePieceList.add(new Plus('b'));
+			bluePieceList.add(new Triangle('b'));
+			bluePieceList.add(new Chevron('b'));
+			bluePieceList.add(new Sun('b'));
+			bluePieceList.add(new Chevron('b'));
+			bluePieceList.add(new Triangle('b'));
+			bluePieceList.add(new Plus('b'));
+			bluePieceList.add(new Arrow('b', false));
+			bluePieceList.add(new Arrow('b', false));
+			bluePieceList.add(new Arrow('b', false));
+			bluePieceList.add(new Arrow('b', false));
 			
 			//assign to each square
 			  //code here
 		}
 		else if (getSide() == 'r'){
-			
-			redPieceList.add(new Plus('r', "Plus"));
-			redPieceList.add(new Triangle('r', "Triangle"));
-			redPieceList.add(new Chevron('r', "Chevron"));
-			redPieceList.add(new Sun('r', "Sun"));
-			redPieceList.add(new Chevron('r', "Chevron"));
-			redPieceList.add(new Triangle('r', "Triangle"));
-			redPieceList.add(new Plus('r', "Plus"));
-			redPieceList.add(new Arrow('r', "Arrow"));
-			redPieceList.add(new Arrow('r', "Arrow"));
-			redPieceList.add(new Arrow('r', "Arrow"));
-			redPieceList.add(new Arrow('r', "Arrow"));
+
+			redPieceList.add(new Plus('r'));
+			redPieceList.add(new Triangle('r'));
+			redPieceList.add(new Chevron('r'));
+			redPieceList.add(new Sun('r'));
+			redPieceList.add(new Chevron('r'));
+			redPieceList.add(new Triangle('r'));
+			redPieceList.add(new Plus('r'));
+			redPieceList.add(new Arrow('r', false));
+			redPieceList.add(new Arrow('r', false));
+			redPieceList.add(new Arrow('r', false));
+			redPieceList.add(new Arrow('r', false));
 			
 			//assign to each square
 			  //code here 

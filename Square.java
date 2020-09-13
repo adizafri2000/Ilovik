@@ -95,7 +95,10 @@ public class Square {
         this.y = y;
     }
 
-
+    /**
+     * Sets a piece to be contained in this square.
+     * Once set, square is automatically set to occupied
+     */
     public void setPiece(Piece p) {
         this.piece = p;
         this.occupied = true;

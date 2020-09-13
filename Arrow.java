@@ -3,18 +3,25 @@
  */
 public class Arrow extends Piece
 {
+
+	/**
+	 * Default .png file name for the piece's icon without the side's name
+	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
+	 */
+	private static String fileName = "Arrow.png";
 	
 	/**
 	 * The orientation of the Arrow piece.
 	 * Arrow pieces from both sides' rotate variable are set as false on starting arrangement.
 	 * When respective sides' Arrow piece reach one end of the board, they rotate (move backwards)
 	 * and boolean variable is set to true.
+	 * By default (on start of new game) is set to FALSE.
 	 */
 	private boolean rotate;
-	
-	public Arrow(char side, String iconFile,boolean rotate)
+
+	public Arrow(char side, boolean rotate)
 	{
-		super(side, iconFile);
+		super(side, fileName);
 		setName("Arrow");
 		this.rotate = rotate;
 	}

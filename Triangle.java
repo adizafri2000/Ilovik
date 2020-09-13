@@ -1,9 +1,24 @@
+/**
+ * @author aisyah
+ */
 public class Triangle extends Piece{
-    
-    public Triangle(String name,char side,Tile t){
-    super(name,side,t);
+
+    /**
+	 * Default .png file name for the piece's icon without the side's name
+	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
+	 */
+    private static String fileName = "Triangle.png";
+
+    public Triangle(char side) {
+        super(side, fileName);
+        setName("Triangle");
     }
-	
+    
+    /*public Triangle(String name,char side,Tile t){
+    super(name,side,t);
+    }*/
+    
+    // Aisyah repairkan ni, sekalikan move check coordinate with move check square valid ke tak
 	@Override
     public boolean move(int xStart, int yStart, int xEnd, int yEnd){
 

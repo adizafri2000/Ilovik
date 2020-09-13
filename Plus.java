@@ -1,11 +1,20 @@
+/**
+ * @author aina
+ */
 public class Plus extends Piece {
 	
-	public Plus(String name,char side, int x, int y){
+	/*public Plus(String name,char side, int x, int y){
 		super(name,side,x,y);	
-	}
+	}*/
 
-	public Plus(char side, String iconFile) {
-		super(side,iconFile);
+	/**
+	 * Default .png file name for the piece's icon without the side's name
+	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
+	 */
+	private static String fileName = "Plus.png";
+
+	public Plus(char side) {
+		super(side,fileName);
 		setName("Plus");
 	}
 	
@@ -67,5 +76,6 @@ public class Plus extends Piece {
 			else
 				return false;
 		}
+		return false;
 	}
 }

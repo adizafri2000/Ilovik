@@ -16,7 +16,7 @@ public abstract class Piece{
     public Piece(char side,String iconFile){
         this.captured = false;
         this.side = side;
-        this.iconFile = iconFile;
+        setIconFile(iconFile);
         setName();
     }
 
@@ -53,11 +53,17 @@ public abstract class Piece{
     }
 
     /**
-     * Sets the icon file name for this respective piece
+     * Sets the icon file name for this respective piece.
+     * This method appends subclass' iconFile String representing piece type's
+     * name with the side name to the front of it.
+     * e.g "Red" + "Arrow.png" = "RedArrow.png"
      * @param iconFile the iconFile to set
      */
     public void setIconFile(String iconFile) {
-        this.iconFile = iconFile;
+        StringBuilder s = new StringBuilder(iconFile);
+        if (side=='r') s.insert(0,"Red");
+        else s.insert(0,"Blue");
+        this.iconFile = s.toString();
     }
 
     /**
@@ -98,8 +104,6 @@ public abstract class Piece{
      * @param start Square containing the selected piece to be moved 
      * @param end Destination square for the piece's movement
      * @return validity of this piece to move to the end square
-     * Once Square class is created, uncomment this method and apply this one into your
-     * Piece types.
      */
     public abstract boolean move(Square start, Square end);
 }

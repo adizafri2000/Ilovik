@@ -2,9 +2,15 @@
  * @author Iffah
  */
 public class Sun extends Piece{
+
+	/**
+	 * Default .png file name for the piece's icon without the side's name
+	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
+	 */
+	private static String fileName = "Sun.png";
 	
-	public Sun(char side,String iconFile){
-		super(side, iconFile);
+	public Sun(char side){
+		super(side, fileName);
 		setName("Sun");
 	}
 	
