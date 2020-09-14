@@ -1,5 +1,9 @@
-import java.util.*;
-
+/**
+ * The Board class defines what must be inside of a 
+ * Webale Chess board. A Board object will hold 56 Square
+ * objects where some of them might hold Piece objects.
+ * @author Adi
+ */
 public class Board{
     private Square[][] squareList;
     private Player player1;
