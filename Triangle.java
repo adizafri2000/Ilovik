@@ -2,52 +2,40 @@
  * @author aisyah
  */
 public class Triangle extends Piece{
-
-    /**
-	 * Default .png file name for the piece's icon without the side's name
-	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
-	 */
-    private static String fileName = "Triangle.png";
-
-    public Triangle(char side) {
-        super(side, fileName);
-        setName("Triangle");
+    
+    public Triangle(char side,String file){
+    super(side, file);
     }
-    
-    /*public Triangle(String name,char side,Tile t){
-    super(name,side,t);
-    }*/
-    
-    // Aisyah repairkan ni, sekalikan move check coordinate with move check square valid ke tak
+	
 	@Override
-    public boolean move(int xStart, int yStart, int xEnd, int yEnd){
+    public boolean move(Square start, Square end){
 
-        //int oldx = Board.Tile.getX();
-        //int oldy = Board.Tile.getY();
-        //int newx = Piece.Tile.getX();
-        //int newy = Piece.Tile.getY();
-        boolean move = false;
+        int xStart = start.getX();
+        int yStart = start.getY();
+        int xEnd = end.getX();
+        int yEnd = end.getY();
+        boolean move1 = false;
         
 		//to check if movement is valid
-        if ((newx < oldx) && (newy < oldy))
+        if ((xEnd < xStart) && (yEnd < yStart))
         {
-            int dx = oldx - newx;
-            int dy = oldy - newy;
+            int dx = xStart - xEnd;
+            int dy = yStart - yEnd;
         }
-        else if ((newx > oldx) && (newy < oldy))
+        else if ((xEnd > xStart) && (yEnd < yStart))
         {
-            int dx = newx - oldx;
-            int dy = oldy - newy;
+            int dx = xEnd - xStart;
+            int dy = yStart - yEnd;
         }
-        else if ((newx < oldx) && (newy > oldy))
+        else if ((xEnd < xStart) && (yEnd > yStart))
         {
-            int dx = oldx - newx;
-            int dy = newy - oldy;
+            int dx = xStart - xEnd;
+            int dy = yEnd - yStart;
         }
-        else if ((newx > oldx) && (newy > oldy))
+        else if ((xEnd > xStart) && (yEnd > yStart))
         {
-            int dx = newx - oldx;
-            int dy = newy - oldy;
+            int dx = xEnd - xStart;
+            int dy = yEnd - yStart;
         }
         else
         {
@@ -57,34 +45,34 @@ public class Triangle extends Piece{
         
         if (dx == dy)
         {
-            move = true;
+            move1 = true;
 		}
         
-        return move;
        
-    }
-	
+    
+		boolean move2 = false;
 	//check if the new square has another piece, same side or not
 	//same side = cannot, diff side = eat
-	@Override
-	public boolean move(Square start, Square end){
 		
-		boolean move;
-		
-		if (start == "triangle")
+		if (start.getPiece().equals("triangle"))
 		{
-			move = true;
+			move1 = true;
 		}
 		
-		if (start.getSide() == side){
-			move = false;
+		if ((start.getPiece().getSide()).equals(side)){
+			move1 = false;
 		}
 		else 
 		{
-			move = true;
+			move1 = true;
 		}
 		
-		return move;
+		boolean finalmove = false;
+		if (move1 && move2){
+			finalmove = true;
+		}
+			
+		return finalmove;
 	}
 	
 }
