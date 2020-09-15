@@ -32,12 +32,12 @@ public class MoveTester {
 
             switch(pieceType){
                 
-                case 'c': p = new Chevron('r',"RedChevron.png");check = false;break;
+                case 'c': p = new Chevron('r');check = false;break;
                 //INSERT YOUR RESPECTIVE CONSTRUCTORS HERE KALAU NAK CHECK, JANGAN LUPA UPDATE MOVE() MASING-MASING
-                case 's': p = new Sun('r',"RedChevron.png");check = false;break;
-                //case 't': p = new Triangle('r',"RedChevron.png");check = false;break;
-                //case 'p': p = new Plus('r',"RedChevron.png");check = false;break;
-                case 'a': p = new Arrow('r',"RedChevron.png",false);check = false;break;
+                case 's': p = new Sun('r');check = false;break;
+                case 't': p = new Triangle('r');check = false;break;
+                case 'p': p = new Plus('r');check = false;break;
+                case 'a': p = new Arrow('r',false);check = false;break;
                 default: System.out.println("No such piece with the initial.\n");break;
             }
         }

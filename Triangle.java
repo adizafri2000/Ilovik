@@ -62,10 +62,10 @@ public class Triangle extends Piece{
 	//check if the new square has another piece, same side or not
 	//same side = cannot, diff side = eat
 		
-		if (start.getPiece().equals("triangle"))
+		/*if (start.getPiece().equals("triangle"))
 		{
 			move1 = true;
-		}
+		}*/
 		
 		if ((start.getPiece().getSide())==(end.getPiece().getSide())){
 			move1 = false;
