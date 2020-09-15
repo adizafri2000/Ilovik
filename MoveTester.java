@@ -143,7 +143,7 @@ public class MoveTester {
                 System.out.println("Only two sides are available: 'r' and 'b'. Please re-enter.\n");
 
         }
-        board[y][x].setPiece(new Chevron(side.charAt(0),"whatever"));
+        board[y][x].setPiece(new Chevron(side.charAt(0)));
     }
 
     public void addPiece(Square pos){

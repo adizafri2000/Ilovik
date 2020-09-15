@@ -50,11 +50,12 @@ public class Triangle extends Piece{
             dx = 0;
             dy = 0;
         }
-        
         if (dx == dy)
         {
             move1 = true;
-		}
+        }
+        
+        //move1 = (Math.abs(xStart-yStart)==Math.abs(yEnd-xEnd));
         
        
     
@@ -62,17 +63,17 @@ public class Triangle extends Piece{
 	//check if the new square has another piece, same side or not
 	//same side = cannot, diff side = eat
 		
-		/*if (start.getPiece().equals("triangle"))
+		if (start.getPiece().equals("triangle"))
 		{
-			move1 = true;
-		}*/
+			move2 = true;
+		}
 		
 		if ((start.getPiece().getSide())==(end.getPiece().getSide())){
-			move1 = false;
+			move2 = false;
 		}
 		else 
 		{
-			move1 = true;
+			move2 = true;
 		}
 		
 		boolean finalmove = false;
