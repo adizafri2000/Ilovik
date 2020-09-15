@@ -21,7 +21,7 @@ public class Square {
 
     /**
      * Status of the square:
-     * If a piece is present in the square, occupied is set to true.
+     * If a piece is moved into a square, occupied is set to true.
      */
     private boolean occupied;
 
@@ -79,7 +79,6 @@ public class Square {
     public Piece getPiece() {
         return piece;
     }
-
 
     public boolean isOccupied() {
         return occupied;

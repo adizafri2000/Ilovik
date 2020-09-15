@@ -3,9 +3,16 @@
  */
 public class Triangle extends Piece{
     
-    public Triangle(char side,String file){
-    super(side, file);
-    }
+    /**
+	 * Default .png file name for the piece's icon without the side's name
+	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
+	 */
+	private static String fileName = "Triangle.png";
+
+	public Triangle(char side) {
+		super(side,fileName);
+		setName("Triangle");
+	}
 	
 	@Override
     public boolean move(Square start, Square end){
@@ -15,32 +22,33 @@ public class Triangle extends Piece{
         int xEnd = end.getX();
         int yEnd = end.getY();
         boolean move1 = false;
+        int dx,dy;
         
 		//to check if movement is valid
         if ((xEnd < xStart) && (yEnd < yStart))
         {
-            int dx = xStart - xEnd;
-            int dy = yStart - yEnd;
+            dx = xStart - xEnd;
+            dy = yStart - yEnd;
         }
         else if ((xEnd > xStart) && (yEnd < yStart))
         {
-            int dx = xEnd - xStart;
-            int dy = yStart - yEnd;
+            dx = xEnd - xStart;
+            dy = yStart - yEnd;
         }
         else if ((xEnd < xStart) && (yEnd > yStart))
         {
-            int dx = xStart - xEnd;
-            int dy = yEnd - yStart;
+            dx = xStart - xEnd;
+            dy = yEnd - yStart;
         }
         else if ((xEnd > xStart) && (yEnd > yStart))
         {
-            int dx = xEnd - xStart;
-            int dy = yEnd - yStart;
+            dx = xEnd - xStart;
+            dy = yEnd - yStart;
         }
         else
         {
-            int dx = 0;
-            int dy = 0;
+            dx = 0;
+            dy = 0;
         }
         
         if (dx == dy)
@@ -59,7 +67,7 @@ public class Triangle extends Piece{
 			move1 = true;
 		}
 		
-		if ((start.getPiece().getSide()).equals(side)){
+		if ((start.getPiece().getSide())==(end.getPiece().getSide())){
 			move1 = false;
 		}
 		else 
