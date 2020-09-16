@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * @author Aisyah, Iffah
+ */
 public class Player{
 	
 	private char side;
