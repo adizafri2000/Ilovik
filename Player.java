@@ -5,10 +5,29 @@ import java.util.*;
  */
 public class Player{
 	
+	/**
+	 * Playing side of player 
+	 * i.e 'r' for red side or 'b' for blue side
+	 */
 	private char side;
 
 	/**
 	 * Holds the pieces for a player side. ArrayList indexes are specified to piece types.
+	 * Pieces' list index are determined from left to right (col 0 - 7) starting 
+	 * arrangement from non-Arrow-pieces row to Arrow-pieces row, specified as:
+	 * <p>Format: (index no.) piecename</p>
+	 * 
+	 * <p>1. (0) Plus
+	 * <p>2. (1) Triangle
+	 * <p>3. (2) Chevron
+	 * <p>4. (3) Sun
+	 * <p>5. (4) Chevron
+	 * <p>6. (5) Triangle
+	 * <p>7. (6) Plus
+	 * <p>8. (7) Arrow
+	 * <p>9. (8) Arrow
+	 * <p>10. (9) Arrow
+	 * <p>11. (10) Arrow
 	 * @see assignPlayerPieces()
 	 */
 	private ArrayList<Piece> pieceList = new ArrayList<Piece>();
@@ -26,19 +45,9 @@ public class Player{
 	
 	/**
 	 * Assigns respective pieces to players according to which side they are on.
-	 * Pieces' list index are determined from left to right (col 0 - 7) starting 
-	 * arrangement from non-Arrow-pieces row to Arrow-pieces row, specified as: 
-	 * <p>0. Plus</p>
-	 * <p>1. Triangle</p>
-	 * <p>2. Chevron</p>
-	 * <p>3. Sun</p>
-	 * <p>4. Chevron</p>
-	 * <p>5. Triangle</p>
-	 * <p>6. Plus</p>
-	 * <p>7. Arrow</p>
-	 * <p>8. Arrow</p>
-	 * <p>9. Arrow</p>
-	 * <p>10. Arrow</p>
+	 * Order of adding pieces to this list follows the adding order protocol as defined for
+	 * pieceList ArrayList.
+	 * @see pieceList
 	 * @param side side owning the pieces
 	 */
 	public void assignPlayerPieces(char side){
@@ -87,12 +96,17 @@ public class Player{
 		this.piece = piece;
 	}
 	
-	//check whether the side is winning
-	//sun is captured or not
+
+	/**
+	 * Checks whether the side is winning by checking if 
+	 * sun is captured or not
+	 * @return captured status of Sun piece (pieceList(3))
+	 */
 	public boolean isWinner(){
-		boolean c = Piece.isCaptured("Sun");
+		/*boolean c = Piece.isCaptured("Sun");
 		if (c == true){win = true;}
-		return win;
+		return win;*/
+		return (pieceList.get(3).isCaptured());
 	}
 	
 	//return whether the side is in their turn or not
