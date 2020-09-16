@@ -8,7 +8,7 @@ public class Player{
 	private char side;
 
 	/**
-	 * Holds the pieces for a player side. Indexes are unique to piece types.
+	 * Holds the pieces for a player side. ArrayList indexes are specified to piece types.
 	 * @see assignPlayerPieces()
 	 */
 	private ArrayList<Piece> pieceList = new ArrayList<Piece>();
@@ -27,7 +27,7 @@ public class Player{
 	/**
 	 * Assigns respective pieces to players according to which side they are on.
 	 * Pieces' list index are determined from left to right (col 0 - 7) starting 
-	 * arrangement from non-Arrow piece row to Arrow-piece row, specified as: 
+	 * arrangement from non-Arrow-pieces row to Arrow-pieces row, specified as: 
 	 * <p>0. Plus</p>
 	 * <p>1. Triangle</p>
 	 * <p>2. Chevron</p>
@@ -39,6 +39,7 @@ public class Player{
 	 * <p>8. Arrow</p>
 	 * <p>9. Arrow</p>
 	 * <p>10. Arrow</p>
+	 * @param side side owning the pieces
 	 */
 	public void assignPlayerPieces(char side){
 			
