@@ -6,8 +6,12 @@ import java.util.*;
 public class Player{
 	
 	private char side;
-	private ArrayList<Piece> bluePieceList = new ArrayList<Piece>();
-	private ArrayList<Piece> redPieceList = new ArrayList<Piece>();
+
+	/**
+	 * Holds the pieces for a player side. Indexes are unique to piece types.
+	 * @see assignPlayerPieces()
+	 */
+	private ArrayList<Piece> pieceList = new ArrayList<Piece>();
 	private String name;
 	private boolean win;
 	private boolean turn;
@@ -17,44 +21,42 @@ public class Player{
 	//constructor assign side to player
 	public Player(char side){
 		this.side = side;
-		assignPlayerPieces();
+		assignPlayerPieces(side);
 	}
 	
-	public void assignPlayerPieces(){
-		if (getSide() == 'b'){
+	/**
+	 * Assigns respective pieces to players according to which side they are on.
+	 * Pieces' list index are determined from left to right (col 0 - 7) starting 
+	 * arrangement from non-Arrow piece row to Arrow-piece row, specified as: 
+	 * <p>0. Plus</p>
+	 * <p>1. Triangle</p>
+	 * <p>2. Chevron</p>
+	 * <p>3. Sun</p>
+	 * <p>4. Chevron</p>
+	 * <p>5. Triangle</p>
+	 * <p>6. Plus</p>
+	 * <p>7. Arrow</p>
+	 * <p>8. Arrow</p>
+	 * <p>9. Arrow</p>
+	 * <p>10. Arrow</p>
+	 */
+	public void assignPlayerPieces(char side){
 			
-			bluePieceList.add(new Plus('b'));
-			bluePieceList.add(new Triangle('b'));
-			bluePieceList.add(new Chevron('b'));
-			bluePieceList.add(new Sun('b'));
-			bluePieceList.add(new Chevron('b'));
-			bluePieceList.add(new Triangle('b'));
-			bluePieceList.add(new Plus('b'));
-			bluePieceList.add(new Arrow('b', false));
-			bluePieceList.add(new Arrow('b', false));
-			bluePieceList.add(new Arrow('b', false));
-			bluePieceList.add(new Arrow('b', false));
-			
-			//assign to each square
-			  //code here
-		}
-		else if (getSide() == 'r'){
-
-			redPieceList.add(new Plus('r'));
-			redPieceList.add(new Triangle('r'));
-			redPieceList.add(new Chevron('r'));
-			redPieceList.add(new Sun('r'));
-			redPieceList.add(new Chevron('r'));
-			redPieceList.add(new Triangle('r'));
-			redPieceList.add(new Plus('r'));
-			redPieceList.add(new Arrow('r', false));
-			redPieceList.add(new Arrow('r', false));
-			redPieceList.add(new Arrow('r', false));
-			redPieceList.add(new Arrow('r', false));
-			
-			//assign to each square
-			  //code here 
-		}
+		pieceList.add(new Plus('b'));
+		pieceList.add(new Triangle('b'));
+		pieceList.add(new Chevron('b'));
+		pieceList.add(new Sun('b'));
+		pieceList.add(new Chevron('b'));
+		pieceList.add(new Triangle('b'));
+		pieceList.add(new Plus('b'));
+		pieceList.add(new Arrow('b', false));
+		pieceList.add(new Arrow('b', false));
+		pieceList.add(new Arrow('b', false));
+		pieceList.add(new Arrow('b', false));
+		
+		//assign to each square
+			//code here
+			//maybe this part Board class ambik kot, dia take Player.pieceList and susun je
 		
 	}
 	
