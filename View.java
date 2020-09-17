@@ -1,4 +1,11 @@
 /* RESIZE FRAME, SET ICON CENTER , ADD LABEL PLAYER NAME , SET JPANEL1 ,JPANEL2 */
+/***
+-set icon dalam jButton:
+ --> controller return square.occupied jadi false, kosongkan icon
+ --> the same to controller return apa2 piece to a newer location
+		-->set icon to new piece punya icon
+-icon punya file name, controller bagi jgn set sendiri okay
+***/
 
 import java.util.*;
 import javax.swing.*;
@@ -6,27 +13,37 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class ChessBoard extends JFrame {
-    private JFrame frame;  // Main window
+public class View extends JFrame {
+    private JFrame frame;  		// Main window
     private MenuBar menuBar;
     private Menu newGameMenu, loadMenu, saveMenu;
-    private String name1, name2;
     private JButton squares[][] = new JButton[8][7];  // components
-
-    public ChessBoard() {
-        frame = new JFrame("Ilovik Webale Chess");
-        frame.setSize(600, 600);
-        frame.setMinimumSize(frame.getSize());
-        frame.setLayout(new GridLayout(8, 7));
+	private JLabel player1Name, player2Name;
+	private JPanel boardPanel, home;
+	
+    public View() {
+        super("Ilovik Webale Chess");
+		setSize(600, 600);
+        setMinimumSize(getSize());
+		//getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+		player1Name = new JLabel("Kamal");
+		player2Name = new JLabel("Ali");
         
+		boardPanel = new JPanel(new GridLayout(8,7));
+		home = new JPanel();
+		home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
+		setBackground(Color.BLACK);
+		setForeground(Color.RED);
+		
         menuBar = new MenuBar();
         createMenu();
-        addMenuBarMenus(); // Add Menu to MenuBar
-        frame.setMenuBar(menuBar); // Add MenuBar to the Frame
-        frame.setResizable(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
-        //create board components
+        addMenuBarMenus(); 			// Add Menu to MenuBar
+        setMenuBar(menuBar); 		// Add MenuBar to the Frame
+        setResizable(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		home.add(player1Name);
+		//create board components
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
                 squares[i][j] = new JButton();
@@ -35,10 +52,13 @@ public class ChessBoard extends JFrame {
                 } else {
                     squares[i][j].setBackground(Color.WHITE);
                 }   
-                frame.add(squares[i][j]);
+                boardPanel.add(squares[i][j]);
             }
         }
-        
+		home.add(boardPanel);
+		home.add(player2Name);
+		add(home);
+		
         String pathBP = "/icons/BluePlus.png";
         String pathBT = "/icons/BlueTriangle.png";
         String pathBC = "/icons/BlueChevron.png";
@@ -64,6 +84,7 @@ public class ChessBoard extends JFrame {
         ImageIcon RedArrow = new ImageIcon(getClass().getResource(pathRA)); 
 
         squares[0][0].add(new JLabel(BluePlus));
+        squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);		
         squares[0][1].add(new JLabel(BlueTriangle));
         squares[0][2].add(new JLabel(BlueChevron));
         squares[0][3].add(new JLabel(BlueSun));
@@ -87,8 +108,7 @@ public class ChessBoard extends JFrame {
         squares[6][4].add(new JLabel(RedArrow));
         squares[6][6].add(new JLabel(RedArrow));
         
-        
-        frame.setVisible(true); // set the frame visible
+        setVisible(true); // set the frame visible
     }
 
     private void createMenu() {  // Create Menu objects to add to the MenuBar
@@ -102,9 +122,38 @@ public class ChessBoard extends JFrame {
         menuBar.add(loadMenu);
         menuBar.add(saveMenu);
     } 
- 
+	
+	public Menu getNewGameMenu(){
+		return newGameMenu;
+	}
+	
+	public Menu getLoadMenu(){
+		return loadMenu;
+	}
+	
+	public Menu getSaveMenu(){
+		return saveMenu;
+	}
+	
+	public JButton [][] getSquareButton(){
+		return squares;
+	}
+	
+	public JLabel getPlayer1Name(){
+		return player1Name;
+	} 
+	
+	public JLabel getPlayer2Name(){
+		return player2Name;
+	}
+	
     public static void main(String[] args) {
-        new ChessBoard();
+        //new View();
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new View();
+            }
+        });
     }
  
 }
