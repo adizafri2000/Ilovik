@@ -5,6 +5,8 @@
  --> the same to controller return apa2 piece to a newer location
 		-->set icon to new piece punya icon
 -icon punya file name, controller bagi jgn set sendiri okay
+PLAYER 1 RED
+PLAYER 2 BLUE
 ***/
 
 import java.util.*;

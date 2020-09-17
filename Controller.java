@@ -7,6 +7,8 @@ public class Controller {
         //this.view = view;
     }
 
+    //PLAYER 1 RED
+    // PLAYER 2 BLUE
 
     /*
     Dalam repository ni, ada folder Official MVC Example, or boleh refer website Iffah bagi in whatsapp.
