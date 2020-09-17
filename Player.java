@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * @author Aisyah, Iffah
+ * @author Aisyah, Iffah, Adi
  */
 public class Player{
 	
@@ -15,86 +15,119 @@ public class Player{
 	 * Holds the pieces for a player side. ArrayList indexes are specified to piece types.
 	 * Pieces' list index are determined from left to right (col 0 - 7) starting 
 	 * arrangement from non-Arrow-pieces row to Arrow-pieces row, specified as:
-	 * <p>Format: (index no.) piecename</p>
+	 * <p>index no. : piecename
 	 * 
-	 * <p>1. (0) Plus
-	 * <p>2. (1) Triangle
-	 * <p>3. (2) Chevron
-	 * <p>4. (3) Sun
-	 * <p>5. (4) Chevron
-	 * <p>6. (5) Triangle
-	 * <p>7. (6) Plus
-	 * <p>8. (7) Arrow
-	 * <p>9. (8) Arrow
-	 * <p>10. (9) Arrow
-	 * <p>11. (10) Arrow
+	 * <ul>
+	 * <li>0 : Plus
+	 * <li>1 : Triangle
+	 * <li>2 : Chevron
+	 * <li>3 : Sun
+	 * <li>4 : Chevron
+	 * <li>5 : Triangle
+	 * <li>6 : Plus
+	 * <li>7 : Arrow
+	 * <li>8 : Arrow
+	 * <li>9 : Arrow
+	 * <li>10: Arrow
 	 * @see assignPlayerPieces()
 	 */
 	private ArrayList<Piece> pieceList = new ArrayList<Piece>();
+
+	/**
+	 * Name of player
+	 */
 	private String name;
-	private boolean win;
+
+	/**
+	 * Winning status of player
+	 */
+	//private boolean win;
+
+	/**
+	 * Checker for whether it's the player's turn to move
+	 */
 	private boolean turn;
 	private int moves;
-	//private int numPlayer = 0;
 	
-	//constructor assign side to player
-	public Player(char side){
+	/**
+	 * Creates a new Player respective to his/her name and side
+	 * @param side
+	 */
+	public Player(String name,char side){
+		this.name = name;
 		this.side = side;
 		assignPlayerPieces(side);
+		this.turn = false;
 	}
 	
 	/**
 	 * Assigns respective pieces to players according to which side they are on.
-	 * Order of adding pieces to this list follows the adding order protocol as defined for
-	 * pieceList ArrayList.
+	 * Order of adding pieces to this list follows the adding order protocol as defined in
+	 * Player.pieceList
 	 * @see pieceList
 	 * @param side side owning the pieces
 	 */
 	public void assignPlayerPieces(char side){
 			
-		pieceList.add(new Plus('b'));
-		pieceList.add(new Triangle('b'));
-		pieceList.add(new Chevron('b'));
-		pieceList.add(new Sun('b'));
-		pieceList.add(new Chevron('b'));
-		pieceList.add(new Triangle('b'));
-		pieceList.add(new Plus('b'));
-		pieceList.add(new Arrow('b', false));
-		pieceList.add(new Arrow('b', false));
-		pieceList.add(new Arrow('b', false));
-		pieceList.add(new Arrow('b', false));
-		
-		//assign to each square
-			//code here
-			//maybe this part Board class ambik kot, dia take Player.pieceList and susun je
-		
+		pieceList.add(new Plus(side));
+		pieceList.add(new Triangle(side));
+		pieceList.add(new Chevron(side));
+		pieceList.add(new Sun(side));
+		pieceList.add(new Chevron(side));
+		pieceList.add(new Triangle(side));
+		pieceList.add(new Plus(side));
+		pieceList.add(new Arrow(side, false));
+		pieceList.add(new Arrow(side, false));
+		pieceList.add(new Arrow(side, false));
+		pieceList.add(new Arrow(side, false));
 	}
 	
-	
-	//get side that is moving
+	/**
+	 * Returns the player's list of pieces
+	 * @return the pieceList
+	 * @see pieceList
+	 */
+	public ArrayList<Piece> getPieceList() {
+		return pieceList;
+	}
+
+	/**
+	 * Returns the side of the player ('b'/'r')
+	 * @return player's side
+	 */
 	public char getSide(){
 		return side;
 	}
 	
-	//set the side that is moving
+	
+	/**
+	 * Sets the side of the player
+	 * @param side playing side to be assigned to the player
+	 */
 	public void setSide(char side){
 		this.side = side;
 	}
 	
-	//get the name of the piece??
+	/**
+	 * Returns the name of the player
+	 * @return player's name
+	 */
 	public String getName(){
 		return name;
 	}
 	
-	//set name of the piece??
+	/**
+	 * Sets the name for this player
+	 * @param name Name to be set for this player
+	 */
 	public void setName(String name){
 		this.name = name;
 	}
 	
 	//set piece that is wanted by the player to move
-	public void setPieces(Piece piece){
+	/*public void setPieces(Piece piece){
 		this.piece = piece;
-	}
+	}*/
 	
 
 	/**
@@ -110,15 +143,19 @@ public class Player{
 	}
 	
 	//return whether the side is in their turn or not
+	/**
+	 * Returns whether the side is in their turn or not
+	 * @return turn to move status
+	 */
 	public boolean isTurn(){
 		return turn;
 	}
 	
-	/*
-	//put the side in their turn
+	/**
+	 * Sets whether the player is to move or not
+	 * @param turn
+	 */
 	public void setTurn(boolean turn){
-		if (Piece.move() == true)){
-			getSide() = false;
 		this.turn = turn;
 	}
 	
@@ -137,10 +174,19 @@ public class Player{
 		return moves;
 	}
 	
+	/**
+	 * Swaps triangle pieces with plus pieces, and vice versa
+	 */
 	public void swapPiece(){
 		//swap triangle and plus
-		Collections.swap(pieceList,"triangle,plus");
-	} */
+		//Collections.swap(pieceList,"triangle,plus");
+		Piece temp1 = pieceList.get(0);
+		Piece temp2 = pieceList.get(6);
+		pieceList.set(0, pieceList.get(1));
+		pieceList.set(6, pieceList.get(5));
+		pieceList.set(1, temp1);
+		pieceList.set(5, temp2);
+	} 
 }
 	
 	
