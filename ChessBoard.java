@@ -6,14 +6,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class Board extends JFrame {
+public class ChessBoard extends JFrame {
     private JFrame frame;  // Main window
     private MenuBar menuBar;
     private Menu newGameMenu, loadMenu, saveMenu;
     private String name1, name2;
     private JButton squares[][] = new JButton[8][7];  // components
 
-    public Board() {
+    public ChessBoard() {
         frame = new JFrame("Ilovik Webale Chess");
         frame.setSize(600, 600);
         frame.setMinimumSize(frame.getSize());
@@ -104,7 +104,7 @@ public class Board extends JFrame {
     } 
  
     public static void main(String[] args) {
-        new Board();
+        new ChessBoard();
     }
  
 }
