@@ -18,7 +18,16 @@ public class View extends JFrame {
     private MenuBar menuBar;
     private Menu newGameMenu, loadMenu, saveMenu;
     private JButton squares[][] = new JButton[8][7];  // components
-	private JLabel player1Name, player2Name;
+
+    /**
+     * Holds the text for RED player's name
+     */
+    private JLabel player1Name;
+
+    /**
+     * Holds the text for BLUE player's name
+     */
+    private JLabel player2Name; 
 	private JPanel boardPanel, home;
 	
     public View() {
@@ -52,6 +61,7 @@ public class View extends JFrame {
                 } else {
                     squares[i][j].setBackground(Color.WHITE);
                 }   
+                squares[i][j].setName(Integer.toString(i)+Integer.toString(j));
                 boardPanel.add(squares[i][j]);
             }
         }
