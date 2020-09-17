@@ -18,9 +18,20 @@ public class Board {
      */
     private Player p2;
 
+    /**
+     * Board constructor for new games
+     * @param p1 Red player
+     * @param p2 Blue player
+     */
     public Board(Player p1, Player p2){
         this.p1 = p1;
         this.p2 = p2;
+        initBoard();
+        startingArrangement();
+    }
+
+    /**Board constructor for load games */
+    public Board(){
         initBoard();
     }
 
@@ -88,14 +99,14 @@ public class Board {
     }
 
     /**
-     * @param p1 the p1 to set
+     * @param p1 Red player to set
      */
     public void setP1(Player p1) {
         this.p1 = p1;
     }
 
     /**
-     * @param p2 the p2 to set
+     * @param p2 Blue player to set
      */
     public void setP2(Player p2) {
         this.p2 = p2;
@@ -106,6 +117,19 @@ public class Board {
      */
     public Square[][] getSquareList() {
         return squareList;
+    }
+
+    public void debug(){
+        Square temp;
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                temp = squareList[i][j];
+                if (temp.isOccupied())
+                    System.out.printf("Row: %d, Column: %d, %s\n",i,j,temp.getPiece().getName());
+                else
+                    System.out.printf("Row: %d, Column: %d, empty\n",i,j);
+            }
+        }
     }
 
 
