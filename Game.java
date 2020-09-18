@@ -38,7 +38,12 @@ public class Game {
     }
 
     /**
-     * 
+     * Loads all data saved in the saveFile "webalesave.txt".
+     * Data loading is focused to 3 different line types:
+     * <ul>
+     * <li>Both players' sides and names
+     * <li>The recently moved side (Last moving side before game is saved)
+     * <li>Existing pieces in the board at which row/column of which side (and rotating state)
      * @return
      * @throws FileNotFoundException
      */
@@ -53,27 +58,54 @@ public class Game {
             line = fRead.nextLine();
         board.setP2(new Player(line.substring(2), line.charAt(0)));
 
+        //Sets all pieces by blue player to captured status
+        board.getP2().pieceCaptured(true);
+
         //Red player's side and name
         if(fRead.hasNextLine())
             line = fRead.nextLine();
         board.setP1(new Player(line.substring(2), line.charAt(0)));
 
+        //Sets all pieces by red player to captured status
+        board.getP1().pieceCaptured(true);
+
         //2nd line: side(char)
         if(fRead.hasNextLine())
             line = fRead.nextLine();
 
+
+        //Set whose turn it is for the NEXT turn
         if (line.equals("r"))
-            board.getP1().setTurn(true);
-        else board.getP2().setTurn(true);
+            board.getP2().setTurn(true);
+        else board.getP1().setTurn(true);
+
+
 
         //Consecutive lines: (String)
+        //Should there be an existing piece of a side, then only the player's piece
+        //corresponding to the pieceList indexes will be set to "not captured"
+        Piece p;
         while(fRead.hasNextLine()){
             line = fRead.nextLine();
             int row = Integer.parseInt(Character.toString(line.charAt(0)));
             int col = Integer.parseInt(Character.toString(line.charAt(1)));
             char side = line.charAt(3);
-            
-            board.getSquareList()[row][col].setPiece(p);
+
+            switch(Character.toLowerCase(line.charAt(4))){
+                case 'c':   
+                            break;
+                case 't':
+                            break;
+                case 's':
+                            break;
+                case 'p':
+                            break;
+                case 'a':
+                            break;
+            }
+
+
+            //board.getSquareList()[row][col].setPiece(p);
         }
 
         fRead.close();
@@ -130,7 +162,15 @@ public class Game {
 
                     //piece name with side in format: <side><piece type>
                     //e.g Red Sun is saved as "rSun"
-                    fw.write(temp.getPiece().getName()+"\n");
+
+                    //Arrow pieces contain additional piece info: rotating state
+                    if(temp.getPiece() instanceof Arrow){
+                        Arrow a = (Arrow)temp.getPiece();
+                        fw.write(a.getName()+" "+a.isRotating()+"\n");
+                    }
+
+                    else
+                        fw.write(temp.getPiece().getName()+"\n");
                     
                 }
             }
@@ -158,6 +198,6 @@ public class Game {
         board.getP1().setTurn(true);
         g = new Game(board);
         //g.getBoard().debug();
-        //g.save();
+        g.save();
     }
 }

@@ -83,6 +83,16 @@ public class Player{
 	}
 	
 	/**
+	 * Sets all pieces in the player's piecelist to captured or 
+	 * not captured
+	 * @param captured 
+	 */
+	public void pieceCaptured(boolean captured){
+		for(Piece p:pieceList)
+			p.setCaptured(captured);
+	}
+
+	/**
 	 * Returns the player's list of pieces
 	 * @return the pieceList
 	 * @see pieceList
