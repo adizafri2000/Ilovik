@@ -102,7 +102,7 @@ public class Game {
             //3rd line: side(char)
             //Line example: r
             //Line example: b
-            
+
             if(fRead.hasNextLine())
                 line = fRead.nextLine();
 
@@ -115,8 +115,6 @@ public class Game {
             if (line.equals("r"))
                 board.getP2().setTurn(true);
             else board.getP1().setTurn(true);
-
-
 
             //Consecutive lines: (String)
             //Should there be an existing piece of a side, then only the player's piece

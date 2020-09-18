@@ -39,11 +39,6 @@ public class Player{
 	private String name;
 
 	/**
-	 * Winning status of player
-	 */
-	//private boolean win;
-
-	/**
 	 * Checker for whether it's the player's turn to move
 	 */
 	private boolean turn;
@@ -150,7 +145,6 @@ public class Player{
 		return (pieceList.get(3).isCaptured());
 	}
 	
-	//return whether the side is in their turn or not
 	/**
 	 * Returns whether the side is in their turn or not
 	 * @return turn to move status

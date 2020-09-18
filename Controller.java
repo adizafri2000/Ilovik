@@ -1,5 +1,6 @@
 public class Controller {
-    //Model: Game tak siap lagi
+    //Model: Game tak siap load() and save() lagi
+    private Game game;
     private View view;
     
     public Controller(){
@@ -7,7 +8,7 @@ public class Controller {
         //this.view = view;
     }
 
-    //PLAYER 1 RED
+    // PLAYER 1 RED
     // PLAYER 2 BLUE
 
     /*
