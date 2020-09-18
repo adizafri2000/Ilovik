@@ -2,13 +2,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author Adi
+ */
 public class Game {
     /** Board to be used for this game */
     private Board board;
 
-    /** File for saving the current state of the game */
+    /** File for saving the current state of the game.
+     * File contents are partitioned and specified by row:
+     * 
+     * <ol>
+     * <li>Blue Player: side and name
+     * <li>Red PLayer: side and name
+     * <li>Recently moved side (Before game is saved)
+     * <li>Piece (next n<=22 lines): coordinates, side+name (+ rotation status for arrows)
+     * </ol>
+     * 
+     * Failure to contain lines 1,2,3 or data being incorrectly written
+     * results in an invalid save file.
+    */
     private File saveFile;
 
     /** Default file name for the game's save file */
@@ -39,11 +55,8 @@ public class Game {
 
     /**
      * Loads all data saved in the saveFile "webalesave.txt".
-     * Data loading is focused to 3 different line types:
-     * <ul>
-     * <li>Both players' sides and names
-     * <li>The recently moved side (Last moving side before game is saved)
-     * <li>Existing pieces in the board at which row/column of which side (and rotating state)
+     * Data loading is focused to different line types
+     * @see saveFile
      * @return
      * @throws FileNotFoundException
      */
@@ -51,100 +64,149 @@ public class Game {
         Scanner fRead = new Scanner(saveFile);
         String line = " ";
 
-        //1st line: side(char) and name(String)
-        
-        //Blue player's side and name
-        if(fRead.hasNext())
-            line = fRead.nextLine();
-        board.setP2(new Player(line.substring(2), line.charAt(0)));
+        try {
+            //1st line: side(char) and name(String)
+            //Line example: b George
+            //Line example: b Zoe LaVerne
+                
+            //Blue player's side and name
+            if(fRead.hasNext())
+                line = fRead.nextLine();
 
-        //Sets all pieces by blue player to captured status
-        board.getP2().piecesCaptured(true);
+            //Check validity of retrieved line 1 according to standard save file format
+            if(((line.substring(2).trim().isEmpty())||(line.substring(2)==null)) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
+                throw new Exception();
+            
+            board.setP2(new Player(line.substring(2), line.charAt(0)));
 
-        //Red player's side and name
-        if(fRead.hasNextLine())
-            line = fRead.nextLine();
-        board.setP1(new Player(line.substring(2), line.charAt(0)));
+            //Sets all pieces by blue player to captured status
+            board.getP2().piecesCaptured(true);
 
-        //Sets all pieces by red player to captured status
-        board.getP1().piecesCaptured(true);
+            //2nd line: side(char) and name(String)
+            //Line example: r Massimo
+            //Line example: r Robert Lewandowski
 
-        //2nd line: side(char)
-        if(fRead.hasNextLine())
-            line = fRead.nextLine();
+            //Red player's side and name
+            if(fRead.hasNextLine())
+                line = fRead.nextLine();
+
+            //Check validity of retrieved line 2 according to standard save file format
+            if(((line.substring(2).trim().isEmpty())||(line.substring(2)==null)) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
+                throw new Exception();
+            
+            board.setP1(new Player(line.substring(2), line.charAt(0)));
+
+            //Sets all pieces by red player to captured status
+            board.getP1().piecesCaptured(true);
+
+            //3rd line: side(char)
+            //Line example: r
+            //Line example: b
+            
+            if(fRead.hasNextLine())
+                line = fRead.nextLine();
+
+            //Check validity of retrieved line 3 according to standard save file format
+            if((line.charAt(0)!='r') && (line.charAt(0)!='b'))
+                throw new Exception();
 
 
-        //Set whose turn it is for the NEXT turn
-        if (line.equals("r"))
-            board.getP2().setTurn(true);
-        else board.getP1().setTurn(true);
+            //Set whose turn it is for the NEXT turn
+            if (line.equals("r"))
+                board.getP2().setTurn(true);
+            else board.getP1().setTurn(true);
 
 
 
-        //Consecutive lines: (String)
-        //Should there be an existing piece of a side, then only the player's piece
-        //corresponding to the pieceList indexes will be set to "not captured"
-        Piece tempPiece;
-        Player tempPlayer;
-        while(fRead.hasNextLine()){
-            line = fRead.nextLine();
-            int row = Integer.parseInt(Character.toString(line.charAt(0)));
-            int col = Integer.parseInt(Character.toString(line.charAt(1)));
-            char side = line.charAt(3);
-            if (side=='r')
-                tempPlayer = board.getP1();
-            else tempPlayer = board.getP2();
+            //Consecutive lines: (String)
+            //Should there be an existing piece of a side, then only the player's piece
+            //corresponding to the pieceList indexes will be set to "not captured"
+            //line example: 45 rChevron
+            //line example: 11 bArrow true
+            Piece tempPiece;
+            Player tempPlayer;
+            boolean coordinatesCheck, sideCheck, pieceCheck, rotateCheck;
+            rotateCheck = false;
+            while(fRead.hasNextLine()){
+                line = fRead.nextLine();
 
-            switch(Character.toLowerCase(line.charAt(4))){
-                case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
+                //Exception thrown when either one is not a digit (coordinates can only be formed with integers)
+                coordinatesCheck = ((!Character.isDigit(line.charAt(0)))||(!Character.isDigit(line.charAt(1))));
 
-                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else tempPiece = board.getP1().getPieceList().get(4);
-                            board.loadArrangement(tempPiece, row, col);
-                            break;
 
-                case 't':   tempPiece = tempPlayer.getPieceList().get(1);
+                //Exception thrown when piece type does not correspond to either red or blue
+                sideCheck = ((line.charAt(3)!='r')&&(line.charAt(3)!='b'));
 
-                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else tempPiece = board.getP1().getPieceList().get(5);
-                            board.loadArrangement(tempPiece, row, col);
-                            break;
+                //Exception thrown when piece name (identifier) does not start with any piece types' initial
+                //e.g 'p' for plus, 's' for sun
+                pieceCheck = ((line.charAt(4)!='p')&&(line.charAt(4)!='t')&&(line.charAt(4)!='c')&&(line.charAt(4)!='s')&&(line.charAt(4)!='a'));
+                
+                //(FOR ARROW PIECES ONLY)
+                //Exception thrown when rotation identifier initial does not correspond to true/false
+                if(line.charAt(4)=='a')
+                    rotateCheck = ((line.charAt(10)!='f')&&(line.charAt(10)!='t'));
+                
+                if(coordinatesCheck||sideCheck||pieceCheck||rotateCheck)
+                    throw new Exception();                
 
-                case 's':   tempPiece = tempPlayer.getPieceList().get(3);
+                int row = Integer.parseInt(Character.toString(line.charAt(0)));
+                int col = Integer.parseInt(Character.toString(line.charAt(1)));
+                char side = line.charAt(3);
+                if (side=='r')
+                    tempPlayer = board.getP1();
+                else tempPlayer = board.getP2();
 
-                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            board.loadArrangement(tempPiece, row, col);
-                            break;
+                switch(Character.toLowerCase(line.charAt(4))){
+                    case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
 
-                case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
+                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                                else tempPiece = board.getP1().getPieceList().get(4);
+                                board.loadArrangement(tempPiece, row, col);
+                                break;
 
-                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else tempPiece = board.getP1().getPieceList().get(6);
-                            board.loadArrangement(tempPiece, row, col);
-                            break;
-                            
-                case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
-                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else {
-                                tempPiece = board.getP1().getPieceList().get(8);
-                                if (tempPiece.isCaptured())
-                                    tempPiece.setCaptured(false);
-                                else{
-                                    tempPiece = board.getP1().getPieceList().get(9);
+                    case 't':   tempPiece = tempPlayer.getPieceList().get(1);
+
+                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                                else tempPiece = board.getP1().getPieceList().get(5);
+                                board.loadArrangement(tempPiece, row, col);
+                                break;
+
+                    case 's':   tempPiece = tempPlayer.getPieceList().get(3);
+
+                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                                board.loadArrangement(tempPiece, row, col);
+                                break;
+
+                    case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
+
+                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                                else tempPiece = board.getP1().getPieceList().get(6);
+                                board.loadArrangement(tempPiece, row, col);
+                                break;
+                                
+                    case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
+                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                                else {
+                                    tempPiece = board.getP1().getPieceList().get(8);
                                     if (tempPiece.isCaptured())
                                         tempPiece.setCaptured(false);
-                                    else
+                                    else{
                                         tempPiece = board.getP1().getPieceList().get(9);
+                                        if (tempPiece.isCaptured())
+                                            tempPiece.setCaptured(false);
+                                        else
+                                            tempPiece = board.getP1().getPieceList().get(9);
+                                    }
                                 }
-                            }
-                            Arrow a = (Arrow)tempPiece;
-                            a.setRotate(line.charAt(10)=='f' ? false : true);
-                            board.loadArrangement(a, row, col);
-                            break;
+                                Arrow a = (Arrow)tempPiece;
+                                a.setRotate(line.charAt(10)=='f' ? false : true);
+                                board.loadArrangement(a, row, col);
+                                break;
+                }
             }
-
-
-            //board.getSquareList()[row][col].setPiece(p);
+        } catch (Exception e) {
+            fRead.close();
+            return false;
         }
 
         fRead.close();
