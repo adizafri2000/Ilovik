@@ -23,6 +23,7 @@ public class Triangle extends Piece{
         int yEnd = end.getY();
         boolean move1 = false;
         int dx,dy;
+	Square[][] sl = new Board().getSquareList();
         
 		//to check if movement is valid
         if ((xEnd < xStart) && (yEnd < yStart))
@@ -52,8 +53,45 @@ public class Triangle extends Piece{
         }
         if (dx == dy)
         {
-            move1 = true;
-        }
+			int checksquare = dx - 1;
+			if ((xEnd < xStart) && (yEnd < yStart)) //(2,2) to (0,0)
+			{
+
+				for (int i = 0; i < checksquare; i++)
+				{
+					if (!sl[xEnd+1][yEnd+1].isOccupied()){ //check (1,1)
+						move1 = true;
+					}
+				}
+			}
+			else if ((xEnd > xStart) && (yEnd < yStart)) //(2,2) to (4,0)
+			{
+				for (int i = 0; i < checksquare; i++)
+				{
+					if (!sl[xEnd-1][yEnd+1].isOccupied()){ //check (3,1)
+						move1 = true;
+					}
+				}            
+			}
+			else if ((xEnd < xStart) && (yEnd > yStart)) //(2,2) to (0,4)
+			{
+				for (int i = 0; i < checksquare; i++)
+				{
+					if (!sl[xEnd+1][yEnd-1].isOccupied()){ //check (1,3)
+						move1 = true;
+					}
+				}
+			}
+			else if ((xEnd > xStart) && (yEnd > yStart)) //(2,2) to (4,4)
+			{
+				for (int i = 0; i < checksquare; i++)
+				{
+					if (!sl[xEnd-1][yEnd-1].isOccupied()){ //check (3,3)
+						move1 = true;
+					}
+				}
+			}
+		}
         
         //move1 = (Math.abs(xStart-yStart)==Math.abs(yEnd-xEnd));
         
@@ -63,12 +101,7 @@ public class Triangle extends Piece{
 	//check if the new square has another piece, same side or not
 	//same side = cannot, diff side = eat
 		
-		if (start.getPiece().equals("triangle"))
-		{
-			move2 = true;
-		}
-		
-		if ((start.getPiece().getSide())==(end.getPiece().getSide())){
+		if ((start.getPiece().getSide())==(end.getPiece().getSide()) && (end.isOccupied())){
 			move2 = false;
 		}
 		else 
