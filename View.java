@@ -24,12 +24,12 @@ public class View extends JFrame {
     /**
      * Holds the text for RED player's name
      */
-    public JLabel player1Name;
+    private JLabel player1Name;
 
     /**
      * Holds the text for BLUE player's name
      */
-    public JLabel player2Name; 
+    private JLabel player2Name; 
     private JPanel boardPanel, home;
     
     public View() {
