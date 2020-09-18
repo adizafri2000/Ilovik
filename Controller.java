@@ -1,13 +1,56 @@
+import javax.swing.JOptionPane;
+import java.io.*;
+
 public class Controller {
     //Model: Game tak siap load() and save() lagi
     private Game game;
+    private Player player1;
+    private Player player2;
     private View view;
     
-    public Controller(){
-        //this.game = game;
-        //this.view = view;
+    public Controller(Game game, Player player1, Player player2, View view){
+        this.game = game;
+        this.player1 = player1;
+        this.player2 = player2;
+        this.view = view;
     }
-
+    
+    public void initController(){
+       view.getNewGameMenu().addActionListener(e -> createNewGame());
+       view.getLoadMenu().addActionListener(e -> loadGame());
+       view.getSaveMenu().addActionListener(e -> saveGame());
+       //view.getSquareButton().addActionListener(e -> movePiece());
+    }
+    
+    private void createNewGame(){
+        view.setVisible(false); //close previous board
+        View view = new View(); //create new board
+        Game game = new Game();
+        Player player1 = new Player("", 'b');
+        Player player2 = new Player("", 'r');
+        Controller controller = new Controller(game,player1,player2,view);
+        controller.initController();
+        String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
+        view.player1Name.setText(namePlayer1);
+        String namePlayer2 = JOptionPane.showInputDialog("Enter name of player 2:");
+        view.player2Name.setText(namePlayer2);
+        
+        player1.setName(namePlayer1);
+        player2.setName(namePlayer2);
+        System.out.println(player1.getName() + " " + player1.getSide());
+        System.out.println(player2.getName() + " " + player2.getSide());
+    }
+    
+    private void loadGame(){
+        JOptionPane.showMessageDialog(null, "load game");
+    }
+    
+    private void saveGame(){
+        //game.save();
+        JOptionPane.showMessageDialog(null, "save game");
+    }
+    
+   
     // PLAYER 1 RED
     // PLAYER 2 BLUE
 
