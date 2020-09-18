@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.applet.Applet;
 
 public class View extends JFrame {
     private JFrame frame;  		// Main window
@@ -31,17 +30,23 @@ public class View extends JFrame {
      * Holds the text for BLUE player's name
      */
     private JLabel player2Name; 
-	private JPanel boardPanel, home;
+	private JPanel mainPanel, boardPanel, home;
 	
     public View() {
         super("Ilovik Webale Chess");
 		setSize(800, 800);
         setMinimumSize(getSize());
-		//pack();
 		//getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
 		player1Name = new JLabel("Kamal");
 		player2Name = new JLabel("Ali");
-        
+       
+	    /*** testing 
+		mainPanel = new JPanel();
+		Container contentPane = getContentPane();
+		contentPane.setLayout(new BorderLayout());
+		contentPane.add(mainPanel, BorderLayout.CENTER);
+		***/
+		
 		boardPanel = new JPanel(new GridLayout(8,7));
 		home = new JPanel();
 		home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
@@ -53,6 +58,7 @@ public class View extends JFrame {
         addMenuBarMenus(); 			// Add Menu to MenuBar
         setMenuBar(menuBar); 		// Add MenuBar to the Frame
         setResizable(true);
+		//pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		home.add(player1Name);
@@ -66,7 +72,7 @@ public class View extends JFrame {
                     squares[i][j].setBackground(Color.WHITE);
                 }   
                 squares[i][j].setName(Integer.toString(i)+Integer.toString(j));
-                boardPanel.add(squares[i][j]);
+                boardPanel.add(squares[i][j],SwingConstants.CENTER);
             }
         }
 		home.add(boardPanel);
@@ -155,7 +161,7 @@ public class View extends JFrame {
 		
 		//squares[0][0].add(new JLabel(BluePlus));
         //squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);
-        squares[0][0].add(new JLabel(BluePlus,JLabel.CENTER));		
+        squares[0][0].add(new JLabel(BluePlus,SwingConstants.CENTER));		
         squares[0][1].add(new JLabel(BlueTriangle));
         squares[0][2].add(new JLabel(BlueChevron));
         squares[0][3].add(new JLabel(BlueSun));
