@@ -34,7 +34,7 @@ public class View extends JFrame {
 	
     public View() {
         super("Ilovik Webale Chess");
-		setSize(600, 600);
+		setSize(800, 800);
         setMinimumSize(getSize());
 		//getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
 		player1Name = new JLabel("Kamal");
@@ -95,8 +95,9 @@ public class View extends JFrame {
         ImageIcon RedSun = new ImageIcon(getClass().getResource(pathRS));
         ImageIcon RedArrow = new ImageIcon(getClass().getResource(pathRA)); 
 
-        squares[0][0].add(new JLabel(BluePlus));
-        squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);		
+        //squares[0][0].add(new JLabel(BluePlus));
+        //squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);
+        squares[0][0].add(new JLabel(BluePlus,SwingConstants.CENTER));		
         squares[0][1].add(new JLabel(BlueTriangle));
         squares[0][2].add(new JLabel(BlueChevron));
         squares[0][3].add(new JLabel(BlueSun));
