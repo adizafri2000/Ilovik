@@ -39,14 +39,11 @@ public class Player{
 	private String name;
 
 	/**
-	 * Winning status of player
-	 */
-	//private boolean win;
-
-	/**
 	 * Checker for whether it's the player's turn to move
 	 */
 	private boolean turn;
+
+	/**A counter for the player's moves to indicate swapping pieces */
 	private int moves;
 	
 	/**
@@ -58,6 +55,7 @@ public class Player{
 		this.side = side;
 		assignPlayerPieces(side);
 		this.turn = false;
+		this.moves = 0;
 	}
 	
 	/**
@@ -134,11 +132,6 @@ public class Player{
 		this.name = name;
 	}
 	
-	//set piece that is wanted by the player to move
-	/*public void setPieces(Piece piece){
-		this.piece = piece;
-	}*/
-	
 
 	/**
 	 * Checks whether the side is winning by checking if 
@@ -152,7 +145,6 @@ public class Player{
 		return (pieceList.get(3).isCaptured());
 	}
 	
-	//return whether the side is in their turn or not
 	/**
 	 * Returns whether the side is in their turn or not
 	 * @return turn to move status
@@ -169,19 +161,32 @@ public class Player{
 		this.turn = turn;
 	}
 	
-	//check whether triangle and plus must change or not
-	//every 4 turn??
-	public void updateMoves(int i){
-		i++;
-		if (i == 4)
-		{
+	/**
+	 * Resets Player.moves to 0 when moves==2, indicating a swapping event
+	 * @param i
+	 */
+	public void updateMoves(){
+		if(moves==2){
 			swapPiece();
-			i = 0;
+			moves=0;
 		}
+		moves++;
 	}
 	
+	/**
+	 * Returns the move number for this player
+	 * @return moves count
+	 */
 	public int getMoves(){
 		return moves;
+	}
+
+	/**
+	 * Sets the moves done by this player
+	 * @param moves moves done
+	 */
+	public void setMoves(int moves) {
+		this.moves = moves;
 	}
 	
 	/**
