@@ -78,10 +78,16 @@ public class Board {
     }
 
     /**
-     * Loads an arrangement from a saved game
+     * Loads a piece's arrangment into the board.
+     * This method is used for setting up pieces in load games.
+     * Player's pieces are individually checked beforehand by calling class
+     * and its location in the board is passed.
+     * @param p Piece to be added to board
+     * @param row Row location (y-axis) of piece
+     * @param col Column location (x-axis) of piece
      */
-    public void loadArrangement(){
-
+    public void loadArrangement(Piece p,int row,int col){
+        squareList[row][col].setPiece(p);
     }
 
     /**

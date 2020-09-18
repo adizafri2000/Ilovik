@@ -30,6 +30,13 @@ public class Arrow extends Piece
 	{
 		return rotate;
 	}
+
+	/**
+	 * @param rotate Rotation status (move to/from enemy)
+	 */
+	public void setRotate(boolean rotate) {
+		this.rotate = rotate;
+	}
 	
 	@Override
 	public boolean move(Square start, Square end)

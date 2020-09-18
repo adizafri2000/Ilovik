@@ -59,7 +59,7 @@ public class Game {
         board.setP2(new Player(line.substring(2), line.charAt(0)));
 
         //Sets all pieces by blue player to captured status
-        board.getP2().pieceCaptured(true);
+        board.getP2().piecesCaptured(true);
 
         //Red player's side and name
         if(fRead.hasNextLine())
@@ -67,7 +67,7 @@ public class Game {
         board.setP1(new Player(line.substring(2), line.charAt(0)));
 
         //Sets all pieces by red player to captured status
-        board.getP1().pieceCaptured(true);
+        board.getP1().piecesCaptured(true);
 
         //2nd line: side(char)
         if(fRead.hasNextLine())
@@ -84,23 +84,62 @@ public class Game {
         //Consecutive lines: (String)
         //Should there be an existing piece of a side, then only the player's piece
         //corresponding to the pieceList indexes will be set to "not captured"
-        Piece p;
+        Piece tempPiece;
+        Player tempPlayer;
         while(fRead.hasNextLine()){
             line = fRead.nextLine();
             int row = Integer.parseInt(Character.toString(line.charAt(0)));
             int col = Integer.parseInt(Character.toString(line.charAt(1)));
             char side = line.charAt(3);
+            if (side=='r')
+                tempPlayer = board.getP1();
+            else tempPlayer = board.getP2();
 
             switch(Character.toLowerCase(line.charAt(4))){
-                case 'c':   
+                case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else tempPiece = board.getP1().getPieceList().get(4);
+                            board.loadArrangement(tempPiece, row, col);
                             break;
-                case 't':
+
+                case 't':   tempPiece = tempPlayer.getPieceList().get(1);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else tempPiece = board.getP1().getPieceList().get(5);
+                            board.loadArrangement(tempPiece, row, col);
                             break;
-                case 's':
+
+                case 's':   tempPiece = tempPlayer.getPieceList().get(3);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            board.loadArrangement(tempPiece, row, col);
                             break;
-                case 'p':
+
+                case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else tempPiece = board.getP1().getPieceList().get(6);
+                            board.loadArrangement(tempPiece, row, col);
                             break;
-                case 'a':
+                            
+                case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else {
+                                tempPiece = board.getP1().getPieceList().get(8);
+                                if (tempPiece.isCaptured())
+                                    tempPiece.setCaptured(false);
+                                else{
+                                    tempPiece = board.getP1().getPieceList().get(9);
+                                    if (tempPiece.isCaptured())
+                                        tempPiece.setCaptured(false);
+                                    else
+                                        tempPiece = board.getP1().getPieceList().get(9);
+                                }
+                            }
+                            Arrow a = (Arrow)tempPiece;
+                            a.setRotate(line.charAt(10)=='f' ? false : true);
+                            board.loadArrangement(a, row, col);
                             break;
             }
 
