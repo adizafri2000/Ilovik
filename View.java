@@ -40,7 +40,9 @@ public class View extends JFrame {
         player1Name = new JLabel("Kamal");
         player2Name = new JLabel("Ali");
         
-        boardPanel = new JPanel(new GridLayout(8,7));
+		boardPanel = new JPanel(new GridLayout(8,7));
+		//boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Page_AXIS));
+		boardPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         home = new JPanel();
         home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
         setBackground(Color.BLACK);
@@ -50,11 +52,11 @@ public class View extends JFrame {
         createMenu();
         addMenuBarMenus();          // Add Menu to MenuBar
         add(menuBar);   
-        setJMenuBar(menuBar);  // Add MenuBar to the Frame
+        setJMenuBar(menuBar);  		// Add MenuBar to the Frame
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
-        home.add(player1Name);
+		home.add(player1Name);
         //create board components
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
@@ -68,7 +70,7 @@ public class View extends JFrame {
                 boardPanel.add(squares[i][j]);
             }
         }
-        home.add(boardPanel);
+		home.add(boardPanel, BorderLayout.CENTER);
         home.add(player2Name);
         add(home);
         
@@ -138,7 +140,7 @@ public class View extends JFrame {
 
         //squares[0][0].add(new JLabel(BluePlus));
         //squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);
-        squares[0][0].add(new JLabel(BluePlus,SwingConstants.CENTER));      
+        squares[0][0].add(new JLabel(BluePlus));
         squares[0][1].add(new JLabel(BlueTriangle));
         squares[0][2].add(new JLabel(BlueChevron));
         squares[0][3].add(new JLabel(BlueSun));
