@@ -43,12 +43,22 @@ public class Controller {
     
     private void loadGame(){
         JOptionPane.showMessageDialog(null, "load game");
+        
+        view.getLoadMenu();
+		if (loadExists()){
+			game.load(); //set gui
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "file not exist.", JOptionPane.INFORMATION_MESSAGE);
+		}
     }
     
     private void saveGame(){
-        //game.save();
+        game.save();
         JOptionPane.showMessageDialog(null, "save game");
+		JOptionPane.showMessageDialog(null, "GAME SAVED SUCCESSFULLY", JOptionPane.ERROR_MESSAGE);
     }
+    
     
    
     // PLAYER 1 RED
