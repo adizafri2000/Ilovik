@@ -13,6 +13,81 @@ public class Triangle extends Piece{
 		super(side,fileName);
 		setName("Triangle");
 	}
+	public boolean pathwayClear1(Square start, Square end){ //(2,2) to (0,0)
+		boolean move = true;
+		Square temp;
+		if (end.getX() < start.getX() && end.getY() < start.getY()){
+			temp = new Square.Builder().x(end.getX()+1).y(end.getY()+1).build(); //??
+			if (!temp.isOccupied()){
+				pathwayClear1(start,temp);
+			}
+			else
+			{
+				move = false;
+			}
+		}
+		else if (start.getX() == end.getX() && start.getY() == end.getY()){
+			move = true;
+		}
+		return move;
+	}
+	
+	public boolean pathwayClear2(Square start, Square end){ //(2,2) to (4,0)
+		boolean move = true;
+		Square temp;
+		if (end.getX() > start.getX() && end.getY() < start.getY()){
+			temp = new Square.Builder().x(end.getX()+1).y(end.getY()-1).build();
+			if (!temp.isOccupied()){ 
+				pathwayClear2(start,temp);
+			}
+			else
+			{
+				move = false;
+			}
+		}
+		else if (start.getX() == end.getX() && start.getY() == end.getY()){
+			move = true;
+		}
+		return move;
+	}
+	
+	public boolean pathwayClear3(Square start, Square end){ //(2,2) to (0,4)
+		boolean move = true;
+		Square temp;
+		if (end.getX() < start.getX() && end.getY() > start.getY()){
+			temp = new Square.Builder().x(end.getX()-1).y(end.getY()+1).build(); //??
+			if (!temp.isOccupied()){
+				pathwayClear3(start,temp);
+			}
+			else
+			{
+				move = false;
+			}
+		}
+		else if (start.getX() == end.getX() && start.getY() == end.getY()){
+			move = true;
+		}
+		return move;
+	}
+	
+	public boolean pathwayClear4(Square start, Square end){ //(2,2) to (4,4)
+		boolean move = true;
+		Square temp;
+		if (end.getX() > start.getX() && end.getY() > start.getY()){
+			temp = new Square.Builder().x(end.getX()-1).y(end.getY()-1).build(); //??
+			if (!temp.isOccupied()){
+				pathwayClear4(start,temp);
+			}
+			else
+			{
+				move = false;
+			}
+		}
+		else if (start.getX() == end.getX() && start.getY() == end.getY()){
+			move = true;
+		}
+		return move;
+	}
 	
 	@Override
     public boolean move(Square start, Square end){
@@ -21,9 +96,8 @@ public class Triangle extends Piece{
         int yStart = start.getY();
         int xEnd = end.getX();
         int yEnd = end.getY();
-        boolean move1 = false;
+        boolean move1 = true;
         int dx,dy;
-	Square[][] sl = new Board().getSquareList();
         
 		//to check if movement is valid
         if ((xEnd < xStart) && (yEnd < yStart))
@@ -51,70 +125,54 @@ public class Triangle extends Piece{
             dx = 0;
             dy = 0;
         }
+        //CHECK IF PATHWAY CLEAR
         if (dx == dy)
         {
-			int checksquare = dx - 1;
 			if ((xEnd < xStart) && (yEnd < yStart)) //(2,2) to (0,0)
 			{
-
-				for (int i = 0; i < checksquare; i++)
-				{
-					if (!sl[xEnd+1][yEnd+1].isOccupied()){ //check (1,1)
-						move1 = true;
-					}
-				}
+				move1 = pathwayClear1(start,end);
 			}
 			else if ((xEnd > xStart) && (yEnd < yStart)) //(2,2) to (4,0)
 			{
-				for (int i = 0; i < checksquare; i++)
-				{
-					if (!sl[xEnd-1][yEnd+1].isOccupied()){ //check (3,1)
-						move1 = true;
-					}
-				}            
+				move1 = pathwayClear2(start,end);
 			}
 			else if ((xEnd < xStart) && (yEnd > yStart)) //(2,2) to (0,4)
 			{
-				for (int i = 0; i < checksquare; i++)
-				{
-					if (!sl[xEnd+1][yEnd-1].isOccupied()){ //check (1,3)
-						move1 = true;
-					}
-				}
+				move1 = pathwayClear3(start,end);
 			}
 			else if ((xEnd > xStart) && (yEnd > yStart)) //(2,2) to (4,4)
 			{
-				for (int i = 0; i < checksquare; i++)
-				{
-					if (!sl[xEnd-1][yEnd-1].isOccupied()){ //check (3,3)
-						move1 = true;
-					}
-				}
+				move1 = pathwayClear4(start,end);
 			}
-		}
+			}
+			else{
+				move1 = false;
+			}
+	}
         
         //move1 = (Math.abs(xStart-yStart)==Math.abs(yEnd-xEnd));
         
        
     
-		boolean move2 = false;
+	boolean move2 = false;
 	//check if the new square has another piece, same side or not
 	//same side = cannot, diff side = eat
 		
-		if ((start.getPiece().getSide())==(end.getPiece().getSide()) && (end.isOccupied())){
-			move2 = false;
-		}
-		else 
-		{
-			move2 = true;
-		}
-		
-		boolean finalmove = false;
-		if (move1 && move2){
-			finalmove = true;
-		}
+	if ((start.getPiece().getSide())==(end.getPiece().getSide()) && (end.isOccupied())){
+		move2 = false;
+	}
+	else 
+	{
+		move2 = true;
+	}
+	
+	    //final move or not
+	boolean finalmove = false;
+	if (move1 && move2){
+		finalmove = true;
+	}
 			
-		return finalmove;
+	return finalmove;
 	}
 	
 }
