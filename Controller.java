@@ -31,9 +31,9 @@ public class Controller {
         Controller controller = new Controller(game,player1,player2,view);
         controller.initController();
         String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
-        view.player1Name.setText(namePlayer1);
+        view.getPlayer1Name().setText(namePlayer1);
         String namePlayer2 = JOptionPane.showInputDialog("Enter name of player 2:");
-        view.player2Name.setText(namePlayer2);
+        view.getPlayer2Name().setText(namePlayer2);
         
         player1.setName(namePlayer1);
         player2.setName(namePlayer2);
