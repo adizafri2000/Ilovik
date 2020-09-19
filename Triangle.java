@@ -148,31 +148,31 @@ public class Triangle extends Piece{
 			else{
 				move1 = false;
 			}
-	}
+	
         
         //move1 = (Math.abs(xStart-yStart)==Math.abs(yEnd-xEnd));
         
        
     
-	boolean move2 = false;
-	//check if the new square has another piece, same side or not
-	//same side = cannot, diff side = eat
-		
-	if ((start.getPiece().getSide())==(end.getPiece().getSide()) && (end.isOccupied())){
-		move2 = false;
-	}
-	else 
-	{
-		move2 = true;
-	}
-	
-	    //final move or not
-	boolean finalmove = false;
-	if (move1 && move2){
-		finalmove = true;
-	}
+		boolean move2 = false;
+		//check if the new square has another piece, same side or not
+		//same side = cannot, diff side = eat
 			
-	return finalmove;
+		if ((start.getPiece().getSide())==(end.getPiece().getSide()) && (end.isOccupied())){
+			move2 = false;
+		}
+		else 
+		{
+			move2 = true;
+		}
+		
+			//final move or not
+		boolean finalmove = false;
+		if (move1 && move2){
+			finalmove = true;
+		}
+				
+		return finalmove;
 	}
 	
 }

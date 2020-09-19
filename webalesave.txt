@@ -1,6 +1,6 @@
 b Biru
 r Merah
-r
+r 0 0
 00 rPlus
 01 rTriangle
 02 rChevron

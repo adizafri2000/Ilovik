@@ -15,8 +15,8 @@ public class Game {
      * File contents are partitioned and specified by row:
      * 
      * <ol>
-     * <li>Blue Player: side and name
-     * <li>Red PLayer: side and name
+     * <li>Blue Player: side, move counter, name
+     * <li>Red PLayer: side, move counter, name
      * <li>Recently moved side (Before game is saved)
      * <li>Piece (next n<=22 lines): coordinates, side+name (+ rotation status for arrows)
      * </ol>
@@ -73,7 +73,7 @@ public class Game {
                 line = fRead.nextLine();
 
             //Check validity of retrieved line 1 according to standard save file format
-            if(((line.substring(2).trim().isEmpty())||(line.substring(2)==null)) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
+            if((validLine(line.substring(2))) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
                 throw new Exception();
             
             board.setP2(new Player(line.substring(2), line.charAt(0)));
@@ -90,7 +90,7 @@ public class Game {
                 line = fRead.nextLine();
 
             //Check validity of retrieved line 2 according to standard save file format
-            if(((line.substring(2).trim().isEmpty())||(line.substring(2)==null)) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
+            if((validLine(line.substring(2))) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
                 throw new Exception();
             
             board.setP1(new Player(line.substring(2), line.charAt(0)));
@@ -211,6 +211,16 @@ public class Game {
     }
 
     /**
+     * Checks if a retrieved line in Game.load() is an empty line consisting of either whitespace, or
+     * is null.
+     * @param s String (Line) to be checked
+     * @return whether string is empty or not
+     */
+    private boolean validLine(String s){
+        return (s.trim().isEmpty()&&s==null);
+    }
+
+    /**
      * Creates a new save file
      * @throws IOException
      */
@@ -219,10 +229,11 @@ public class Game {
         return fw;
     }
 
+
     /**
      * Saves current game into a .txt file of same directory. Extracted info are:
      * <ul>
-     * <li>Player names for both sides
+     * <li>Both sides' side, move counter, name
      * <li>Recently moved side
      * <li>Occupied squares' positions with their respective pieces
      * 
@@ -234,18 +245,26 @@ public class Game {
         //Blue player side
         fw.write(Character.toString(board.getP2().getSide())+" ");
 
+        //Blue's recent move counter
+        String bMove = Integer.toString(board.getP2().getMoves());
+        fw.write(bMove+" ");
+
         //Blue player name
         fw.write(board.getP2().getName()+"\n");
 
         //Red player side
         fw.write(Character.toString(board.getP1().getSide())+" ");
 
+        //Red's recent move counter
+        String rMove = Integer.toString(board.getP1().getMoves());
+        fw.write(rMove+"\n");
+
         //Red player name
         fw.write(board.getP1().getName()+"\n");
 
         //Recently moved side
         char recent = (board.getP1().isTurn()) ? board.getP1().getSide() : board.getP2().getSide();
-        fw.write(Character.toString(recent)+"\n");
+        fw.write(Character.toString(recent)+" ");
 
         //Occupied squares (with coordinates and respective pieces)
         //Format: coordinates<SPACE>pieceName
