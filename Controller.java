@@ -185,13 +185,11 @@ public class Controller implements ActionListener {
                     view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED));
                     System.out.println("HERE AT RED");
                 }
-                else{
+                else
                     JOptionPane.showMessageDialog(null, "Not your turn yet!");
-                } 
             }
-            else{
+            else
                  System.out.println("click on empty square");
-            }
         }
         else if (pieceClick == true){
             if(start.getY() == i && start.getX() == j ){ //deselect square
@@ -205,6 +203,7 @@ public class Controller implements ActionListener {
 
                     if (end.isOccupied()){
                         System.out.println(end.getPiece().getName());
+                        JOptionPane.showMessageDialog(null, "The square is occupied!");
                     }
                     else{
                         System.out.println("Selected square is empty");
@@ -215,45 +214,14 @@ public class Controller implements ActionListener {
                         pieceClick = false;
                         System.out.println("Valid Move");
                     }
-                    else{
+                    else
                         System.out.println("Invalid Move");
-                    }
+                    
                     view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE));
                                 System.out.println("start: " + start.getY() + "," + start.getX()
                                 + " end: " + end.getY() + "," + end.getX());
-
-                    /*
-                    if(!end.isOccupied()){
-                        view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE)); //set border non-red
-                        
-                            //isMoveValid = game.getBoard().getSquareList()[i][j].getPiece().move(start, end);
-                            if (isMoveValid){
-                                view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE));
-                                System.out.println("start: " + start.getY() + "," + start.getX()
-                                + " end: " + end.getY() + "," + end.getX());
-                                pieceClick = false;
-                                System.out.println("Valid move"); 
-                                
-                        } 
-                        else
-                            System.out.println("Invalid move"); 
-                    }
-                    else{
-                        isMoveValid = game.getBoard().getSquareList()[i][j].getPiece().move(start, end);
-                        if (isMoveValid){
-                                view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE));
-                                System.out.println("start: " + start.getY() + "," + start.getX()
-                                + " end: " + end.getY() + "," + end.getX());
-                                pieceClick = false;
-                                System.out.println("Valid move"); 
-                                
-                        } 
-                        else
-                            System.out.println("Invalid move"); 
-                    }*/
-                    
-               
             }
+                   
         }
     }catch (NullPointerException ex){ex.printStackTrace();}
 }
