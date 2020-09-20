@@ -8,7 +8,6 @@ public class Triangle2 extends Piece{
 	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
 	 */
     private static String fileName = "Triangle.png";
-    private Board board;
 
 	public Triangle2(char side) {
 		super(side,fileName);
