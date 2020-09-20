@@ -19,7 +19,7 @@ public class View extends JFrame {
     private JFrame frame, nameFrame;       // Main window
     private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
-    private JButton squares[][] = new JButton[8][7];  // components
+    public JButton squares[][] = new JButton[8][7];  // components
     
     /**
      * Holds the text for RED player's name
