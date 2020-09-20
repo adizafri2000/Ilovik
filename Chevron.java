@@ -19,7 +19,8 @@ public class Chevron extends Piece{
         /*
         Implementation steps
         1. Check validity of destination (square)
-            1.1 Destination square has piece of same side? return false
+            1.1 Destination square is empty? -> (2), occupied? -> (1.2)
+            1.2 Destination square has piece of same side? return false, different side? ->(2)
         2. Check movement itself
             2.1 Upper L movement (y-2, x+/-1)
             2.2 Lower L movement (y+2, x+/-1)

@@ -107,4 +107,12 @@ public class Square {
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
     }
+
+    public static void main(String[] args) {
+        Square sq = new Square.Builder().x(5).y(5).occupied(false).build();
+        System.out.printf("sq: (%d,%d),%s\n",sq.getX(),sq.getY(),sq.isOccupied());
+
+        sq.setX(23);
+        System.out.printf("sq: (%d,%d),%s\n",sq.getX(),sq.getY(),sq.isOccupied());
+    }
 }
