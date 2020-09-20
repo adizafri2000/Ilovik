@@ -10,10 +10,9 @@ public class Triangle2 extends Piece{
     private static String fileName = "Triangle.png";
     private Board board;
 
-	public Triangle2(char side,Board board) {
+	public Triangle2(char side) {
 		super(side,fileName);
         setName("Triangle");
-        this.board = board;
     }
     
     /**
@@ -23,11 +22,10 @@ public class Triangle2 extends Piece{
      * @param end Ending(Destination) square
      */    
 	private boolean pathwayClear1(Square start, Square end){ //(2,2) to (0,0)
-        //quare temp = new Square.Builder().x(start.getX()-1).y(start.getY()-1).occupied(false).build();
+        Square temp = new Square.Builder().x(start.getX()-1).y(start.getY()-1).occupied(false).build();
         //temp square location is one upper-left square in distance from start square
         //temp.setX(temp.getX()-1);
         //temp.setY(temp.getY()-1);
-        Square temp = board.getSquareList()[start.getY()-1][start.getX()-1];
         System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
         System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
         System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
@@ -186,7 +184,7 @@ public class Triangle2 extends Piece{
             dy = 0;
         }
         
-        //False condition reached: Incorrect movement location
+        //False condition reached: Non-diagonal movement detected
         if(dy!=dx) 
             return false;
 
