@@ -13,15 +13,11 @@ PLAYER 2 BLUE
 ***/
 
 
-import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
 
 
 public class View extends JFrame {
-    private JFrame frame;       // Main window
     private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
     public JButton[][] squares = new JButton[8][7];  // components

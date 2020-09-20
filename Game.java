@@ -91,8 +91,10 @@ public class Game {
     }
 
     /**
-     * Loads all data saved in the saveFile "webalesave.txt".
-     * Data loading is focused to different line types
+     * Loads all data from the saveFile "webalesave.txt".
+     * Data loading is focused to different line types.
+     * Load process fails should a line from the save file
+     * does not follow the standard save format
      * @see saveFile
      * @return
      * @throws FileNotFoundException
@@ -100,6 +102,7 @@ public class Game {
     public boolean load() throws FileNotFoundException {
         Scanner fRead = new Scanner(saveFile);
         String line = " ";
+        Board tempBoard;
 
         try {
             //1st line: side(char) and name(String)
@@ -111,10 +114,15 @@ public class Game {
                 line = fRead.nextLine();
 
             //Check validity of retrieved line 1 according to standard save file format
-            if((validLine(line.substring(2))) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
+            if(!validLine1or2(line))
                 throw new Exception();
+
+            Player bluePlayer2 = new Player(line.substring(4), line.charAt(0));
+            bluePlayer2.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
+            bluePlayer2.piecesCaptured(true);
             
-            board.setP2(new Player(line.substring(2), line.charAt(0)));
+            //board.setP2(new Player(line.substring(4), line.charAt(0)));
+            //board.getP2().setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
 
             //Sets all pieces by blue player to captured status
             board.getP2().piecesCaptured(true);
@@ -128,13 +136,20 @@ public class Game {
                 line = fRead.nextLine();
 
             //Check validity of retrieved line 2 according to standard save file format
-            if((validLine(line.substring(2))) || ((line.charAt(0)!='r') && (line.charAt(0)!='b')))
+            if(!validLine1or2(line))
                 throw new Exception();
+
+            Player redPlayer1 = new Player(line.substring(4), line.charAt(0));
+            redPlayer1.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
+            redPlayer1.piecesCaptured(true);
             
-            board.setP1(new Player(line.substring(2), line.charAt(0)));
+            board.setP1(new Player(line.substring(4), line.charAt(0)));
+            board.getP1().setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
 
             //Sets all pieces by red player to captured status
             board.getP1().piecesCaptured(true);
+
+            tempBoard = new Board(redPlayer1, bluePlayer2);
 
             //3rd line: side(char)
             //Line example: r
@@ -144,14 +159,14 @@ public class Game {
                 line = fRead.nextLine();
 
             //Check validity of retrieved line 3 according to standard save file format
-            if((line.charAt(0)!='r') && (line.charAt(0)!='b'))
+            if(!validLine3(line))
                 throw new Exception();
 
 
             //Set whose turn it is for the NEXT turn
             if (line.equals("r"))
-                board.getP2().setTurn(true);
-            else board.getP1().setTurn(true);
+                tempBoard.getP2().setTurn(true);
+            else tempBoard.getP1().setTurn(true);
 
             //Consecutive lines: (String)
             //Should there be an existing piece of a side, then only the player's piece
@@ -160,91 +175,75 @@ public class Game {
             //line example: 11 bArrow true
             Piece tempPiece;
             Player tempPlayer;
-            boolean coordinatesCheck, sideCheck, pieceCheck, rotateCheck;
-            rotateCheck = false;
             while(fRead.hasNextLine()){
                 line = fRead.nextLine();
 
-                //Exception thrown when either one is not a digit (coordinates can only be formed with integers)
-                coordinatesCheck = ((!Character.isDigit(line.charAt(0)))||(!Character.isDigit(line.charAt(1))));
-
-
-                //Exception thrown when piece type does not correspond to either red or blue
-                sideCheck = ((line.charAt(3)!='r')&&(line.charAt(3)!='b'));
-
-                //Exception thrown when piece name (identifier) does not start with any piece types' initial
-                //e.g 'p' for plus, 's' for sun
-                pieceCheck = ((line.charAt(4)!='p')&&(line.charAt(4)!='t')&&(line.charAt(4)!='c')&&(line.charAt(4)!='s')&&(line.charAt(4)!='a'));
-                
-                //(FOR ARROW PIECES ONLY)
-                //Exception thrown when rotation identifier initial does not correspond to true/false
-                if(line.charAt(4)=='a')
-                    rotateCheck = ((line.charAt(10)!='f')&&(line.charAt(10)!='t'));
-                
-                if(coordinatesCheck||sideCheck||pieceCheck||rotateCheck)
-                    throw new Exception();                
+                if(!validPieceLine(line))           
+                    throw new Exception();
 
                 int row = Integer.parseInt(Character.toString(line.charAt(0)));
                 int col = Integer.parseInt(Character.toString(line.charAt(1)));
                 char side = line.charAt(3);
                 if (side=='r')
-                    tempPlayer = board.getP1();
-                else tempPlayer = board.getP2();
+                    tempPlayer = tempBoard.getP1();
+                else tempPlayer = tempBoard.getP2();
 
                 switch(Character.toLowerCase(line.charAt(4))){
                     case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
 
                                 if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                                 else tempPiece = board.getP1().getPieceList().get(4);
-                                board.loadArrangement(tempPiece, row, col);
+                                tempBoard.loadArrangement(tempPiece, row, col);
                                 break;
 
                     case 't':   tempPiece = tempPlayer.getPieceList().get(1);
 
                                 if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                                 else tempPiece = board.getP1().getPieceList().get(5);
-                                board.loadArrangement(tempPiece, row, col);
+                                tempBoard.loadArrangement(tempPiece, row, col);
                                 break;
 
                     case 's':   tempPiece = tempPlayer.getPieceList().get(3);
 
                                 if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                                board.loadArrangement(tempPiece, row, col);
+                                tempBoard.loadArrangement(tempPiece, row, col);
                                 break;
 
                     case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
 
                                 if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                                 else tempPiece = board.getP1().getPieceList().get(6);
-                                board.loadArrangement(tempPiece, row, col);
+                                tempBoard.loadArrangement(tempPiece, row, col);
                                 break;
                                 
                     case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
                                 if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                                 else {
-                                    tempPiece = board.getP1().getPieceList().get(8);
+                                    tempPiece = tempBoard.getP1().getPieceList().get(8);
                                     if (tempPiece.isCaptured())
                                         tempPiece.setCaptured(false);
                                     else{
-                                        tempPiece = board.getP1().getPieceList().get(9);
+                                        tempPiece = tempBoard.getP1().getPieceList().get(9);
                                         if (tempPiece.isCaptured())
                                             tempPiece.setCaptured(false);
                                         else
-                                            tempPiece = board.getP1().getPieceList().get(9);
+                                            tempPiece = tempBoard.getP1().getPieceList().get(9);
                                     }
                                 }
                                 Arrow a = (Arrow)tempPiece;
                                 a.setRotate(line.charAt(10)=='f' ? false : true);
-                                board.loadArrangement(a, row, col);
+                                tempBoard.loadArrangement(a, row, col);
                                 break;
                 }
             }
+            
         } catch (Exception e) {
             fRead.close();
             return false;
         }
 
         fRead.close();
+        setBoard(tempBoard);
         return true;
     }
 
@@ -256,6 +255,75 @@ public class Game {
      */
     private boolean validLine(String s){
         return (s.trim().isEmpty()&&s==null);
+    }
+
+    /**
+     * Checks whether a line retrieved from the save file has valid characters
+     * to fit specified data of line 1/2 according to the standard save file format/
+     * <p>
+     * Line 1/2: side(SPACE)recent_move_counter(SPACE)name
+     * @param s
+     * @return
+     */
+    private boolean validLine1or2(String s){
+        if(validLine(s))
+            if(s.trim().length()>2)
+                if((s.charAt(0)=='r')||(s.charAt(0)=='b'))
+                    if(Character.isDigit(s.charAt(2)))
+                        if(s.substring(2).trim().length()!=0)
+                            return true;
+                    
+        return false;
+    }
+
+    /**
+     * Checks whether a line retrieved from the save file has valid characters
+     * to fit specified data of line 3 according to the standard save file format/
+     * <p>
+     * Line 3: side
+     * @param s
+     * @return
+     */
+    private boolean validLine3(String s){
+        if(validLine(s))
+            if((s.charAt(0)=='b')||(s.charAt(0)=='r'))
+                return true;
+
+        return false;
+    }
+
+    private boolean validPieceLine(String s){
+        if(validLine(s)){
+            if(s.trim().length()>3){
+                boolean coordinatesCheck, sideCheck, pieceCheck, rotateCheck;
+                rotateCheck = false;
+
+                //Exception thrown when either one is not a digit (coordinates can only be formed with integers)
+                coordinatesCheck = ((!Character.isDigit(s.charAt(0)))||(!Character.isDigit(s.charAt(1))));
+
+                //Exception thrown when piece type does not correspond to either red or blue
+                sideCheck = ((s.charAt(3)!='r')&&(s.charAt(3)!='b'));
+
+                //Exception thrown when piece name (identifier) does not start with any piece types' initial
+                //e.g 'p' for plus, 's' for sun
+                pieceCheck = ((s.charAt(4)!='p')&&(s.charAt(4)!='t')&&(s.charAt(4)!='c')&&(s.charAt(4)!='s')&&(s.charAt(4)!='a'));
+                
+                //(FOR ARROW PIECES ONLY)
+                //Exception thrown when rotation identifier initial does not correspond to true/false
+                if(s.charAt(4)=='a')
+                    rotateCheck = ((s.charAt(10)!='f')&&(s.charAt(10)!='t'));
+
+                if(coordinatesCheck&&sideCheck&&pieceCheck){
+                    if(s.charAt(4)!='a')
+                        return true;
+                    else{
+                        if(rotateCheck)
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -295,14 +363,14 @@ public class Game {
 
         //Red's recent move counter
         String rMove = Integer.toString(board.getP1().getMoves());
-        fw.write(rMove+"\n");
+        fw.write(rMove+" ");
 
         //Red player name
         fw.write(board.getP1().getName()+"\n");
 
         //Recently moved side
         char recent = (board.getP1().isTurn()) ? board.getP1().getSide() : board.getP2().getSide();
-        fw.write(Character.toString(recent)+" ");
+        fw.write(Character.toString(recent)+"\n");
 
         //Occupied squares (with coordinates and respective pieces)
         //Format: coordinates<SPACE>pieceName
@@ -342,18 +410,27 @@ public class Game {
     public Board getBoard() {
         return board;
     }
+
+    public void setBoard(Board b){
+        this.board = b;
+    }
+
     public static void main(String[] args) throws IOException {
         Game g = new Game();
         System.out.println(g.loadExists());
         if (!g.loadExists())
             g.createSaveFile();
         System.out.println(g.loadExists());
+        //g.load();
         Player p1 = new Player("Merah", 'r');
         Player p2 = new Player("Biru", 'b');
         Board board = new Board(p1, p2);
         board.getP1().setTurn(true);
         g = new Game(board);
-        //g.getBoard().debug();
+        if(g.loadExists())
+            g.load();
+        g.getBoard().debug();
         g.save();
+
     }
 }

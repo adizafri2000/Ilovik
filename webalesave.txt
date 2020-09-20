@@ -1,7 +1,7 @@
 b 0 Biru
-r 0
-Merah
-r 00 rPlus
+r 0 Merah
+r
+00 rPlus
 01 rTriangle
 02 rChevron
 03 rSun
