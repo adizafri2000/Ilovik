@@ -6,7 +6,7 @@
  * @author Adi
  */
 public class Board {
-    private Square[][] squareList = new Square[8][7];
+    public Square[][] squareList = new Square[8][7];
 
     /**
      * Red player
