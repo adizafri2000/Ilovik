@@ -1,3 +1,6 @@
+
+
+
 /* RESIZE FRAME, SET ICON CENTER , ADD LABEL PLAYER NAME , SET JPANEL1 ,JPANEL2 */
 /***
 -set icon dalam jButton:
@@ -9,18 +12,19 @@ PLAYER 1 RED
 PLAYER 2 BLUE
 ***/
 
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.awt.image.BufferedImage;
+
 
 public class View extends JFrame {
-    private JFrame frame, nameFrame;       // Main window
+    private JFrame frame;       // Main window
     private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
-    public JButton squares[][] = new JButton[8][7];  // components
+    public JButton[][] squares = new JButton[8][7];  // components
     
     /**
      * Holds the text for RED player's name
@@ -37,48 +41,41 @@ public class View extends JFrame {
         super("Ilovik Webale Chess");
         setSize(800, 800);
         setMinimumSize(getSize());
+        //getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
         player1Name = new JLabel("Kamal");
         player2Name = new JLabel("Ali");
         
-		boardPanel = new JPanel(new GridLayout(8,7));
-		boardPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        boardPanel = new JPanel(new GridLayout(8,7));
         home = new JPanel();
         home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
         setBackground(Color.BLACK);
         setForeground(Color.RED);
-		
+        
         menuBar = new JMenuBar();
         createMenu();
         addMenuBarMenus();          // Add Menu to MenuBar
         add(menuBar);   
-        setJMenuBar(menuBar);  		// Add MenuBar to the Frame
+        setJMenuBar(menuBar);  // Add MenuBar to the Frame
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
-		home.add(player1Name);
+        home.add(player1Name);
         //create board components
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
                 squares[i][j] = new JButton();
-				squares[i][j].setMargin(new Insets(0,0,0,0));
-				ImageIcon icon = new ImageIcon(new BufferedImage(70,70,BufferedImage.TYPE_INT_ARGB));
-				squares[i][j].setIcon(icon);
                 if ((i + j) % 2 == 0) {
                     squares[i][j].setBackground(Color.BLACK);
                 } else {
                     squares[i][j].setBackground(Color.WHITE);
                 }   
                 squares[i][j].setName(Integer.toString(i)+Integer.toString(j));
-                squares[i][j].putClientProperty("row",i);
-				squares[i][j].putClientProperty("col",j);
-				boardPanel.add(squares[i][j]);
+                boardPanel.add(squares[i][j]);
             }
         }
-		home.add(boardPanel, BorderLayout.CENTER);
+        home.add(boardPanel);
         home.add(player2Name);
         add(home);
-
-
         
         String pathBP = "/icons/BluePlus.png";
         String pathBT = "/icons/BlueTriangle.png";
@@ -92,17 +89,7 @@ public class View extends JFrame {
         String pathRS = "/icons/RedSun.png";
         String pathRA = "/icons/RedArrow.png"; 
 		
-        // Blue Icon Pieces
-        String iconPath = "/icons/";
-        String controllerbagi = "blabla.png";
-        iconPath = iconPath+controllerbagi;
-        ImageIcon icon = new ImageIcon(getClass().getResource(iconPath)); // load the image to imageIcon
-        Image iconP = icon.getImage(); //transform it 
-        Image idk = iconP.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        icon = new ImageIcon(idk); //transfer it back
-        squares[2][3].setIcon(icon);
-
-
+		// Blue Icon Pieces
         ImageIcon BluePlus = new ImageIcon(getClass().getResource(pathBP)); // load the image to imageIcon
         Image bluePlus = BluePlus.getImage(); //transform it 
         Image newBluePlus = bluePlus.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
@@ -153,8 +140,174 @@ public class View extends JFrame {
         Image redArrow = RedArrow.getImage(); //transform it 
         Image newRedArrow = redArrow.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
         RedArrow = new ImageIcon(newRedArrow); //transfer it back
+        /*
+        //squares[0][0].add(new JLabel(BluePlus));
+        //squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);
+        squares[0][0].add(new JLabel(BluePlus,SwingConstants.CENTER));      
+        squares[0][1].add(new JLabel(BlueTriangle));
+        squares[0][2].add(new JLabel(BlueChevron));
+        squares[0][3].add(new JLabel(BlueSun));
+        squares[0][4].add(new JLabel(BlueChevron));
+        squares[0][5].add(new JLabel(BlueTriangle));
+        squares[0][6].add(new JLabel(BluePlus));
+        squares[1][0].add(new JLabel(BlueArrow));
+        squares[1][2].add(new JLabel(BlueArrow));
+        squares[1][4].add(new JLabel(BlueArrow));
+        squares[1][6].add(new JLabel(BlueArrow));
+    
+        squares[7][0].add(new JLabel(RedPlus));
+        squares[7][1].add(new JLabel(RedTriangle));
+        squares[7][2].add(new JLabel(RedChevron));
+        squares[7][3].add(new JLabel(RedSun));
+        squares[7][4].add(new JLabel(RedChevron));
+        squares[7][5].add(new JLabel(RedTriangle));
+        squares[7][6].add(new JLabel(RedPlus));
+        squares[6][0].add(new JLabel(RedArrow));
+        squares[6][2].add(new JLabel(RedArrow));
+        squares[6][4].add(new JLabel(RedArrow));
+        squares[6][6].add(new JLabel(RedArrow));
+        */
+        squares[0][0].setIcon(BluePlus);      
+        squares[0][1].setIcon(BlueTriangle);
+        squares[0][2].setIcon(BlueChevron);
+        squares[0][3].setIcon(BlueSun);
+        squares[0][4].setIcon(BlueChevron);
+        squares[0][5].setIcon(BlueTriangle);
+        squares[0][6].setIcon(BluePlus);
+        squares[1][0].setIcon(BlueArrow);
+        squares[1][2].setIcon(BlueArrow);
+        squares[1][4].setIcon(BlueArrow);
+        squares[1][6].setIcon(BlueArrow);
+        
+        squares[7][0].setIcon(RedPlus);
+        squares[7][1].setIcon(RedTriangle);
+        squares[7][2].setIcon(RedChevron);
+        squares[7][3].setIcon(RedSun);
+        squares[7][4].setIcon(RedChevron);
+        squares[7][5].setIcon(RedTriangle);
+        squares[7][6].setIcon(RedPlus);
+        squares[6][0].setIcon(RedArrow);
+        squares[6][2].setIcon(RedArrow);
+        squares[6][4].setIcon(RedArrow);
+        squares[6][6].setIcon(RedArrow);
+        
+        setLocationRelativeTo(null);
+        setVisible(true); // set the frame visible
+    }
 
-        squares[0][0].add(new JLabel(BluePlus));
+    private void createMenu() {  // Create Menu objects to add to the MenuBar
+        newGameMenu = new JButton("New Game");
+        loadMenu = new JButton("Load");
+        saveMenu = new JButton("Save");
+    }
+    
+    private void addMenuBarMenus() {    // Add Menu to the MenuBar
+        menuBar.add(newGameMenu);
+        menuBar.add(loadMenu);
+        menuBar.add(saveMenu);
+    } 
+    
+    public JButton getNewGameMenu(){
+        return newGameMenu;
+    }
+    
+    public JButton getLoadMenu(){
+        return loadMenu;
+    }
+    
+    public JButton getSaveMenu(){
+        return saveMenu;
+    }
+    
+    public JButton[][] getSquareButton(){
+        return squares;
+    }
+    
+    public JLabel getPlayer1Name(){
+        return player1Name;
+    } 
+    
+    public JLabel getPlayer2Name(){
+        return player2Name;
+    }
+   
+     public static void main(String[] args) {
+        //new View();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new View();
+            }
+        });
+    } 
+    /*
+    public View() {
+        super("Ilovik Webale Chess");
+        setSize(800, 800);
+        setMinimumSize(getSize());
+        //getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+        player1Name = new JLabel("Kamal");
+        player2Name = new JLabel("Ali");
+        
+        home = new JPanel();
+        home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
+        setBackground(Color.BLACK);
+        setForeground(Color.RED);
+        
+        menuBar = new JMenuBar();
+        createMenu();
+        addMenuBarMenus();          // Add Menu to MenuBar
+        add(menuBar);   
+        setJMenuBar(menuBar);  // Add MenuBar to the Frame
+        setResizable(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+        home.add(player1Name);
+        boardPanel = new JPanel(new GridLayout(8,7));
+        //create board components
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 7; j++) {
+                squares[i][j] = new JButton();
+                if ((i + j) % 2 == 0) {
+                    squares[i][j].setBackground(Color.BLACK);
+                } else {
+                    squares[i][j].setBackground(Color.WHITE);
+                }   
+                squares[i][j].setName(Integer.toString(i)+Integer.toString(j));
+                
+                boardPanel.add(squares[i][j]);
+            }
+        }
+        home.add(boardPanel);
+        home.add(player2Name);
+        add(home);
+        
+        String pathBP = "/icons/BluePlus.png";
+        String pathBT = "/icons/BlueTriangle.png";
+        String pathBC = "/icons/BlueChevron.png";
+        String pathBS = "/icons/BlueSun.png";
+        String pathBA = "/icons/BlueArrow.png";
+        
+        String pathRP = "/icons/RedPlus.png";
+        String pathRT = "/icons/RedTriangle.png";
+        String pathRC = "/icons/RedChevron.png";
+        String pathRS = "/icons/RedSun.png";
+        String pathRA = "/icons/RedArrow.png";
+        
+        ImageIcon BluePlus = new ImageIcon(getClass().getResource(pathBP));
+        ImageIcon BlueTriangle = new ImageIcon(getClass().getResource(pathBT)); 
+        ImageIcon BlueChevron = new ImageIcon(getClass().getResource(pathBC));
+        ImageIcon BlueSun = new ImageIcon(getClass().getResource(pathBS));
+        ImageIcon BlueArrow = new ImageIcon(getClass().getResource(pathBA)); 
+        
+        ImageIcon RedPlus = new ImageIcon(getClass().getResource(pathRP));
+        ImageIcon RedTriangle = new ImageIcon(getClass().getResource(pathRT)); 
+        ImageIcon RedChevron = new ImageIcon(getClass().getResource(pathRC));
+        ImageIcon RedSun = new ImageIcon(getClass().getResource(pathRS));
+        ImageIcon RedArrow = new ImageIcon(getClass().getResource(pathRA)); 
+
+        //squares[0][0].add(new JLabel(BluePlus));
+        //squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);
+        squares[0][0].add(new JLabel(BluePlus,SwingConstants.CENTER));      
         squares[0][1].add(new JLabel(BlueTriangle));
         squares[0][2].add(new JLabel(BlueChevron));
         squares[0][3].add(new JLabel(BlueSun));
@@ -206,7 +359,7 @@ public class View extends JFrame {
         return saveMenu;
     }
     
-    public JButton [][] getSquareButton(){
+    public JButton[][] getSquareButton(){
         return squares;
     }
     
@@ -219,13 +372,6 @@ public class View extends JFrame {
     }
     
     
-    public static void main(String[] args) {
-        //new View();
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new View();
-            }
-        });
-    } 
+   */
     
-}
+} 
