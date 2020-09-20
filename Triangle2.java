@@ -7,11 +7,13 @@ public class Triangle2 extends Piece{
 	 * Default .png file name for the piece's icon without the side's name
 	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
 	 */
-	private static String fileName = "Triangle.png";
+    private static String fileName = "Triangle.png";
+    private Board board;
 
-	public Triangle2(char side) {
+	public Triangle2(char side,Board board) {
 		super(side,fileName);
-		setName("Triangle");
+        setName("Triangle");
+        this.board = board;
     }
     
     /**
@@ -21,10 +23,11 @@ public class Triangle2 extends Piece{
      * @param end Ending(Destination) square
      */    
 	private boolean pathwayClear1(Square start, Square end){ //(2,2) to (0,0)
-        Square temp = new Square.Builder().x(start.getX()-1).y(start.getY()-1).occupied(false).build();
+        //quare temp = new Square.Builder().x(start.getX()-1).y(start.getY()-1).occupied(false).build();
         //temp square location is one upper-left square in distance from start square
         //temp.setX(temp.getX()-1);
         //temp.setY(temp.getY()-1);
+        Square temp = board.getSquareList()[start.getY()-1][start.getX()-1];
         System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
         System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
         System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
@@ -187,7 +190,7 @@ public class Triangle2 extends Piece{
         if(dy!=dx) 
             return false;
 
-        else{
+        else if(!start.isNearDestination(end)){
             if ((xEnd < xStart) && (yEnd < yStart)) //(2,2) to (0,0)
 			{
 				move1 = pathwayClear1(start,end);
@@ -207,6 +210,8 @@ public class Triangle2 extends Piece{
             else
                 return false;
         }
+        else
+            move1 = true;
     
 		//check if the new square has another piece, same side or not
         //same side = cannot, diff side = eat
@@ -215,7 +220,6 @@ public class Triangle2 extends Piece{
             if ((!end.isOccupied())||(end.getPiece().getSide()!=start.getPiece().getSide())){
                 return true;
             }
-        }
             
         return false;
 	}
