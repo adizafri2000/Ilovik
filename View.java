@@ -79,6 +79,8 @@ public class View extends JFrame {
 		home.add(boardPanel, BorderLayout.CENTER);
         home.add(player2Name);
         add(home);
+
+
         
         String pathBP = "/icons/BluePlus.png";
         String pathBT = "/icons/BlueTriangle.png";
@@ -92,7 +94,17 @@ public class View extends JFrame {
         String pathRS = "/icons/RedSun.png";
         String pathRA = "/icons/RedArrow.png"; 
 		
-		// Blue Icon Pieces
+        // Blue Icon Pieces
+        String iconPath = "/icons/";
+        String controllerbagi = "blabla.png";
+        iconPath = iconPath+controllerbagi;
+        ImageIcon icon = new ImageIcon(getClass().getResource(iconPath)); // load the image to imageIcon
+        Image iconP = icon.getImage(); //transform it 
+        Image idk = iconP.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(idk); //transfer it back
+        squares[2][3].setIcon(icon);
+
+
         ImageIcon BluePlus = new ImageIcon(getClass().getResource(pathBP)); // load the image to imageIcon
         Image bluePlus = BluePlus.getImage(); //transform it 
         Image newBluePlus = bluePlus.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
