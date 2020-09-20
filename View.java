@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.awt.image.BufferedImage;
 
 public class View extends JFrame {
     private JFrame frame, nameFrame;       // Main window
@@ -59,6 +60,9 @@ public class View extends JFrame {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
                 squares[i][j] = new JButton();
+				squares[i][j].setMargin(new Insets(0,0,0,0));
+				ImageIcon icon = new ImageIcon(new BufferedImage(70,70,BufferedImage.TYPE_INT_ARGB));
+				squares[i][j].setIcon(icon);
                 if ((i + j) % 2 == 0) {
                     squares[i][j].setBackground(Color.BLACK);
                 } else {
