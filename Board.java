@@ -126,21 +126,23 @@ public class Board {
         return squareList;
     }
 
-    /*
-    1. Check starting piece == triangle/plus
-    2. check pathway cleared/not
-    */
-
     /**
      * To check if triangle/plus pieces have clear pathways from their starting position until
      * end position
+     * @param p Piece to be checked for its type
+     * @param start Starting square
+     * @param end Destination square
      * @return true if pathway from start to end is clear from any piece
      */
-    public boolean isClearPathway(){
-        //if piece==triangle:
-            //pathway checking methods
-        //else (plus)
-            //pathway checking methods
+    public boolean isClearPathway(Piece p,Square start,Square end){
+        if (p instanceof Triangle){
+            //Triangle pathway check
+            //Aisyah letak sini
+        }
+        else if (p instanceof Plus){
+            //Plus pathway check
+            //Aina letak sini
+        }
         return true;
     }
 
