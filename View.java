@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.awt.image.BufferedImage;
 
 public class View extends JFrame {
     private JFrame frame, nameFrame;       // Main window
@@ -37,12 +36,10 @@ public class View extends JFrame {
         super("Ilovik Webale Chess");
         setSize(800, 800);
         setMinimumSize(getSize());
-        //getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
         player1Name = new JLabel("Kamal");
         player2Name = new JLabel("Ali");
         
 		boardPanel = new JPanel(new GridLayout(8,7));
-		//boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Page_AXIS));
 		boardPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         home = new JPanel();
         home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
@@ -62,9 +59,6 @@ public class View extends JFrame {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
                 squares[i][j] = new JButton();
-				squares[i][j].setMargin(new Insets(0,0,0,0));
-				ImageIcon icon = new ImageIcon(new BufferedImage(70,70,BufferedImage.TYPE_INT_ARGB));
-				squares[i][j].setIcon(icon);
                 if ((i + j) % 2 == 0) {
                     squares[i][j].setBackground(Color.BLACK);
                 } else {
@@ -144,8 +138,6 @@ public class View extends JFrame {
         Image newRedArrow = redArrow.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
         RedArrow = new ImageIcon(newRedArrow); //transfer it back
 
-        //squares[0][0].add(new JLabel(BluePlus));
-        //squares[0][0].setHorizontalAlignment(SwingConstants.CENTER);
         squares[0][0].add(new JLabel(BluePlus));
         squares[0][1].add(new JLabel(BlueTriangle));
         squares[0][2].add(new JLabel(BlueChevron));
