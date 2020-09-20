@@ -33,7 +33,6 @@ public class Controller implements ActionListener {
         for(int i = 0; i < 8; i++){
            for(int j = 0; j < 7; j++){
                view.getSquareButton()[i][j].addActionListener(this);
-               //view.squares[i][j].addActionListener(this);
                view.getSquareButton()[i][j].setActionCommand(i+""+j);
            }
         }
@@ -44,10 +43,10 @@ public class Controller implements ActionListener {
         view.setVisible(false); //close previous board
         
         View view = new View(); //create new board
-        Game game = new Game(b);
         Player player1 = new Player("", 'b'); //player 1 use blue piece
         Player player2 = new Player("", 'r'); //player 2 use red piece
-        //Board board = new Board(player1, player2);
+        Board board = new Board(player1, player2);
+        Game game = new Game(board);
         Controller controller = new Controller(view, game, player1, player2, board);
         controller.initController();
         
@@ -68,16 +67,16 @@ public class Controller implements ActionListener {
         JOptionPane.showMessageDialog(null, "load game");
         
         view.getLoadMenu();
-		if (loadExists()){
-			game.load(); //set gui
-		}
-		else{
-			JOptionPane.showMessageDialog(null, "file not exist.", JOptionPane.INFORMATION_MESSAGE);
+        if (game.loadExists()){
+            //game.load(); //set gui
         }
-
+        else{
+            JOptionPane.showMessageDialog(null, "file not exist.");
+        }
+    /*
     public String giveIcon(int i,int j){
         return game.getBoard().getSquareList()[i][j].getPiece().getIconFile();
-    }
+    } */
     
         /*
         retrieve save data
@@ -119,9 +118,9 @@ public class Controller implements ActionListener {
     }
     
     private void saveGame(){
-        game.save();
+        //game.save();
         JOptionPane.showMessageDialog(null, "save game");
-		JOptionPane.showMessageDialog(null, "GAME SAVED SUCCESSFULLY", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "GAME SAVED SUCCESSFULLY");
     }
     
     public void actionPerformed(ActionEvent e){
@@ -176,8 +175,8 @@ public class Controller implements ActionListener {
                         System.out.println(end.getPiece().getName());
                     }
                     else{
-			System.out.println("Selected square is empty");
-		     }
+            System.out.println("Selected square is empty");
+             }
                     
                         boolean isMoveValid = true; 
                         if(!end.isOccupied()){
@@ -209,16 +208,13 @@ public class Controller implements ActionListener {
                                 System.out.println("Invalid move"); 
                         }
                     
-                /*
-                else{
-                    System.out.println("click on empty square");
-                    
-                }*/
+               
             }
         }
     }catch (NullPointerException ex){ex.printStackTrace();}
-   
-	//test controller
+}
+/*
+    //test controller
     public static void main(String[] args){
         View v = new View();
         Game g = new Game();
@@ -226,11 +222,11 @@ public class Controller implements ActionListener {
         p1.setTurn(true);
         Player p2 = new Player("Adli", 'r');
         Board b = new Board (p1, p2);
-	g = new Game(b);
+        g = new Game(b);
         Controller c = new Controller(v,g,p1,p2,b);
         c.initController();
-    }
-	
+    } */
+    
     // PLAYER 1 RED
     // PLAYER 2 BLUE
 
