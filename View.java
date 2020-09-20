@@ -195,6 +195,22 @@ public class View extends JFrame {
         setVisible(true); // set the frame visible
     }
 
+    /**
+     * Sets a button with an icon of a piece, respective to the pieces' arrangement in model, given by controller
+     * @param row row of square
+     * @param col column of square
+     * @param iconFile file name for the icon of the piece set in this square in the model
+     */
+    public void addIcon(int row, int col, String iconFile){
+        String iconPath = "/icons/";
+        iconPath = iconPath+iconFile;
+        ImageIcon icon = new ImageIcon(getClass().getResource(iconPath)); // load the image to imageIcon
+        Image iconP = icon.getImage(); //transform it 
+        Image idk = iconP.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(idk); //transfer it back
+        squares[row][col].setIcon(icon);
+    }
+
     private void createMenu() {  // Create Menu objects to add to the MenuBar
         newGameMenu = new JButton("New Game");
         loadMenu = new JButton("Load");
