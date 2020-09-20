@@ -218,8 +218,8 @@ public class Triangle2 extends Piece{
             if ((!end.isOccupied())||(end.getPiece().getSide()!=start.getPiece().getSide())){
                 return true;
             }
-            
+        }
+        
         return false;
-	}
-	
+    }
 }
