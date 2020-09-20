@@ -32,8 +32,8 @@ public class Controller implements ActionListener {
        view.getSaveMenu().addActionListener(e -> saveGame());
         for(int i = 0; i < 8; i++){
            for(int j = 0; j < 7; j++){
-               view.getSquareButton()[i][j].addActionListener(this);
-               view.getSquareButton()[i][j].setActionCommand(i+""+j);
+               //view.getSquareButton()[i][j].addActionListener(this);
+               //view.getSquareButton()[i][j].setActionCommand(i+""+j);
            }
         }
        
@@ -41,14 +41,25 @@ public class Controller implements ActionListener {
     
     private void createNewGame(){
         view.setVisible(false); //close previous board
-        
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 7; j++){
+                view.getSquareButton()[i][j].addActionListener(this);
+                view.getSquareButton()[i][j].setActionCommand(i+""+j);
+            }
+        }
         View view = new View(); //create new board
         Player player1 = new Player("", 'b'); //player 1 use blue piece
         Player player2 = new Player("", 'r'); //player 2 use red piece
         Board board = new Board(player1, player2);
         Game game = new Game(board);
         Controller controller = new Controller(view, game, player1, player2, board);
-        controller.initController();
+        //controller.initController();
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 7; j++){
+                view.getSquareButton()[i][j].addActionListener(this);
+                view.getSquareButton()[i][j].setActionCommand(i+""+j);
+            }
+        }
         
         String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
         view.getPlayer1Name().setText(namePlayer1);
@@ -65,7 +76,12 @@ public class Controller implements ActionListener {
     
    private void loadGame(){
         JOptionPane.showMessageDialog(null, "load game");
-        
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 7; j++){
+                view.getSquareButton()[i][j].addActionListener(this);
+                view.getSquareButton()[i][j].setActionCommand(i+""+j);
+            }
+        }
         view.getLoadMenu();
         if (game.loadExists()){
             //game.load(); //set gui
@@ -125,14 +141,26 @@ public class Controller implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
         String action = e.getActionCommand();
-        JButton baction = (JButton)e.getSource();
-        action = baction.getName();
         char rowClicked = action.charAt(0);
         char colClicked = action.charAt(1);
         int row = Character.getNumericValue(rowClicked);
         int col = Character.getNumericValue(colClicked);
         movePiece(row, col);
     }
+
+    public void loadBoardIcons(){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                if(game.getBoard().getSquareList()[i][j].isOccupied())
+                    view.addIcon(i, j, game.getBoard().getSquareList()[i][j].getPiece().getIconFile());
+                else
+                    view.getSquareButton()[i][j].setIcon(null);
+            }
+        }
+    }
+    
+    
+
     
     private void movePiece(int i, int j){
         //&&  board.squareList[i][j] != null
