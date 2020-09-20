@@ -18,6 +18,7 @@ public class Board {
      */
     private Player p2;
 
+
     /**
      * Board constructor for new games
      * @param p1 Red player
@@ -124,6 +125,63 @@ public class Board {
     public Square[][] getSquareList() {
         return squareList;
     }
+
+    /*
+    1. Check starting piece == triangle/plus
+    2. check pathway cleared/not
+    */
+
+    /**
+     * To check if triangle/plus pieces have clear pathways from their starting position until
+     * end position
+     * @return true if pathway from start to end is clear from any piece
+     */
+    public boolean isClearPathway(){
+        //if piece==triangle:
+            //pathway checking methods
+        //else (plus)
+            //pathway checking methods
+        return true;
+    }
+
+    /**
+     * Checking method to identify if UPPPER-LEFT pathway is clear from starting until 
+     * destination (end) square.
+     * @param start Starting square
+     * @param end Ending(Destination) square
+     */    
+	/*private boolean pathwayClear1(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = new Square.Builder().x(start.getX()-1).y(start.getY()-1).occupied(false).build();
+        //temp square location is one upper-left square in distance from start square
+        //temp.setX(temp.getX()-1);
+        //temp.setY(temp.getY()-1);
+        System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
+        System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
+        System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
+
+        //Final true condition reached: start Square has reached end Square without prior false returns
+        //When this condition is reached, start Square has its pathway clear from its initial start position until
+        //1 square before its destination
+        if((temp.getX()==end.getX())&&(temp.getY()==end.getY())){
+            System.out.println("True reached.");
+            return true;
+        }
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied()){
+                System.out.println("False reached.");
+                return false;
+            }
+            
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else{
+                System.out.println("Recursion reached.");
+                return pathwayClear1(temp, end);
+            }
+        }
+	}*/
 
     public void debug(){
         Square temp;
