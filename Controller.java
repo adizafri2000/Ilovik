@@ -8,6 +8,7 @@ public class Controller {
     private Player player2;
     private Board board;
     private View view;
+
     
     public Controller(View view,Game game, Player player1, Player player2, Board board){
         this.view = view;
@@ -15,6 +16,8 @@ public class Controller {
         this.player1 = player1;
         this.player2 = player2;
         this.board = board;
+        board.getSquareList()[2][4].isOccupied();
+        board.getSquareList()[2][4].getPiece().getIconFile();
     }
     
     public void initController(){
@@ -27,6 +30,10 @@ public class Controller {
                view.squares[i][j].setActionCommand(i+""+j);
            }
         }
+    }
+
+    public String giveIcon(int i,int j){
+        return game.getBoard().getSquareList()[i][j].getPiece().getIconFile();
     }
     
     private void createNewGame(){
@@ -57,7 +64,44 @@ public class Controller {
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "file not exist.", JOptionPane.INFORMATION_MESSAGE);
-		}
+        }
+        /*
+        retrieve save data
+        create game object from save data
+        Update view with game object
+            1. player names
+                1.1 view: jlabel player1name, player2name
+                1.2 model: game.getboard.getP1().getName() & P2
+                1.3 controller: getView().getplayer1Name().setText()
+            2. board (squares ada piece/takda)
+                2.1 view : squares[][] 
+                2.2 model: game.getBoard()
+                3.3 controller: getView().getSquares()[][]
+
+                View:
+                pv updateIcon(int i,int j,String s){
+                    String iconPath = "/icons/";
+                    iconPath = iconPath+s;
+                    ImageIcon icon = new ImageIcon(getClass().getResource(iconPath)); // load the image to imageIcon
+                    Image iconP = icon.getImage(); //transform it 
+                    Image idk = iconP.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(idk); //transfer it back
+                    squares[i][j].setIcon(icon);
+                }
+
+                Controller:
+                pv arrangeSquares(){
+                    for(int i=0;i<8;i++){
+                        for(int j=0;j<7;j++){
+                            if(getView().getSquares()[i][j].isOccupied())
+                                String fileName = getView().getSquares()[i][j].getPiece().getIconFile();
+                                getView.updateIcon(i,j,fileName);
+                        }
+                    }       
+                }
+                
+            3. inverted ke tak(siapa yang move)
+        */
     }
     
     private void saveGame(){
