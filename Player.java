@@ -166,9 +166,6 @@ public class Player{
 	 * @param i
 	 */
 	public void updateMoves(){
-		if(moves==2){
-			moves=0;
-		}
 		moves++;
 	}
 	

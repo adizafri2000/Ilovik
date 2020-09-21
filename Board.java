@@ -142,7 +142,7 @@ public class Board {
      * @param end Destination square
      * @return true if pathway from start to end is clear from any piece
      */
-    public boolean isClearPathway(Piece p,Square start,Square end){
+    /*public boolean isClearPathway(Piece p,Square start,Square end){
         if (p instanceof Triangle){
             //Triangle pathway check
 		boolean move = false;
@@ -239,11 +239,60 @@ public class Board {
             }
         }
         return true;
-    }
+    }*/
 
     public void swapPieces(){
         p1.swapPiece();
         p2.swapPiece();
+        int plusCount = 0;
+        int triangleCount = 0;
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                if(squareList[i][j].isOccupied()){
+                    
+                    Piece temp = squareList[i][j].getPiece();
+                    if(temp instanceof Plus){
+                        if(temp.getSide()=='b'){
+                            if(plusCount==0){
+                                temp = p1.getPieceList().get(0);
+                            }
+                            else{
+                                temp = p1.getPieceList().get(6);
+                            }
+                        }
+                        else{
+                            if(plusCount==0){
+                                temp = p2.getPieceList().get(0);
+                            }
+                            else{
+                                temp = p2.getPieceList().get(6);
+                            }
+                        }
+                    }
+                    else if (temp instanceof Triangle){
+                        if(temp.getSide()=='b'){
+                            if(triangleCount==0){
+                                temp = p1.getPieceList().get(1);
+                            }
+                            else{
+                                temp = p1.getPieceList().get(5);
+                            }
+                        }
+                        else{
+                            if(triangleCount==0){
+                                temp = p2.getPieceList().get(1);
+                            }
+                            else{
+                                temp = p2.getPieceList().get(5);
+                            }
+                        }
+                    }
+
+                    //squareList[i][j].setOccupied(false);
+                    squareList[i][j].setPiece(temp);
+                }
+            }
+        }
     }
     
     /**

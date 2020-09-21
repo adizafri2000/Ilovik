@@ -380,23 +380,27 @@ public class Controller implements ActionListener {
     
     private void setPlayerTurn(){
         
-        if (game.getBoard().getP1().isTurn() == true){
+        if (game.getBoard().getP1().isTurn()){
             game.getBoard().getP1().setTurn(false);
             game.getBoard().getP2().setTurn(true); 
+            game.getBoard().getP1().updateMoves();
             //checkArrowFlip();
         }
-        else if (game.getBoard().getP2().isTurn() == true){
-            game.getBoard().getP2().updateMoves();
-            System.out.println("number of move before change: " + game.getBoard().getP2().getMoves());
-                                        
-            if (game.getBoard().getP2().getMoves() == 2){
-                System.out.println("number of move before change: ");
-                swapPiece();
-            }  
+        else if (game.getBoard().getP2().isTurn()){
             game.getBoard().getP2().setTurn(false);
             game.getBoard().getP1().setTurn(true);
+            game.getBoard().getP2().updateMoves();
             //checkArrowFlip();
         }
+
+
+        
+        
+        if ((game.getBoard().getP1().getMoves()==2)&&(game.getBoard().getP2().getMoves() == 2)){
+            game.getBoard().getP1().setMoves(0);
+            game.getBoard().getP2().setMoves(0);
+            swapPiece();
+        }  
     }
 
     /**
@@ -458,7 +462,7 @@ public class Controller implements ActionListener {
                     }
                 }
             }   
-          }*/
+        }*/
         
     }
     //test controller
