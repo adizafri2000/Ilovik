@@ -10,7 +10,6 @@ import java.io.*;
 
 
 public class View extends JFrame {
-    private JFrame frame;       // Main window
     private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
     public JButton[][] squares = new JButton[8][7];  /** components **/
