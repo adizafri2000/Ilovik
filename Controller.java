@@ -7,7 +7,6 @@ import java.io.*;
 
 
 public class Controller implements ActionListener {
-    //Model: Game tak siap load() and save() lagi
     private Game game;
     private View view;
     private Player player1;
@@ -48,14 +47,14 @@ public class Controller implements ActionListener {
     }
     
     private void createNewGame(){
-        view.setVisible(false); //close previous board
+        //view.setVisible(false); //close previous board
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 view.getSquareButton()[i][j].addActionListener(this);
                 view.getSquareButton()[i][j].setActionCommand(i+""+j);
             }
         }
-        View view = new View(); //create new board
+        //View view = new View(); //create new board
         Player player1 = new Player("", 'b'); //player 1 use blue piece
         Player player2 = new Player("", 'r'); //player 2 use red piece
         Board board = new Board(player1, player2,false);
@@ -85,9 +84,18 @@ public class Controller implements ActionListener {
                 view.getSquareButton()[i][j].setActionCommand(i+""+j);
             }
         }
-        view.getLoadMenu();
+        //view.getLoadMenu();
         if (game.loadExists()){
-            //game.load(); //set gui
+            try{
+                Board b = game.load();
+                game = new Game(b);
+                setGame(game);
+                setViewBoardIcons();
+                
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+            }
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "file not exist.");
@@ -121,6 +129,9 @@ public class Controller implements ActionListener {
                 temp = board.getSquareList()[i][j];
                 if (temp.isOccupied()){
                     view.addIcon(i, j, temp.getPiece().getIconFile());
+                }
+                else{
+                    view.addIcon(i, j, null);
                 }
             }
         }
@@ -357,6 +368,13 @@ public class Controller implements ActionListener {
             game.getBoard().getP1().setTurn(true);
             //checkArrowFlip();
         }
+    }
+
+    /**
+     * @param game the game to set
+     */
+    public void setGame(Game game) {
+        this.game = game;
     }
     
     private void swapPiece(){
