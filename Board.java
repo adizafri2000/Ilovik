@@ -368,7 +368,7 @@ else
                     
                     Piece temp = squareList[i][j].getPiece();
                     if(temp instanceof Plus){
-                        if(temp.getSide()=='b'){
+                        if(temp.getSide()=='r'){
                             if(plusCount==0){
                                 temp = p1.getPieceList().get(0);
                             }
@@ -386,7 +386,7 @@ else
                         }
                     }
                     else if (temp instanceof Triangle){
-                        if(temp.getSide()=='b'){
+                        if(temp.getSide()=='r'){
                             if(triangleCount==0){
                                 temp = p1.getPieceList().get(1);
                             }

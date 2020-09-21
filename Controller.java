@@ -402,44 +402,6 @@ public class Controller implements ActionListener {
         game = new Game(bo);
         emptyViewBoardIcons();
         setViewBoardIcons();
-
-        /*for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 7; j++){
-                if (game.getBoard().getSquareList()[i][j].isOccupied() == true){
-                    
-                    sq = game.getBoard().getSquareList()[i][j];
-                    String pieceName = sq.getPiece().getName();
-                    System.out.println("in SWAPAIECE() 2");
-                    
-                    if (pieceName.equals("bTriangle")){
-                        game.getBoard().getSquareList()[i][j].setPiece(null);
-                        game.getBoard().getSquareList()[i][j].setPiece(game.getBoard().getP1().getPieceList().get(0));
-                        view.getSquareButton()[i][j].setIcon(null);
-                        view.addIcon(i, j, "BluePlus.png");
-                    }
-                    else if (pieceName.equals("rTriangle")){
-                        game.getBoard().getSquareList()[i][j].setPiece(null);
-                        game.getBoard().getSquareList()[i][j].setPiece(game.getBoard().getP2().getPieceList().get(0));
-                        view.getSquareButton()[i][j].setIcon(null);
-                        view.addIcon(i, j, "RedPlus.png");
-                    }
-                    
-                    else if (pieceName.equals("bPlus")){
-                        game.getBoard().getSquareList()[i][j].setPiece(null);
-                        game.getBoard().getSquareList()[i][j].setPiece(game.getBoard().getP1().getPieceList().get(1));
-                        view.getSquareButton()[i][j].setIcon(null);
-                        view.addIcon(i, j, "BlueTriangle.png");
-                    }
-                    else if (pieceName.equals("rPlus")){
-                        game.getBoard().getSquareList()[i][j].setPiece(null);
-                        game.getBoard().getSquareList()[i][j].setPiece(game.getBoard().getP2().getPieceList().get(1));
-                        view.getSquareButton()[i][j].setIcon(null);
-                        view.addIcon(i, j, "RedTriangle.png");
-                    }
-                }
-            }   
-        }*/
-        
     }
     //test controller
     public static void main(String[] args){
