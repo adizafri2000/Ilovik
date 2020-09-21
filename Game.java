@@ -167,8 +167,8 @@ public class Game {
 
         //Set whose turn it is for the NEXT turn
         if (line.equals("r"))
-            tempBoard.getP2().setTurn(true);
-        else tempBoard.getP1().setTurn(true);
+            tempBoard.getP1().setTurn(true);
+        else tempBoard.getP2().setTurn(true);
 
         //Consecutive lines: (String)
         //Should there be an existing piece of a side, then only the player's piece
@@ -192,7 +192,7 @@ public class Game {
 
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                             else{
-                                tempPiece = board.getP1().getPieceList().get(4);
+                                tempPiece = tempPlayer.getPieceList().get(4);
                                 tempPiece.setCaptured(false);
                             }
                             tempBoard.loadArrangement(tempPiece, row, col);
@@ -203,7 +203,7 @@ public class Game {
 
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                             else {
-                                tempPiece = board.getP1().getPieceList().get(5);
+                                tempPiece = tempPlayer.getPieceList().get(5);
                                 tempPiece.setCaptured(false);
                             }
                             tempBoard.loadArrangement(tempPiece, row, col);
@@ -219,7 +219,7 @@ public class Game {
 
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                             else {
-                                tempPiece = board.getP1().getPieceList().get(6);
+                                tempPiece = tempPlayer.getPieceList().get(6);
                                 tempPiece.setCaptured(false);
                             }
                             tempBoard.loadArrangement(tempPiece, row, col);
@@ -228,15 +228,15 @@ public class Game {
                 case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                             else {
-                                tempPiece = tempBoard.getP1().getPieceList().get(8);
+                                tempPiece = tempPlayer.getPieceList().get(8);
                                 if (tempPiece.isCaptured())
                                     tempPiece.setCaptured(false);
                                 else{
-                                    tempPiece = tempBoard.getP1().getPieceList().get(9);
+                                    tempPiece = tempPlayer.getPieceList().get(9);
                                     if (tempPiece.isCaptured())
                                         tempPiece.setCaptured(false);
                                     else
-                                        tempPiece = tempBoard.getP1().getPieceList().get(9);
+                                        tempPiece = tempPlayer.getPieceList().get(9);
                                 }
                             }
                             Arrow a = (Arrow)tempPiece;

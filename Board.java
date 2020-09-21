@@ -145,67 +145,71 @@ public class Board {
     public boolean isClearPathway(Square start,Square end){
         if (start.getPiece() instanceof Triangle){
             //Triangle pathway check
-	    boolean move = false;
+            boolean move = false;
             if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
-			{
-				Square temp = squareList[start.getY()][start.getX()];
-				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getY()-1][temp.getX()-1]; 
-						if(temp.isOccupied()){
-							move = false;
-							break;
-						}
-						else{
-							move = true;
-							}
-				}
-			}
-	    else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
-			{
-				Square temp = squareList[start.getY()][start.getX()];
-				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getY()+1][temp.getX()-1]; 
-						if(temp.isOccupied()){
-							move = false;
-							break;
-						}
-						else{
-							move = true;
-							}
-				}
-			}
-	   else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
-			{
-				Square temp = squareList[start.getY()][start.getX()];
-				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getY()-1][temp.getX()+1]; 
-						if(temp.isOccupied()){
-							move = false;
-							break;
-						}
-						else{
-							move = true;
-							}
-				}
-			}
-	  else if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
-			{
-				Square temp = squareList[start.getY()][start.getX()];
-				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getY()+1][temp.getX()+1]; 
-						if(temp.isOccupied()){
-							move = false;
-							break;
-						}
-						else{
-							move = true;
-							}
-				}
-			}
-	  else{
-				move = false;
-		}
-		return move;
+            {
+                /*Square temp = squareList[start.getY()][start.getX()];
+                while(temp.getX() != (end.getX()+1)){
+                    temp = squareList[temp.getY()-1][temp.getX()-1]; 
+                        if(temp.isOccupied()){
+                            move = false;
+                            break;
+                        }
+                        else{
+                            move = true;
+                            }
+                }*/
+                move = pathwayClear4(start, end);
+            }
+            else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
+            {
+                /*Square temp = squareList[start.getY()][start.getX()];
+                while(temp.getX() != (end.getX()+1)){
+                    temp = squareList[temp.getY()+1][temp.getX()-1]; 
+                        if(temp.isOccupied()){
+                            move = false;
+                            break;
+                        }
+                        else{
+                            move = true;
+                            }
+                }*/
+                move = pathwayClear3(start, end);
+            }
+            else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
+            {
+                /*Square temp = squareList[start.getY()][start.getX()];
+                while(temp.getX() != (end.getX()+1)){
+                    temp = squareList[temp.getY()-1][temp.getX()+1]; 
+                        if(temp.isOccupied()){
+                            move = false;
+                            break;
+                        }
+                        else{
+                            move = true;
+                            }
+                }*/
+                move = pathwayClear2(start, end);
+            }
+            else if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
+            {
+                /*Square temp = squareList[start.getY()][start.getX()];
+                while(temp.getX() != (end.getX()+1)){
+                    temp = squareList[temp.getY()+1][temp.getX()+1]; 
+                        if(temp.isOccupied()){
+                            move = false;
+                            break;
+                        }
+                        else{
+                            move = true;
+                            }
+                }*/
+                move = pathwayClear1(start, end);
+            }
+            else{
+                    move = false;
+                }
+            return move;
         }
         else if (start.getPiece() instanceof Plus){
             //Plus pathway check
@@ -256,6 +260,128 @@ public class Board {
         }
         return true;
     }
+
+        /**
+     * Checking method to identify if UPPPER-LEFT pathway is clear from starting until 
+     * destination (end) square.
+     * @param start Starting square
+     * @param end Ending(Destination) square
+     */    
+	private boolean pathwayClear1(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = squareList[start.getY()][start.getX()];
+        //Final true condition reached: start Square has reached end Square without prior false returns
+        //When this condition is reached, start Square has its pathway clear from its initial start position until
+        //1 square before its destination
+        if((temp.getX()==end.getX())&&(temp.getY()==end.getY())){
+            return true;
+        }
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied()){
+                return false;
+            }
+            
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else{
+                return pathwayClear1(temp, end);
+            }
+        }
+	}
+    
+    /**
+     * Checking method to identify if UPPPER-RIGHT pathway is clear from starting until 
+     * destination (end) square
+     * @param start Starting square
+     * @param end Ending(Destination) square
+     */    
+	private boolean pathwayClear2(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = squareList[start.getY()][start.getX()];
+
+        //temp square location is one upper-right square in distance from start square
+        temp.setX(temp.getX()+1);
+        temp.setY(temp.getY()-1);
+
+        //Final true condition reached: start Square has reached end Square without prior false returns
+        //When this condition is reached, start Square has its pathway clear from its initial start position until
+        //1 square before its destination
+        if((temp.getX()==end.getX())&&(temp.getY()==end.getY()))
+            return true;
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied())
+                return false;
+            
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else
+                return pathwayClear2(temp, end);
+        }
+	}
+    
+    /**
+     * Checking method to identify if LOWER-LEFT pathway is clear from starting until 
+     * destination (end) square
+     * @param start Starting square
+     * @param end Ending(Destination) square
+     */    
+	private boolean pathwayClear3(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = squareList[start.getY()][start.getX()];
+
+        //temp square location is one lower-left square in distance from start square
+        temp.setX(temp.getX()-1);
+        temp.setY(temp.getY()+1);
+
+        //Final true condition reached: start Square has reached end Square without prior false returns
+        //When this condition is reached, start Square has its pathway clear from its initial start position until
+        //1 square before its destination
+        if((temp.getX()==end.getX())&&(temp.getY()==end.getY()))
+            return true;
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied())
+                return false;
+            
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else
+                return pathwayClear3(temp, end);
+        }
+	}
+    
+    /**
+     * Checking method to identify if LOWER-RIGHT pathway is clear from starting until 
+     * destination (end) square
+     * @param start Starting square
+     * @param end Ending(Destination) square
+     */    
+	private boolean pathwayClear4(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = squareList[start.getY()][start.getX()];
+
+        //temp square location is one lower-right square in distance from start square
+        temp.setX(temp.getX()+1);
+        temp.setY(temp.getY()+1);
+
+        //Final true condition reached: start Square has reached end Square without prior false returns
+        //When this condition is reached, start Square has its pathway clear from its initial start position until
+        //1 square before its destination
+        if((temp.getX()==end.getX())&&(temp.getY()==end.getY()))
+            return true;
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied())
+                return false;
+            
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else
+                return pathwayClear4(temp, end);
+        }
+	}
 
     private boolean forwardClear(Square start,Square end){
         Square temp = squareList [start.getY()+1][start.getX()];

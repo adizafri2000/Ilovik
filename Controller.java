@@ -47,6 +47,10 @@ public class Controller implements ActionListener {
             }
         }
     }*/
+
+    private void resetClick(){
+        pieceClick = false;
+    }
     
     private void createNewGame(){
         //view.setVisible(false); //close previous boar
@@ -75,6 +79,7 @@ public class Controller implements ActionListener {
         enableSaveButton(true);
         emptyViewBoardIcons();
         setViewBoardIcons();
+        resetClick();
     }
     
    private void loadGame(){
@@ -99,6 +104,7 @@ public class Controller implements ActionListener {
             }
             enableBoardButtons(true);
             enableSaveButton(true);
+            resetClick();
             
         }
         else{
