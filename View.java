@@ -225,7 +225,7 @@ public class View extends JFrame {
     public JLabel getPlayer2Name(){
         return player2Name;
     }
-    /*
+    
      public static void main(String[] args) {
         //new View();
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -233,7 +233,7 @@ public class View extends JFrame {
                 new View();
             }
         });
-    }  */
+    }  
     
     
 } 

@@ -58,7 +58,7 @@ public class Controller implements ActionListener {
         View view = new View(); //create new board
         Player player1 = new Player("", 'b'); //player 1 use blue piece
         Player player2 = new Player("", 'r'); //player 2 use red piece
-        Board board = new Board(player1, player2);
+        Board board = new Board(player1, player2,false);
         Game game = new Game(board);
         Controller controller = new Controller(view, game, player1, player2, board);
         controller.initNewController();
@@ -162,15 +162,20 @@ public class Controller implements ActionListener {
         }
     }
     
-     public void flipBoard(){
-        if(game.getBoard().getP1().isTurn()){
-            
-        }
-            //flip, blue player bottom, red up
-        else{
 
+    public void changeTurns(){
+        if(game.getBoard().getP1().isTurn()){
+            game.getBoard().getP1().updateMoves();
+            game.getBoard().getP1().setTurn(false);
+            game.getBoard().getP2().setTurn(true);
         }
-            //flip, red player bottom, blue up
+        else{
+            game.getBoard().getP2().updateMoves();
+            game.getBoard().getP2().setTurn(false);
+            game.getBoard().getP1().setTurn(true);
+        }
+
+        game.getBoard().flip();
     }
     
     private void movePiece(int i, int j){
@@ -436,7 +441,7 @@ public class Controller implements ActionListener {
         Player p1 = new Player("Kamal", 'b');
         p1.setTurn(true);
         Player p2 = new Player("Adli", 'r');
-        Board b = new Board (p1, p2);
+        Board b = new Board (p1, p2,false);
         g = new Game(b);
         Controller c = new Controller(v,g,p1,p2,b);
         c.initController();
@@ -573,7 +578,7 @@ public class Controller implements ActionListener {
         player2.setName(namePlayer2);
         System.out.println(player1.getName() + " " + player1.getSide());
         System.out.println(player2.getName() + " " + player2.getSide()); */
-    }
+    
     /*
    private void loadGame(){
         JOptionPane.showMessageDialog(null, "load game");
@@ -632,7 +637,7 @@ public class Controller implements ActionListener {
                 
             3. inverted ke tak(siapa yang move)
         */
-    }
+    
     /*
     private void saveGame(){
         //game.save();
