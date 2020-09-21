@@ -101,6 +101,9 @@ public class Square {
     public void setPiece(Piece p) {
         this.piece = p;
         this.occupied = true;
+        if (p == null){
+           this.occupied = false;
+        }
     }
 
 
