@@ -149,7 +149,7 @@ public class Board {
             if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
 			{
 				int counter = start.getX() - end.getX() - 1;
-				for (int i = 1;i =< counter;i++){
+				for (int i = 1;i <= counter;i++){
 					Square temp = board[start.getX() - counter][start.getY() - counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
@@ -163,7 +163,7 @@ public class Board {
 	    else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
 			{
 				int counter = end.getX() - start.getX() - 1;
-				for (int i = 1;i =< counter;i++){
+				for (int i = 1;i <= counter;i++){
 					Square temp = board[start.getX()-counter][start.getY()+counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
@@ -177,7 +177,7 @@ public class Board {
 	   else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
 			{
 				int counter = start.getX() - end.getX() - 1;
-				for (int i = 1;i =< counter;i++){
+				for (int i = 1;i <= counter;i++){
 					Square temp = board[start.getX()+counter][start.getY()-counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
@@ -191,7 +191,7 @@ public class Board {
 	  else if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
 			{
 				int counter = end.getX() - start.getX() - 1;
-				for (int i = 1;i =< counter;i++){
+				for (int i = 1;i <= counter;i++){
 					Square temp = board[start.getX()+counter][start.getY()+counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
