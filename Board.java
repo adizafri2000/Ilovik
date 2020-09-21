@@ -144,12 +144,12 @@ public class Board {
     public boolean isClearPathway(Square start,Square end){
         if (start.getPiece() instanceof Triangle){
             //Triangle pathway check
-		/*boolean move = false;
+	    boolean move = false;
             if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
 			{
-				temp = squareList[start.getX()][start.getY()];
-				while(temp.getX() != end.getX()){
-					Square temp = squareList[start.getX()-counter][start.getY()-counter]; 
+				Square temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != (end.getX()+1)){
+					temp = squareList[temp.getX()-1][temp.getY()-1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -161,9 +161,9 @@ public class Board {
 			}
 	    else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
 			{
-				temp = squareList[start.getX()][start.getY()];
-				while(temp.getX() != end.getX()){
-					Square temp = squareList[start.getX()-counter][start.getY()+counter]; 
+				Square temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != (end.getX()+1)){
+					temp = squareList[temp.getX()-1][temp.getY()+1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -175,9 +175,9 @@ public class Board {
 			}
 	   else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
 			{
-				temp = squareList[start.getX()][start.getY()];
-				while(temp.getX() != end.getX()){
-					Square temp = squareList[start.getX()+counter][start.getY()-counter]; 
+				Square temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != (end.getX()+1)){
+					temp = squareList[temp.getX()+1][temp.getY()-1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -189,9 +189,9 @@ public class Board {
 			}
 	  else if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
 			{
-				temp = squareList[start.getX()][start.getY()];
-				while(temp.getX() != end.getX()){
-					Square temp = squareList[start.getX()+counter][start.getY()+counter]; 
+				Square temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != (end.getX()+1)){
+					temp = squareList[temp.getX()+1][temp.getY()+1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -204,7 +204,7 @@ public class Board {
 	  else{
 				move = false;
 		}
-		return move;*/
+		return move;
         }
         else if (start.getPiece() instanceof Plus){
             //Plus pathway check
