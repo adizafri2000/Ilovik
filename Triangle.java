@@ -41,7 +41,7 @@ public class Triangle extends Piece{
         int yStart = start.getY();
         int xEnd = end.getX();
         int yEnd = end.getY();
-        boolean move1 = true;
+        boolean move1 = false;
         int dx,dy;
         
 	
@@ -76,6 +76,9 @@ public class Triangle extends Piece{
 				move1 = true;
 			}
         }
+	else{
+		move1 = false;
+	}
 	
 
 	boolean move2 = false;
