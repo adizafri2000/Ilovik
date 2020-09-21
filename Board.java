@@ -297,7 +297,7 @@ public class Board {
      * @param end Ending(Destination) square
      */    
 	private boolean pathwayClear2(Square start, Square end){ //(2,2) to (0,0)
-        Square temp = squareList[start.getY()-1][start.getX()=1];
+        Square temp = squareList[start.getY()-1][start.getX()-1];
 
         //temp square location is one upper-right square in distance from start square
         temp.setX(temp.getX()+1);
