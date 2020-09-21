@@ -77,6 +77,8 @@ public class View extends JFrame {
         home.add(player2Name);
         add(home);
         
+        /*
+
         String pathBP = "/icons/BluePlus.png";
         String pathBT = "/icons/BlueTriangle.png";
         String pathBC = "/icons/BlueChevron.png";
@@ -164,6 +166,7 @@ public class View extends JFrame {
         squares[6][2].setIcon(RedArrow);
         squares[6][4].setIcon(RedArrow);
         squares[6][6].setIcon(RedArrow);
+        */
         
         setLocationRelativeTo(null);
         setVisible(true); // set the frame visible

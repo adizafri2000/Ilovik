@@ -24,6 +24,7 @@ public class Controller implements ActionListener {
         this.player1 = player1;
         this.player2 = player2;
         this.board = board;
+        enableBoardButtons(false);
     }
     
     public void initController(){
@@ -55,20 +56,31 @@ public class Controller implements ActionListener {
             }
         }
         //View view = new View(); //create new board
-        Player player1 = new Player("", 'b'); //player 1 use blue piece
+        /*Player player1 = new Player("", 'b'); //player 1 use blue piece
         Player player2 = new Player("", 'r'); //player 2 use red piece
         Board board = new Board(player1, player2,false);
         Game game = new Game(board);
         Controller controller = new Controller(view, game, player1, player2, board);
-        controller.initNewController();
+        controller.initNewController();*/
         //
         
         String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
+        Player blue = new Player(namePlayer1, 'b');
         view.getPlayer1Name().setText("Player 1: " + namePlayer1);
-        game.getBoard().getP2().setTurn(true);
+        //game.getBoard().getP2().setTurn(true);
         
         String namePlayer2 = JOptionPane.showInputDialog("Enter name of player 2:");
+        Player red = new Player(namePlayer2, 'r');
         view.getPlayer2Name().setText("Player 2: " + namePlayer2);
+        Board b = new Board(blue, red, false);
+
+        //BLUE PLAYER GERAK DULU, BOLEH JE NAK TUKAR
+        b.getP1().setTurn(true);
+
+        game = new Game(b);
+        setGame(game);
+        enableBoardButtons(true);
+        setViewBoardIcons();
         /*
         player1.setName(namePlayer1);
         player2.setName(namePlayer2);
@@ -117,6 +129,13 @@ public class Controller implements ActionListener {
         movePiece(row, col);
     }
     
+    public void enableBoardButtons(boolean condition){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                view.getSquareButton()[i][j].setEnabled(condition);
+            }
+        }
+    }
 
     /**
      * Sets all pieces' respective icon into the board buttons in the view.
@@ -126,12 +145,13 @@ public class Controller implements ActionListener {
         Square temp;
         for(int i=0;i<8;i++){
             for(int j=0;j<7;j++){
-                temp = board.getSquareList()[i][j];
+                temp = game.getBoard().getSquareList()[i][j];
                 if (temp.isOccupied()){
+                    System.out.println(temp.getPiece().getName());
                     view.addIcon(i, j, temp.getPiece().getIconFile());
                 }
                 else{
-                    view.addIcon(i, j, null);
+                    //view.addIcon(i, j, null);
                 }
             }
         }
