@@ -161,14 +161,4 @@ public class View extends JFrame {
         return player2Name;
     }
     
-     public static void main(String[] args) {
-        //new View();
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new View();
-            }
-        });
-    }  
-    
-    
 } 

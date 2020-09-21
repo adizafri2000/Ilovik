@@ -148,9 +148,9 @@ public class Board {
 	    boolean move = false;
             if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
 			{
-				Square temp = squareList[start.getX()][start.getY()];
+				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getX()-1][temp.getY()-1]; 
+					temp = squareList[temp.getY()-1][temp.getX()-1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -162,9 +162,9 @@ public class Board {
 			}
 	    else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
 			{
-				Square temp = squareList[start.getX()][start.getY()];
+				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getX()-1][temp.getY()+1]; 
+					temp = squareList[temp.getY()+1][temp.getX()-1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -176,9 +176,9 @@ public class Board {
 			}
 	   else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
 			{
-				Square temp = squareList[start.getX()][start.getY()];
+				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getX()+1][temp.getY()-1]; 
+					temp = squareList[temp.getY()-1][temp.getX()+1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
@@ -190,9 +190,9 @@ public class Board {
 			}
 	  else if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
 			{
-				Square temp = squareList[start.getX()][start.getY()];
+				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
-					temp = squareList[temp.getX()+1][temp.getY()+1]; 
+					temp = squareList[temp.getY()+1][temp.getX()+1]; 
 						if(temp.isOccupied()){
 							move = false;
 							break;
