@@ -18,7 +18,6 @@ import java.awt.*;
 
 
 public class View extends JFrame {
-    private JFrame frame;
 	private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
     public JButton[][] squares = new JButton[8][7];  // components
@@ -62,7 +61,6 @@ public class View extends JFrame {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 7; j++) {
                 squares[i][j] = new JButton();
-				//squares[i][j].setPreferredSize(new Dimension(100, 100));
                 if ((i + j) % 2 == 0) {
                     squares[i][j].setBackground(Color.BLACK);
                 } else {
