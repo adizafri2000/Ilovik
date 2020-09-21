@@ -1,11 +1,8 @@
 /**
  * @author aina
  */
+ 
 public class Plus extends Piece {
-	
-	/*public Plus(String name,char side, int x, int y){
-		super(name,side,x,y);	
-	}*/
 
 	/**
 	 * Default .png file name for the piece's icon without the side's name
@@ -13,28 +10,30 @@ public class Plus extends Piece {
 	 */
 	private static String fileName = "Plus.png";
 
-	public Plus(char side) {
-		super(side,fileName);
-		setName("Plus");
-	}
-	
-	/**
+	/***
 	* Plus piece can move anywhere from 1 to 7 squares in any direction (forward,backward,left or right) 
 	* until it reaches the end of board or blocked by another piece.
 	* 
 	* Plus can move 1 to 7 squares (vertical) forward,backward.
 	* Plus can move 1 to 6 squares (horizontal) left or right.	
-	* 
-	* Plus captures on the same path it moves,by occupying the square on which an enemy piece stands.
+	***/
+	public Plus(char side) {
+		super(side,fileName);
+		setName("Plus");
+	}
+	
+	
+	/*** Plus captures on the same path it moves,by occupying the square on which an enemy piece stands.
 	* 
 	* False : Move diagonally or jump over other pieces.
-	* 
-	* Plus movement for 1 step :
+	***/ 
+	
+	/*** Plus movement for 1 step :
 		Move foward : (end.getY() == start.getY() + 1) , (end.getX() == start.getX())
 		Move backward :(end.getY() == start.getY() - 1) , (end.getX() == start.getX())
 		Move to the left : (end.getX() == start.getX() + 1) , (end.getY() == start.getY())
 		Move to the right : (end.getX() == start.getX() - 1) , (end.getY() == start.getY())
-	*/
+	***/
 	
 	@Override
 	public boolean move(Square start, Square end) {
