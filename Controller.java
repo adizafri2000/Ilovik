@@ -192,7 +192,7 @@ public class Controller implements ActionListener {
     try{
         if (pieceClick == false){
             if (game.getBoard().getSquareList()[i][j].isOccupied()){ //occupied square
-                if (game.getBoard().getP1().getSide() == 'b' && game.getBoard().getP1().isTurn() == true &&
+                if (game.getBoard().getP2().isTurn() == true &&
                 game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'b'){
                     start = game.getBoard().getSquareList()[i][j];
                     view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED, 4));
@@ -200,7 +200,7 @@ public class Controller implements ActionListener {
                     System.out.println("HERE AT BLUE");
                     System.out.println(start.getPiece().getName());
                 }
-                else if (game.getBoard().getP2().getSide() == 'r' && game.getBoard().getP2().isTurn() == true &&
+                else if (game.getBoard().getP1().isTurn() == true &&
                 game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'r'){
                     view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED, 4));
                     start = game.getBoard().getSquareList()[i][j];
@@ -241,7 +241,7 @@ public class Controller implements ActionListener {
                                 System.out.println("Valid Move");
                                 
                             }  //player blue turn and kill the opponent(red) piece
-                            else if (end.isOccupied() && end.getPiece().getName().charAt(0) == 'r' && game.getBoard().getP1().isTurn() == true){
+                            else if (end.isOccupied() && end.getPiece().getName().charAt(0) == 'r' && game.getBoard().getP2().isTurn() == true){
                                 //capture sun and player 1 wins
                                 if (end.getPiece().getName().equals("rSun")){
                                     //set opponent piece to captured
@@ -291,7 +291,7 @@ public class Controller implements ActionListener {
                                     pieceClick = false;
                                 }
                             }//player red turn and kill the opponent(blue) piece
-                            else if (end.isOccupied() && end.getPiece().getName().charAt(0) == 'b' && game.getBoard().getP2().isTurn() == true){
+                            else if (end.isOccupied() && end.getPiece().getName().charAt(0) == 'b' && game.getBoard().getP1().isTurn() == true){
                                 if (end.getPiece().getName().equals("bSun")){
                                     game.getBoard().getSquareList()[end.getY()][end.getX()].getPiece().setCaptured(true);
                                     
