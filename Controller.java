@@ -25,6 +25,7 @@ public class Controller implements ActionListener {
         this.player2 = player2;
         this.board = board;
         enableBoardButtons(false);
+        enableSaveButton(false);
     }
     
     public void initController(){
@@ -48,21 +49,13 @@ public class Controller implements ActionListener {
     }
     
     private void createNewGame(){
-        //view.setVisible(false); //close previous board
+        //view.setVisible(false); //close previous boar
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 view.getSquareButton()[i][j].addActionListener(this);
                 view.getSquareButton()[i][j].setActionCommand(i+""+j);
             }
         }
-        //View view = new View(); //create new board
-        /*Player player1 = new Player("", 'b'); //player 1 use blue piece
-        Player player2 = new Player("", 'r'); //player 2 use red piece
-        Board board = new Board(player1, player2,false);
-        Game game = new Game(board);
-        Controller controller = new Controller(view, game, player1, player2, board);
-        controller.initNewController();*/
-        //
         
         String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
         Player blue = new Player(namePlayer1, 'b');
@@ -72,20 +65,14 @@ public class Controller implements ActionListener {
         String namePlayer2 = JOptionPane.showInputDialog("Enter name of player 2:");
         Player red = new Player(namePlayer2, 'r');
         view.getPlayer2Name().setText("Player 2: " + namePlayer2);
-        Board b = new Board(blue, red, false);
-
-        //BLUE PLAYER GERAK DULU, BOLEH JE NAK TUKAR
-        b.getP1().setTurn(true);
+        Board b = new Board(red, blue, false);
+        b.getP2().setTurn(true);
 
         game = new Game(b);
         setGame(game);
         enableBoardButtons(true);
+        enableSaveButton(true);
         setViewBoardIcons();
-        /*
-        player1.setName(namePlayer1);
-        player2.setName(namePlayer2);
-        System.out.println(player1.getName() + " " + player1.getSide());
-        System.out.println(player2.getName() + " " + player2.getSide()); */
     }
     
    private void loadGame(){
@@ -96,7 +83,6 @@ public class Controller implements ActionListener {
                 view.getSquareButton()[i][j].setActionCommand(i+""+j);
             }
         }
-        //view.getLoadMenu();
         if (game.loadExists()){
             try{
                 Board b = game.load();
@@ -110,6 +96,7 @@ public class Controller implements ActionListener {
                 e.printStackTrace();
             }
             enableBoardButtons(true);
+            enableSaveButton(true);
             
         }
         else{
@@ -151,6 +138,11 @@ public class Controller implements ActionListener {
                 view.getSquareButton()[i][j].setEnabled(condition);
             }
         }
+    }
+
+    public void enableSaveButton(boolean condition){
+        view.getSaveMenu().setEnabled(condition);
+        view.getSaveMenu().setVisible(condition);
     }
 
     /**

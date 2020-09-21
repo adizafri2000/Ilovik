@@ -154,7 +154,7 @@ public class Game {
         redPlayer1.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
         redPlayer1.piecesCaptured(true);
 
-        tempBoard = new Board(redPlayer1, bluePlayer2,false);
+        tempBoard = new Board(redPlayer1, bluePlayer2,true);
         tempBoard.emptyAllSquares();
 
         //3rd line: side(char)

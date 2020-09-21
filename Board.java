@@ -51,30 +51,30 @@ public class Board {
      */
     public void startingArrangement(){
         //Blue side arrangement
-        squareList[0][0].setPiece(p1.getPieceList().get(0));
-        squareList[0][1].setPiece(p1.getPieceList().get(1));
-        squareList[0][2].setPiece(p1.getPieceList().get(2));
-        squareList[0][3].setPiece(p1.getPieceList().get(3));
-        squareList[0][4].setPiece(p1.getPieceList().get(4));
-        squareList[0][5].setPiece(p1.getPieceList().get(5));
-        squareList[0][6].setPiece(p1.getPieceList().get(6));
-        squareList[1][0].setPiece(p1.getPieceList().get(7));
-        squareList[1][2].setPiece(p1.getPieceList().get(8));
-        squareList[1][4].setPiece(p1.getPieceList().get(9));
-        squareList[1][6].setPiece(p1.getPieceList().get(10));
+        squareList[0][0].setPiece(p2.getPieceList().get(0));
+        squareList[0][1].setPiece(p2.getPieceList().get(1));
+        squareList[0][2].setPiece(p2.getPieceList().get(2));
+        squareList[0][3].setPiece(p2.getPieceList().get(3));
+        squareList[0][4].setPiece(p2.getPieceList().get(4));
+        squareList[0][5].setPiece(p2.getPieceList().get(5));
+        squareList[0][6].setPiece(p2.getPieceList().get(6));
+        squareList[1][0].setPiece(p2.getPieceList().get(7));
+        squareList[1][2].setPiece(p2.getPieceList().get(8));
+        squareList[1][4].setPiece(p2.getPieceList().get(9));
+        squareList[1][6].setPiece(p2.getPieceList().get(10));
 
         //Red side arrangement
-        squareList[7][0].setPiece(p2.getPieceList().get(0));
-        squareList[7][1].setPiece(p2.getPieceList().get(1));
-        squareList[7][2].setPiece(p2.getPieceList().get(2));
-        squareList[7][3].setPiece(p2.getPieceList().get(3));
-        squareList[7][4].setPiece(p2.getPieceList().get(4));
-        squareList[7][5].setPiece(p2.getPieceList().get(5));
-        squareList[7][6].setPiece(p2.getPieceList().get(6));
-        squareList[6][0].setPiece(p2.getPieceList().get(7));
-        squareList[6][2].setPiece(p2.getPieceList().get(8));
-        squareList[6][4].setPiece(p2.getPieceList().get(9));
-        squareList[6][6].setPiece(p2.getPieceList().get(10));
+        squareList[7][0].setPiece(p1.getPieceList().get(0));
+        squareList[7][1].setPiece(p1.getPieceList().get(1));
+        squareList[7][2].setPiece(p1.getPieceList().get(2));
+        squareList[7][3].setPiece(p1.getPieceList().get(3));
+        squareList[7][4].setPiece(p1.getPieceList().get(4));
+        squareList[7][5].setPiece(p1.getPieceList().get(5));
+        squareList[7][6].setPiece(p1.getPieceList().get(6));
+        squareList[6][0].setPiece(p1.getPieceList().get(7));
+        squareList[6][2].setPiece(p1.getPieceList().get(8));
+        squareList[6][4].setPiece(p1.getPieceList().get(9));
+        squareList[6][6].setPiece(p1.getPieceList().get(10));
     }
 
     /**
