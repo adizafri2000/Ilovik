@@ -13,81 +13,7 @@ public class Triangle extends Piece{
 		super(side,fileName);
 		setName("Triangle");
 	}
-	public boolean pathwayClear1(Square start, Square end){ //(2,2) to (0,0)
-		boolean move = true;
-		Square temp;
-		if (end.getX() < start.getX() && end.getY() < start.getY()){
-			temp = new Square.Builder().x(end.getX()+1).y(end.getY()+1).build(); //??
-			if (!temp.isOccupied()){
-				pathwayClear1(start,temp);
-			}
-			else
-			{
-				move = false;
-			}
-		}
-		else if (start.getX() == end.getX() && start.getY() == end.getY()){
-			move = true;
-		}
-		return move;
-	}
 	
-	public boolean pathwayClear2(Square start, Square end){ //(2,2) to (4,0)
-		boolean move = true;
-		Square temp;
-		if (end.getX() > start.getX() && end.getY() < start.getY()){
-			temp = new Square.Builder().x(end.getX()+1).y(end.getY()-1).build();
-			if (!temp.isOccupied()){ 
-				pathwayClear2(start,temp);
-			}
-			else
-			{
-				move = false;
-			}
-		}
-		else if (start.getX() == end.getX() && start.getY() == end.getY()){
-			move = true;
-		}
-		return move;
-	}
-	
-	public boolean pathwayClear3(Square start, Square end){ //(2,2) to (0,4)
-		boolean move = true;
-		Square temp;
-		if (end.getX() < start.getX() && end.getY() > start.getY()){
-			temp = new Square.Builder().x(end.getX()-1).y(end.getY()+1).build(); //??
-			if (!temp.isOccupied()){
-				pathwayClear3(start,temp);
-			}
-			else
-			{
-				move = false;
-			}
-		}
-		else if (start.getX() == end.getX() && start.getY() == end.getY()){
-			move = true;
-		}
-		return move;
-	}
-	
-	public boolean pathwayClear4(Square start, Square end){ //(2,2) to (4,4)
-		boolean move = true;
-		Square temp;
-		if (end.getX() > start.getX() && end.getY() > start.getY()){
-			temp = new Square.Builder().x(end.getX()-1).y(end.getY()-1).build(); //??
-			if (!temp.isOccupied()){
-				pathwayClear4(start,temp);
-			}
-			else
-			{
-				move = false;
-			}
-		}
-		else if (start.getX() == end.getX() && start.getY() == end.getY()){
-			move = true;
-		}
-		return move;
-	}
 	
 	@Override
     public boolean move(Square start, Square end){
@@ -128,26 +54,11 @@ public class Triangle extends Piece{
         //CHECK IF PATHWAY CLEAR
         if (dx == dy)
         {
-			if ((xEnd < xStart) && (yEnd < yStart)) //(2,2) to (0,0)
-			{
-				move1 = pathwayClear1(start,end);
-			}
-			else if ((xEnd > xStart) && (yEnd < yStart)) //(2,2) to (4,0)
-			{
-				move1 = pathwayClear2(start,end);
-			}
-			else if ((xEnd < xStart) && (yEnd > yStart)) //(2,2) to (0,4)
-			{
-				move1 = pathwayClear3(start,end);
-			}
-			else if ((xEnd > xStart) && (yEnd > yStart)) //(2,2) to (4,4)
-			{
-				move1 = pathwayClear4(start,end);
-			}
-			}
-			else{
-				move1 = false;
-			}
+		move1 = true;
+	}
+	else{
+		move1 = false;
+	}
 	
         
         //move1 = (Math.abs(xStart-yStart)==Math.abs(yEnd-xEnd));
@@ -158,7 +69,7 @@ public class Triangle extends Piece{
 		//check if the new square has another piece, same side or not
 		//same side = cannot, diff side = eat
 			
-		if ((start.getPiece().getSide())==(end.getPiece().getSide()) && (end.isOccupied())){
+		if ((end.isOccupied() && (start.getPiece().getSide())==(end.getPiece().getSide()))){
 			move2 = false;
 		}
 		else 
