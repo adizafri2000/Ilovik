@@ -416,14 +416,11 @@ public class Controller implements ActionListener {
         bo.swapPieces();
         bo.getP1().debug();
         bo.getP2().debug();
-        bo.debug();
-        //game = new Game(bo);
+        game = new Game(bo);
         //game.setBoard(bo);
         
-        //game.getBoard().debug();
+        game.getBoard().debug();
         emptyViewBoardIcons();
-        game.setBoard(bo);
-        //game.getBoard().debug();
         setViewBoardIcons();
 
         /*for(int i = 0; i < 8; i++){

@@ -244,15 +244,6 @@ public class Board {
     public void swapPieces(){
         p1.swapPiece();
         p2.swapPiece();
-        Piece temp1 = p1.getPieceList().get(0);
-        Piece temp2 = p1.getPieceList().get(6);
-        Piece temp3 = p1.getPieceList().get(1);
-        Piece temp4 = p1.getPieceList().get(5);
-        int col,row;
-        for(int count=0;count<4;count++){
-
-        }
-        
     }
     
     /**
