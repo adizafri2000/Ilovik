@@ -192,7 +192,8 @@ public class Game {
         redPlayer1.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
         redPlayer1.piecesCaptured(true);
 
-        tempBoard = new Board(redPlayer1, bluePlayer2);
+        tempBoard = new Board(redPlayer1, bluePlayer2,false);
+        tempBoard.emptyAllSquares();
 
         //3rd line: side(char)
         //Line example: r
@@ -216,7 +217,6 @@ public class Game {
         Player tempPlayer;
         while(fRead.hasNextLine()){
             line = fRead.nextLine();
-            System.out.println(line);
 
             int row = Integer.parseInt(Character.toString(line.charAt(0)));
             int col = Integer.parseInt(Character.toString(line.charAt(1)));
@@ -231,6 +231,7 @@ public class Game {
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
                             else tempPiece = board.getP1().getPieceList().get(4);
                             tempBoard.loadArrangement(tempPiece, row, col);
+
                             break;
 
                 case 't':   tempPiece = tempPlayer.getPieceList().get(1);
@@ -445,36 +446,18 @@ public class Game {
         this.board = b;
     }
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         Game g = new Game();
         System.out.println(g.loadExists());
         if (!g.loadExists())
             g.createSaveFile();
         System.out.println(g.loadExists());
-        //g.load();
-        //Player p1 = new Player("Merah", 'r');
-        //Player p2 = new Player("Biru", 'b');
-        //Board board = new Board(p1, p2);
-        //board.getP1().setTurn(true);
-        //g = new Game(board);
         Board load = g.load();
-        /*
-        System.out.println(load.getP1().getName());
-        for(int i=0;i<11;i++){
-            System.out.printf("%s: %s\n",load.getP1().getPieceList().get(i).getName(),load.getP1().getPieceList().get(i).isCaptured());
-        }
-        System.out.println(load.getP2().getName());
-        for(int i=0;i<11;i++){
-            System.out.printf("%s: %s\n",load.getP2().getPieceList().get(i).getName(),load.getP2().getPieceList().get(i).isCaptured());
-        }
-        */
-        
-        load.debug();
         System.out.print("\n\n\nJUMPER\n\n\n");
         g = new Game(load);
 
-        //g.getBoard().debug();
+        g.getBoard().debug();
         //g.save();
 
-    }
+    }*/
 }

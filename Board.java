@@ -24,16 +24,12 @@ public class Board {
      * @param p1 Red player
      * @param p2 Blue player
      */
-    public Board(Player p1, Player p2){
+    public Board(Player p1, Player p2,boolean load){
         this.p1 = p1;
         this.p2 = p2;
         initBoard();
-        startingArrangement();
-    }
-
-    /**Board constructor for load games */
-    public Board(){
-        initBoard();
+        if(!load)
+            startingArrangement();
     }
 
     /**
@@ -89,6 +85,14 @@ public class Board {
      */
     public void loadArrangement(Piece p,int row,int col){
         squareList[row][col].setPiece(p);
+    }
+
+    public void emptyAllSquares(){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                squareList[i][j].setOccupied(false);
+            }
+        }
     }
 
     /**

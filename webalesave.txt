@@ -1,11 +1,5 @@
 b 0 Bobby
 r 0 Zafirullah
 r
-10 rArrow false
-12 rArrow false
-14 rArrow false
-16 rArrow false
-60 bArrow false
-62 bArrow false
-64 bArrow false
-66 bArrow false
+10 rSun
+12 bSun
