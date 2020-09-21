@@ -191,15 +191,21 @@ public class Game {
                 case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
 
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else tempPiece = board.getP1().getPieceList().get(4);
+                            else{
+                                tempPiece = board.getP1().getPieceList().get(4);
+                                tempPiece.setCaptured(false);
+                            }
                             tempBoard.loadArrangement(tempPiece, row, col);
-
+                            
                             break;
 
                 case 't':   tempPiece = tempPlayer.getPieceList().get(1);
 
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else tempPiece = board.getP1().getPieceList().get(5);
+                            else {
+                                tempPiece = board.getP1().getPieceList().get(5);
+                                tempPiece.setCaptured(false);
+                            }
                             tempBoard.loadArrangement(tempPiece, row, col);
                             break;
 
@@ -212,7 +218,10 @@ public class Game {
                 case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
 
                             if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                            else tempPiece = board.getP1().getPieceList().get(6);
+                            else {
+                                tempPiece = board.getP1().getPieceList().get(6);
+                                tempPiece.setCaptured(false);
+                            }
                             tempBoard.loadArrangement(tempPiece, row, col);
                             break;
                             
