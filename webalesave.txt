@@ -1,5 +1,25 @@
-b 0 Bobby
-r 0 Zafirullah
-r
-00 rSun
-76 bSun
+r 0 3454
+b 0 adsf
+b
+00 bPlus
+01 bTriangle
+02 bChevron
+03 bSun
+04 bChevron
+05 bTriangle
+06 bPlus
+10 bArrow false
+12 bArrow false
+14 bArrow false
+16 bArrow false
+60 rArrow false
+62 rArrow false
+64 rArrow false
+66 rArrow false
+70 rPlus
+71 rTriangle
+72 rChevron
+73 rSun
+74 rChevron
+75 rTriangle
+76 rPlus

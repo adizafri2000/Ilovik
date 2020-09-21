@@ -162,7 +162,7 @@ public class Player{
 	}
 	
 	/**
-	 * Resets Player.moves to 0 when moves==2, indicating a swapping event
+	 * Increments a player's move count
 	 * @param i
 	 */
 	public void updateMoves(){
