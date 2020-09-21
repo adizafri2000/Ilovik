@@ -77,7 +77,7 @@ public class Game {
     }
 
     public Game() {
-
+        this.board = new Board();
     }
 
     /**
@@ -90,19 +90,9 @@ public class Game {
         return saveFile.exists();
     }
 
-    /**
-     * Loads all data from the saveFile "webalesave.txt".
-     * Data loading is focused to different line types.
-     * Load process fails should a line from the save file
-     * does not follow the standard save format
-     * @see saveFile
-     * @return
-     * @throws FileNotFoundException
-     */
-    public boolean load() throws FileNotFoundException {
+    public boolean checkLoad() throws FileNotFoundException {
         Scanner fRead = new Scanner(saveFile);
         String line = " ";
-        Board tempBoard;
 
         try {
             //1st line: side(char) and name(String)
@@ -117,16 +107,6 @@ public class Game {
             if(!validLine1or2(line))
                 throw new Exception();
 
-            Player bluePlayer2 = new Player(line.substring(4), line.charAt(0));
-            bluePlayer2.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
-            bluePlayer2.piecesCaptured(true);
-            
-            //board.setP2(new Player(line.substring(4), line.charAt(0)));
-            //board.getP2().setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
-
-            //Sets all pieces by blue player to captured status
-            board.getP2().piecesCaptured(true);
-
             //2nd line: side(char) and name(String)
             //Line example: r Massimo
             //Line example: r Robert Lewandowski
@@ -139,18 +119,6 @@ public class Game {
             if(!validLine1or2(line))
                 throw new Exception();
 
-            Player redPlayer1 = new Player(line.substring(4), line.charAt(0));
-            redPlayer1.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
-            redPlayer1.piecesCaptured(true);
-            
-            board.setP1(new Player(line.substring(4), line.charAt(0)));
-            board.getP1().setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
-
-            //Sets all pieces by red player to captured status
-            board.getP1().piecesCaptured(true);
-
-            tempBoard = new Board(redPlayer1, bluePlayer2);
-
             //3rd line: side(char)
             //Line example: r
             //Line example: b
@@ -162,89 +130,150 @@ public class Game {
             if(!validLine3(line))
                 throw new Exception();
 
-
-            //Set whose turn it is for the NEXT turn
-            if (line.equals("r"))
-                tempBoard.getP2().setTurn(true);
-            else tempBoard.getP1().setTurn(true);
-
             //Consecutive lines: (String)
             //Should there be an existing piece of a side, then only the player's piece
             //corresponding to the pieceList indexes will be set to "not captured"
             //line example: 45 rChevron
             //line example: 11 bArrow true
-            Piece tempPiece;
-            Player tempPlayer;
             while(fRead.hasNextLine()){
                 line = fRead.nextLine();
 
                 if(!validPieceLine(line))           
                     throw new Exception();
-
-                int row = Integer.parseInt(Character.toString(line.charAt(0)));
-                int col = Integer.parseInt(Character.toString(line.charAt(1)));
-                char side = line.charAt(3);
-                if (side=='r')
-                    tempPlayer = tempBoard.getP1();
-                else tempPlayer = tempBoard.getP2();
-
-                switch(Character.toLowerCase(line.charAt(4))){
-                    case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
-
-                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                                else tempPiece = board.getP1().getPieceList().get(4);
-                                tempBoard.loadArrangement(tempPiece, row, col);
-                                break;
-
-                    case 't':   tempPiece = tempPlayer.getPieceList().get(1);
-
-                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                                else tempPiece = board.getP1().getPieceList().get(5);
-                                tempBoard.loadArrangement(tempPiece, row, col);
-                                break;
-
-                    case 's':   tempPiece = tempPlayer.getPieceList().get(3);
-
-                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                                tempBoard.loadArrangement(tempPiece, row, col);
-                                break;
-
-                    case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
-
-                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                                else tempPiece = board.getP1().getPieceList().get(6);
-                                tempBoard.loadArrangement(tempPiece, row, col);
-                                break;
-                                
-                    case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
-                                if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
-                                else {
-                                    tempPiece = tempBoard.getP1().getPieceList().get(8);
-                                    if (tempPiece.isCaptured())
-                                        tempPiece.setCaptured(false);
-                                    else{
-                                        tempPiece = tempBoard.getP1().getPieceList().get(9);
-                                        if (tempPiece.isCaptured())
-                                            tempPiece.setCaptured(false);
-                                        else
-                                            tempPiece = tempBoard.getP1().getPieceList().get(9);
-                                    }
-                                }
-                                Arrow a = (Arrow)tempPiece;
-                                a.setRotate(line.charAt(10)=='f' ? false : true);
-                                tempBoard.loadArrangement(a, row, col);
-                                break;
-                }
             }
             
         } catch (Exception e) {
-            fRead.close();
             return false;
         }
 
         fRead.close();
-        setBoard(tempBoard);
         return true;
+    }
+
+    /**
+     * Loads all data from the saveFile "webalesave.txt".
+     * Data loading is focused to different line types.
+     * Load process fails should a line from the save file
+     * does not follow the standard save format
+     * @see saveFile
+     * @return
+     * @throws FileNotFoundException
+     */
+    public Board load() throws FileNotFoundException {
+        saveFile = new File(fileName);
+        Scanner fRead = new Scanner(saveFile);
+        String line = " ";
+        Board tempBoard = new Board();
+
+        //1st line: side(char) and name(String)
+        //Line example: b George
+        //Line example: b Zoe LaVerne
+            
+        //Blue player's side and name
+        if(fRead.hasNext())
+            line = fRead.nextLine();
+
+        Player bluePlayer2 = new Player(line.substring(4), line.charAt(0));
+        bluePlayer2.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
+        bluePlayer2.piecesCaptured(true);
+
+        //2nd line: side(char) and name(String)
+        //Line example: r Massimo
+        //Line example: r Robert Lewandowski
+
+        //Red player's side and name
+        if(fRead.hasNextLine())
+            line = fRead.nextLine();
+
+        Player redPlayer1 = new Player(line.substring(4), line.charAt(0));
+        redPlayer1.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
+        redPlayer1.piecesCaptured(true);
+
+        tempBoard = new Board(redPlayer1, bluePlayer2);
+
+        //3rd line: side(char)
+        //Line example: r
+        //Line example: b
+
+        if(fRead.hasNextLine())
+            line = fRead.nextLine();
+
+
+        //Set whose turn it is for the NEXT turn
+        if (line.equals("r"))
+            tempBoard.getP2().setTurn(true);
+        else tempBoard.getP1().setTurn(true);
+
+        //Consecutive lines: (String)
+        //Should there be an existing piece of a side, then only the player's piece
+        //corresponding to the pieceList indexes will be set to "not captured"
+        //line example: 45 rChevron
+        //line example: 11 bArrow true
+        Piece tempPiece;
+        Player tempPlayer;
+        while(fRead.hasNextLine()){
+            line = fRead.nextLine();
+
+            int row = Integer.parseInt(Character.toString(line.charAt(0)));
+            int col = Integer.parseInt(Character.toString(line.charAt(1)));
+            char side = line.charAt(3);
+            if (side=='r')
+                tempPlayer = tempBoard.getP1();
+            else tempPlayer = tempBoard.getP2();
+
+            switch(Character.toLowerCase(line.charAt(4))){
+                case 'c':   tempPiece = tempPlayer.getPieceList().get(2);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else tempPiece = board.getP1().getPieceList().get(4);
+                            tempBoard.loadArrangement(tempPiece, row, col);
+                            break;
+
+                case 't':   tempPiece = tempPlayer.getPieceList().get(1);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else tempPiece = board.getP1().getPieceList().get(5);
+                            tempBoard.loadArrangement(tempPiece, row, col);
+                            break;
+
+                case 's':   tempPiece = tempPlayer.getPieceList().get(3);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            tempBoard.loadArrangement(tempPiece, row, col);
+                            break;
+
+                case 'p':   tempPiece = tempPlayer.getPieceList().get(0);
+
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else tempPiece = board.getP1().getPieceList().get(6);
+                            tempBoard.loadArrangement(tempPiece, row, col);
+                            break;
+                            
+                case 'a':   tempPiece = tempPlayer.getPieceList().get(7);
+                            if (tempPiece.isCaptured()) tempPiece.setCaptured(false);
+                            else {
+                                tempPiece = tempBoard.getP1().getPieceList().get(8);
+                                if (tempPiece.isCaptured())
+                                    tempPiece.setCaptured(false);
+                                else{
+                                    tempPiece = tempBoard.getP1().getPieceList().get(9);
+                                    if (tempPiece.isCaptured())
+                                        tempPiece.setCaptured(false);
+                                    else
+                                        tempPiece = tempBoard.getP1().getPieceList().get(9);
+                                }
+                            }
+                            Arrow a = (Arrow)tempPiece;
+                            a.setRotate(line.charAt(10)=='f' ? false : true);
+                            tempBoard.loadArrangement(a, row, col);
+                            break;
+            }
+        }
+            
+        
+
+        fRead.close();
+        return tempBoard;
     }
 
     /**
@@ -422,15 +451,18 @@ public class Game {
             g.createSaveFile();
         System.out.println(g.loadExists());
         //g.load();
-        Player p1 = new Player("Merah", 'r');
-        Player p2 = new Player("Biru", 'b');
-        Board board = new Board(p1, p2);
-        board.getP1().setTurn(true);
-        g = new Game(board);
+        //Player p1 = new Player("Merah", 'r');
+        //Player p2 = new Player("Biru", 'b');
+        //Board board = new Board(p1, p2);
+        //board.getP1().setTurn(true);
+        //g = new Game(board);
         if(g.loadExists())
-            g.load();
+            if(g.checkLoad())
+                g.load();
+        g.setBoard(g.load());
+        g = new Game(g.load());
         g.getBoard().debug();
-        g.save();
+        //g.save();
 
     }
 }
