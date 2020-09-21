@@ -48,42 +48,34 @@ public class Triangle extends Piece{
 	 /**
 	*check if number of square from x of start square to x of end square and number of square from y of start square to y of end square must be the same
 	*/
-        if ((xEnd < xStart) && (yEnd < yStart))
+        if ((xEnd < xStart) && (yEnd < yStart)) //(0,0) to (2,2)
         {
-            dx = xStart - xEnd;
-            dy = yStart - yEnd;
+            if ((start.getY() - end.getY()) == (start.getX() - end.getX()))
+			{
+				move1 = true;
+			}
         }
         else if ((xEnd > xStart) && (yEnd < yStart))
         {
-            dx = xEnd - xStart;
-            dy = yStart - yEnd;
+            if ((start.getY() - end.getY()) == (end.getX() - start.getX()))
+			{
+				move1 = true;
+			}
         }
         else if ((xEnd < xStart) && (yEnd > yStart))
         {
-            dx = xStart - xEnd;
-            dy = yEnd - yStart;
+            if ((end.getY() - start.getY()) == (start.getX() - end.getX()))
+			{
+				move1 = true;
+			}
         }
         else if ((xEnd > xStart) && (yEnd > yStart))
         {
-            dx = xEnd - xStart;
-            dy = yEnd - yStart;
+            if ((end.getY() - start.getY()) == (end.getX() - start.getX()))
+			{
+				move1 = true;
+			}
         }
-        else
-        {
-            dx = 0;
-            dy = 0;
-        }
-	    
-	/**
-	*detect non-diagonal move
-	*/ 
-        if (dx == dy)
-        {
-		move1 = true;
-	}
-	else{
-		move1 = false;
-	}
 	
 
 	boolean move2 = false;
