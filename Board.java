@@ -148,63 +148,19 @@ public class Board {
             boolean move = false;
             if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
             {
-                /*Square temp = squareList[start.getY()][start.getX()];
-                while(temp.getX() != (end.getX()+1)){
-                    temp = squareList[temp.getY()-1][temp.getX()-1]; 
-                        if(temp.isOccupied()){
-                            move = false;
-                            break;
-                        }
-                        else{
-                            move = true;
-                            }
-                }*/
-                move = pathwayClear1(start, end);
+                move = pathwayClear4(start, end);
             }
             else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
             {
-                /*Square temp = squareList[start.getY()][start.getX()];
-                while(temp.getX() != (end.getX()+1)){
-                    temp = squareList[temp.getY()+1][temp.getX()-1]; 
-                        if(temp.isOccupied()){
-                            move = false;
-                            break;
-                        }
-                        else{
-                            move = true;
-                            }
-                }*/
-                move = pathwayClear2(start, end);
+                move = pathwayClear3(start, end);
             }
             else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
             {
-                /*Square temp = squareList[start.getY()][start.getX()];
-                while(temp.getX() != (end.getX()+1)){
-                    temp = squareList[temp.getY()-1][temp.getX()+1]; 
-                        if(temp.isOccupied()){
-                            move = false;
-                            break;
-                        }
-                        else{
-                            move = true;
-                            }
-                }*/
-                move = pathwayClear3(start, end);
+                move = pathwayClear2(start, end);
             }
             else if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
             {
-                /*Square temp = squareList[start.getY()][start.getX()];
-                while(temp.getX() != (end.getX()+1)){
-                    temp = squareList[temp.getY()+1][temp.getX()+1]; 
-                        if(temp.isOccupied()){
-                            move = false;
-                            break;
-                        }
-                        else{
-                            move = true;
-                            }
-                }*/
-                move = pathwayClear4(start, end);
+                move = pathwayClear1(start, end);
             }
             else{
                     move = false;
