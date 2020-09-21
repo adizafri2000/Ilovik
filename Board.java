@@ -296,7 +296,7 @@ public class Board {
      * @param start Starting square
      * @param end Ending(Destination) square
      */    
-	private boolean pathwayClear2(Square start, Square end){ //(2,2) to (0,0)
+	private boolean pathwayClear2(Square start, Square end){ 
         Square temp = squareList[start.getY()-1][start.getX()-1];
 
         //temp square location is one upper-right square in distance from start square
@@ -327,7 +327,7 @@ public class Board {
      * @param start Starting square
      * @param end Ending(Destination) square
      */    
-	private boolean pathwayClear3(Square start, Square end){ //(2,2) to (0,0)
+	private boolean pathwayClear3(Square start, Square end){ 
         Square temp = squareList[start.getY()+1][start.getX()-1];
 
         //temp square location is one lower-left square in distance from start square
@@ -358,7 +358,7 @@ public class Board {
      * @param start Starting square
      * @param end Ending(Destination) square
      */    
-	private boolean pathwayClear4(Square start, Square end){ //(2,2) to (0,0)
+	private boolean pathwayClear4(Square start, Square end){ 
         Square temp = squareList[start.getY()-1][start.getX()-1];
 
         //temp square location is one lower-right square in distance from start square
