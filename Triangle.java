@@ -31,7 +31,7 @@ public class Triangle extends Piece{
 		/*** How triangle move (Implementation)
 			1. check if the start and end square are located diagonally
 				1.1 if it is not diagonally, then return false
-			2. Check if the end square is accoupied or not and if occupied, check the side of the piece in end square
+			2. Check if the end square is occupied or not and if occupied, check the side of the piece in end square
 				2.1 return false is occupied and the piece is the same side
 			3. Movement logic
 				3.1 number of square from x of start square to x of end square and number of square from y of start square to y of end square must be the same
@@ -44,7 +44,10 @@ public class Triangle extends Piece{
         boolean move1 = true;
         int dx,dy;
         
-		//to check if movement is valid
+	
+	 /**
+	*check if number of square from x of start square to x of end square and number of square from y of start square to y of end square must be the same
+	*/
         if ((xEnd < xStart) && (yEnd < yStart))
         {
             dx = xStart - xEnd;
@@ -71,7 +74,9 @@ public class Triangle extends Piece{
             dy = 0;
         }
 	    
-	//check if length of dx equal to dy   
+	/**
+	*detect non-diagonal move
+	*/ 
         if (dx == dy)
         {
 		move1 = true;
@@ -82,8 +87,10 @@ public class Triangle extends Piece{
 	
 
 	boolean move2 = false;
-	//check if the end square has another piece, same side or not
-			
+	
+	/**
+	*check if the new square has another piece, same side or not
+	*/		
 	if ((end.isOccupied() && (start.getPiece().getSide())==(end.getPiece().getSide()))){
 		move2 = false;
 	}
