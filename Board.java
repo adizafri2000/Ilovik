@@ -159,7 +159,7 @@ public class Board {
                             move = true;
                             }
                 }*/
-                move = pathwayClear4(start, end);
+                move = pathwayClear1(start, end);
             }
             else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
             {
@@ -174,7 +174,7 @@ public class Board {
                             move = true;
                             }
                 }*/
-                move = pathwayClear3(start, end);
+                move = pathwayClear2(start, end);
             }
             else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
             {
@@ -189,7 +189,7 @@ public class Board {
                             move = true;
                             }
                 }*/
-                move = pathwayClear2(start, end);
+                move = pathwayClear3(start, end);
             }
             else if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
             {
@@ -204,7 +204,7 @@ public class Board {
                             move = true;
                             }
                 }*/
-                move = pathwayClear1(start, end);
+                move = pathwayClear4(start, end);
             }
             else{
                     move = false;
