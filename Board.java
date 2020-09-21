@@ -268,7 +268,7 @@ public class Board {
      * @param end Ending(Destination) square
      */    
 	private boolean pathwayClear1(Square start, Square end){ 
-        Square temp = squareList[start.getY()+1][start.getX()+1];
+        Square temp = squareList[start.getY()-1][start.getX()-1];
         //Final true condition reached: start Square has reached end Square without prior false returns
         //When this condition is reached, start Square has its pathway clear from its initial start position until
         //1 square before its destination
@@ -296,8 +296,13 @@ public class Board {
      * @param start Starting square
      * @param end Ending(Destination) square
      */    
+<<<<<<< Updated upstream
 	private boolean pathwayClear2(Square start, Square end){ 
         Square temp = squareList[start.getY()-1][start.getX()-1];
+=======
+	private boolean pathwayClear2(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = squareList[start.getY()-1][start.getX()+1];
+>>>>>>> Stashed changes
 
      
         //Final true condition reached: start Square has reached end Square without prior false returns
@@ -352,8 +357,13 @@ public class Board {
      * @param start Starting square
      * @param end Ending(Destination) square
      */    
+<<<<<<< Updated upstream
 	private boolean pathwayClear4(Square start, Square end){ 
         Square temp = squareList[start.getY()-1][start.getX()-1];
+=======
+	private boolean pathwayClear4(Square start, Square end){ //(2,2) to (0,0)
+        Square temp = squareList[start.getY()+1][start.getX()+1];
+>>>>>>> Stashed changes
 
 
         //Final true condition reached: start Square has reached end Square without prior false returns

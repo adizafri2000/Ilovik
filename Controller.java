@@ -197,7 +197,7 @@ public class Controller implements ActionListener {
     }
     
     private void movePiece(int i, int j){
-    try{
+    //try{
         if (pieceClick == false){
             if (game.getBoard().getSquareList()[i][j].isOccupied()){ //occupied square
                 if (game.getBoard().getP2().isTurn() &&
@@ -367,7 +367,7 @@ public class Controller implements ActionListener {
             
             System.out.println("start: " + start.getY() + "," + start.getX() + " end: " + end.getY() + "," + end.getX());
         }
-    }catch (NullPointerException ex){ex.getMessage();}
+    //}catch (NullPointerException ex){ex.getMessage();}
     }
     
     private void setPlayerTurn(){
