@@ -162,6 +162,7 @@ public class Controller implements ActionListener {
             game.getBoard().getP1().updateMoves();
             game.getBoard().getP1().setTurn(false);
             game.getBoard().getP2().setTurn(true);
+            
         }
         else{
             game.getBoard().getP2().updateMoves();
@@ -399,9 +400,10 @@ public class Controller implements ActionListener {
     
     private void swapPiece(){
         System.out.println("in SWAPAIECE()");
-        for(int i = 0; i < 8; i++){
+        /*for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 if (game.getBoard().getSquareList()[i][j].isOccupied() == true){
+                    
                     sq = game.getBoard().getSquareList()[i][j];
                     String pieceName = sq.getPiece().getName();
                     System.out.println("in SWAPAIECE() 2");
@@ -433,7 +435,8 @@ public class Controller implements ActionListener {
                     }
                 }
             }   
-          }
+          }*/
+        
     }
     //test controller
     public static void main(String[] args){
