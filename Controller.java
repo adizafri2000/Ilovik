@@ -147,7 +147,6 @@ public class Controller implements ActionListener {
             for(int j=0;j<7;j++){
                 temp = game.getBoard().getSquareList()[i][j];
                 if (temp.isOccupied()){
-                    System.out.println(temp.getPiece().getName());
                     view.addIcon(i, j, temp.getPiece().getIconFile());
                 }
                 else{
@@ -328,6 +327,7 @@ public class Controller implements ActionListener {
                             else{
                                 JOptionPane.showMessageDialog(null, "The square has the same piece color!");
                             }
+                            
                             setPlayerTurn();
                 }
                 else{
@@ -400,7 +400,21 @@ public class Controller implements ActionListener {
     
     private void swapPiece(){
         System.out.println("in SWAPAIECE()");
-        game.getBoard().swapPieces();
+        //game.getBoard().debug();
+        game.getBoard().getP1().debug();
+        game.getBoard().getP2().debug();
+        System.out.println("\n\n\nJUMPER\n\n\n");
+        Board bo = game.getBoard();
+        bo.swapPieces();
+        bo.getP1().debug();
+        bo.getP2().debug();
+        game = new Game(bo);
+        //game.setBoard(bo);
+        
+        game.getBoard().debug();
+        
+        setViewBoardIcons();
+
         /*for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 if (game.getBoard().getSquareList()[i][j].isOccupied() == true){

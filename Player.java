@@ -196,11 +196,26 @@ public class Player{
 		//Collections.swap(pieceList,"triangle,plus");
 		Piece temp1 = pieceList.get(0);
 		Piece temp2 = pieceList.get(6);
-		pieceList.set(0, pieceList.get(1));
-		pieceList.set(6, pieceList.get(5));
+		Piece temp3 = pieceList.get(1);
+		Piece temp4 = pieceList.get(5);
+
+		pieceList.set(0, temp3);
+		pieceList.set(6, temp4);
 		pieceList.set(1, temp1);
 		pieceList.set(5, temp2);
+
+		/*pieceList.set(0, pieceList.get(1));
+		pieceList.set(6, pieceList.get(5));
+		pieceList.set(1, temp1);
+		pieceList.set(5, temp2);*/
 	} 
+
+	public void debug(){
+		System.out.printf("Name: %s, side: %s\n",name,side);
+		for(Piece p: pieceList){
+			System.out.printf("%s, captured: %s\n",p.getName(),p.isCaptured());
+		}
+	}
 }
 	
 	
