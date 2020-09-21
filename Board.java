@@ -299,10 +299,7 @@ public class Board {
 	private boolean pathwayClear2(Square start, Square end){ 
         Square temp = squareList[start.getY()-1][start.getX()-1];
 
-        //temp square location is one upper-right square in distance from start square
-        temp.setX(temp.getX()+1);
-        temp.setY(temp.getY()-1);
-
+     
         //Final true condition reached: start Square has reached end Square without prior false returns
         //When this condition is reached, start Square has its pathway clear from its initial start position until
         //1 square before its destination
@@ -330,10 +327,7 @@ public class Board {
 	private boolean pathwayClear3(Square start, Square end){ 
         Square temp = squareList[start.getY()+1][start.getX()-1];
 
-        //temp square location is one lower-left square in distance from start square
-        temp.setX(temp.getX()-1);
-        temp.setY(temp.getY()+1);
-
+     
         //Final true condition reached: start Square has reached end Square without prior false returns
         //When this condition is reached, start Square has its pathway clear from its initial start position until
         //1 square before its destination
@@ -361,9 +355,6 @@ public class Board {
 	private boolean pathwayClear4(Square start, Square end){ 
         Square temp = squareList[start.getY()-1][start.getX()-1];
 
-        //temp square location is one lower-right square in distance from start square
-        temp.setX(temp.getX()+1);
-        temp.setY(temp.getY()+1);
 
         //Final true condition reached: start Square has reached end Square without prior false returns
         //When this condition is reached, start Square has its pathway clear from its initial start position until
