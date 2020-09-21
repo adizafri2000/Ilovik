@@ -148,59 +148,59 @@ public class Board {
 		boolean move = false;
             if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
 			{
-				int counter = start.getX() - end.getX() - 1;
-				for (int i = 1;i <= counter;i++){
-					Square temp = squareList[start.getX() - counter][start.getY() - counter]; 
-					if(temp.isOccupied()){
-						System.out.println("False reached.");
-						move = false;
-					}
-					else{
-						move = true;
+				temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != end.getX()){
+					Square temp = squareList[start.getX()-counter][start.getY()-counter]; 
+						if(temp.isOccupied()){
+							move = false;
+							break;
 						}
-					}
+						else{
+							move = true;
+							}
+				}
 			}
 	    else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
 			{
-				int counter = end.getX() - start.getX() - 1;
-				for (int i = 1;i <= counter;i++){
+				temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != end.getX()){
 					Square temp = squareList[start.getX()-counter][start.getY()+counter]; 
-					if(temp.isOccupied()){
-						System.out.println("False reached.");
-						move = false;
-					}
-					else{
-						move = true;
+						if(temp.isOccupied()){
+							move = false;
+							break;
 						}
-					}
+						else{
+							move = true;
+							}
+				}
 			}
 	   else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
 			{
-				int counter = start.getX() - end.getX() - 1;
-				for (int i = 1;i <= counter;i++){
+				temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != end.getX()){
 					Square temp = squareList[start.getX()+counter][start.getY()-counter]; 
-					if(temp.isOccupied()){
-						System.out.println("False reached.");
-						move = false;
-					}
-				        else{
-						move = true;
+						if(temp.isOccupied()){
+							move = false;
+							break;
 						}
-					}
+						else{
+							move = true;
+							}
+				}
 			}
 	  else if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
 			{
-				int counter = end.getX() - start.getX() - 1;
-				for (int i = 1;i <= counter;i++){
+				temp = squareList[start.getX()][start.getY()];
+				while(temp.getX() != end.getX()){
 					Square temp = squareList[start.getX()+counter][start.getY()+counter]; 
-					if(temp.isOccupied()){
-						System.out.println("False reached.");
-						move = false;
-					}
-				        else{
-						move = true;
+						if(temp.isOccupied()){
+							move = false;
+							break;
 						}
-					}
+						else{
+							move = true;
+							}
+				}
 			}
 	  else{
 				move = false;
