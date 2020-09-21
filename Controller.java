@@ -5,7 +5,9 @@ import java.awt.event.*;
 import java.io.*;
 
 
-
+/**
+* Main controller for the Webale Chess game
+*/
 public class Controller implements ActionListener {
     private Game game;
     private View view;
