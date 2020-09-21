@@ -1,5 +1,5 @@
-b 0 adsfg
-r 0 324567
+b 1 adsfg
+r 1 324567
 b
 00 bPlus
 01 bTriangle
@@ -8,11 +8,11 @@ b
 04 bChevron
 05 bTriangle
 06 bPlus
-10 bArrow false
 12 bArrow false
 14 bArrow false
 16 bArrow false
-60 rArrow false
+30 bArrow false
+40 rArrow false
 62 rArrow false
 64 rArrow false
 66 rArrow false
