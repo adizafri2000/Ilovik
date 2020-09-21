@@ -1,6 +1,4 @@
 
-
-
 /* RESIZE FRAME, SET ICON CENTER , ADD LABEL PLAYER NAME , SET JPANEL1 ,JPANEL2 */
 /***
 -set icon dalam jButton:
@@ -37,7 +35,7 @@ public class View extends JFrame {
     public View() {
         super("Ilovik Webale Chess");
         setSize(800, 800);
-		//setPreferredSize(new Dimension(100, 100));
+		//setPreferredSize(new Dimension(800, 800));
         setMinimumSize(getSize());
         //getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
         player1Name = new JLabel("Kamal");
