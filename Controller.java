@@ -150,24 +150,17 @@ public class Controller implements ActionListener {
         int col = Character.getNumericValue(colClicked);
         movePiece(row, col);
     }
-
-    public void loadBoardIcons(){
-        for(int i=0;i<8;i++){
-            for(int j=0;j<7;j++){
-                if(game.getBoard().getSquareList()[i][j].isOccupied())
-                    view.addIcon(i, j, game.getBoard().getSquareList()[i][j].getPiece().getIconFile());
-                else
-                    view.getSquareButton()[i][j].setIcon(null);
-            }
-        }
-    }
     
 
+    /**
+     * Sets all pieces' respective icon into the board buttons in the view.
+     * Icons follow the pieces contained in the board (from model part).
+     */
     public void setViewBoardIcons(){
         Square temp;
         for(int i=0;i<8;i++){
             for(int j=0;j<7;j++){
-                temp = board.getSquareList()[i][j]
+                temp = board.getSquareList()[i][j];
                 if (temp.isOccupied()){
                     view.addIcon(i, j, temp.getPiece().getIconFile());
                 }
