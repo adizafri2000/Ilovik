@@ -181,6 +181,14 @@ public class View extends JFrame {
         icon = new ImageIcon(iconP2); //transfer it back
         squares[row][col].setIcon(icon);
     }
+
+    public void emptyIcon(){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                squares[i][j].setIcon(null);
+            }
+        }
+    }
     
     public ImageIcon getIcon(String file){
         String path = "/icons/";

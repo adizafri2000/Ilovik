@@ -142,6 +142,7 @@ public class Controller implements ActionListener {
      * Icons follow the pieces contained in the board (from model part).
      */
     public void setViewBoardIcons(){
+        System.out.println("\nENTERING SETVIEWBOARDICONS()\n");
         Square temp;
         for(int i=0;i<8;i++){
             for(int j=0;j<7;j++){
@@ -155,6 +156,13 @@ public class Controller implements ActionListener {
             }
         }
     }
+
+    public void emptyViewBoardIcons(){
+        System.out.println("\nENTERING EMPTYVIEWBOARDICONS()\n");
+        view.emptyIcon();
+    }
+
+    
 
     public void changeTurns(){
         if(game.getBoard().getP1().isTurn()){
@@ -412,7 +420,7 @@ public class Controller implements ActionListener {
         //game.setBoard(bo);
         
         game.getBoard().debug();
-        
+        emptyViewBoardIcons();
         setViewBoardIcons();
 
         /*for(int i = 0; i < 8; i++){
