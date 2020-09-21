@@ -210,122 +210,22 @@ public class Board {
         else if (start.getPiece() instanceof Plus){
             //Plus pathway check
             if ((end.getX() == start.getX()) && (end.getY() > start.getY() )) {		     // foward
-	Square temp = squareList [start.getX()][start.getY() + 1];
-		
-	System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
-	System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
-	System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
-			
-		// 1 square before its condition
-		if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
-			System.out.println("True reached.");
-			return true;
-		}
+                return forwardClear(start, end);
+            }
 
-		else{
-			//False condition reached: A square along this pathway is occupied
-			if(temp.isOccupied()){
-				System.out.println("False reached.");
-				return false;
-			}
-					
-			//Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
-			//be more squares ahead unchecked
-			else{
-				System.out.println("Recursion reached.");
-				return isClearPathway(temp, end);
-			}
-		}	
-}
-
-else if ((end.getX() == start.getX()) && (end.getY() < start.getY() )) {		// backward
-	Square temp = squareList [start.getX()][start.getY() - 1];
-			
-	System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
-	System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
-	System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
-				
-		// 1 square before its condition
-		if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
-			System.out.println("True reached.");
-			return true;
-		}
-
-		else{
-			//False condition reached: A square along this pathway is occupied
-			if(temp.isOccupied()){
-				System.out.println("False reached.");
-				return false;
-			}
-						
-			//Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
-			//be more squares ahead unchecked
-			else{
-				System.out.println("Recursion reached.");
-				return isClearPathway(temp, end);
-			}
-		}	
-}
-		
-else if ((end.getY() == start.getY()) && (end.getX() > start.getX() )) {		// right
-	Square temp = squareList [start.getX() + 1][start.getY()];
-			
-	System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
-	System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
-	System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
-				
-		// 1 square before its condition
-		if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
-			System.out.println("True reached.");
-			return true;
-		}
-
-		else{
-			//False condition reached: A square along this pathway is occupied
-			if(temp.isOccupied()){
-				System.out.println("False reached.");
-				return false;
-			}
-						
-			//Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
-			//be more squares ahead unchecked
-			else{
-				System.out.println("Recursion reached.");
-				return isClearPathway(temp, end);
-			}
-		}	
-}
-		
-else if ((end.getY() == start.getY()) && (end.getX() < start.getX() )) {		// left
-	Square temp = squareList [start.getX() - 1][start.getY()];
-			
-	System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
-	System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
-	System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
-				
-		// 1 square before its condition
-		if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
-			System.out.println("True reached.");
-			return true;
-		}
-
-		else{
-			//False condition reached: A square along this pathway is occupied
-			if(temp.isOccupied()){
-				System.out.println("False reached.");
-				return false;
-			}
-						
-			//Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
-			//be more squares ahead unchecked
-			else{
-				System.out.println("Recursion reached.");
-				return isClearPathway(temp, end);
-			}
-		}	
-}
-else
-	return false;			
+            else if ((end.getX() == start.getX()) && (end.getY() < start.getY() )) {		// backward
+                return backwardClear(start, end);
+            }
+                    
+            else if ((end.getY() == start.getY()) && (end.getX() > start.getX() )) {		// right
+                    return rightClear(start, end);
+            }
+                    
+            else if ((end.getY() == start.getY()) && (end.getX() < start.getX() )) {		// left
+                return leftClear(start, end);
+            }
+            else
+                return false;			
         }
         else if(start.getPiece() instanceof Arrow){
             Square temp;
@@ -355,6 +255,122 @@ else
             }
         }
         return true;
+    }
+
+    private boolean forwardClear(Square start,Square end){
+        Square temp = squareList [start.getY()+1][start.getX()];
+		
+        System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
+        System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
+        System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
+                
+        // 1 square before its condition
+        if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
+            System.out.println("True reached.");
+            return true;
+        }
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied()){
+                System.out.println("False reached.");
+                return false;
+            }
+                    
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else{
+                System.out.println("Recursion reached.");
+                return forwardClear(temp, end);
+            }
+        }	
+    }
+
+    private boolean backwardClear(Square start,Square end){
+        Square temp = squareList [start.getY()-1][start.getX()];
+			
+        System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
+        System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
+        System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
+                    
+            // 1 square before its condition
+            if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
+                System.out.println("True reached.");
+                return true;
+            }
+
+            else{
+                //False condition reached: A square along this pathway is occupied
+                if(temp.isOccupied()){
+                    System.out.println("False reached.");
+                    return false;
+                }
+                            
+                //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+                //be more squares ahead unchecked
+                else{
+                    System.out.println("Recursion reached.");
+                    return backwardClear(temp, end);
+                }
+            }	
+    }
+
+    private boolean rightClear(Square start,Square end){
+        Square temp = squareList [start.getY()][start.getX()+1];
+			
+        System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
+        System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
+        System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
+                    
+            // 1 square before its condition
+            if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
+                System.out.println("True reached.");
+                return true;
+            }
+
+            else{
+                //False condition reached: A square along this pathway is occupied
+                if(temp.isOccupied()){
+                    System.out.println("False reached.");
+                    return false;
+                }
+                            
+                //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+                //be more squares ahead unchecked
+                else{
+                    System.out.println("Recursion reached.");
+                    return rightClear(temp, end);
+                }
+            }
+    }
+
+    private boolean leftClear(Square start,Square end){
+        Square temp = squareList [start.getY()][start.getX()-1];
+			
+        System.out.printf("\n\nStart: (%d,%d)\n",start.getX(),start.getY());
+        System.out.printf("Temp: (%d,%d)\n",temp.getX(),temp.getY());
+        System.out.printf("End: (%d,%d)\n",end.getX(),end.getY());
+                    
+        // 1 square before its condition
+        if((temp.getX()==end.getX())&&(temp.getY()== end.getY())){
+            System.out.println("True reached.");
+            return true;
+        }
+
+        else{
+            //False condition reached: A square along this pathway is occupied
+            if(temp.isOccupied()){
+                System.out.println("False reached.");
+                return false;
+            }
+                        
+            //Recursion condition reached: Squares along the pathway reached until now are all clear, but there might
+            //be more squares ahead unchecked
+            else{
+                System.out.println("Recursion reached.");
+                return leftClear(temp, end);
+            }
+        }
     }
 
     public void swapPieces(){
