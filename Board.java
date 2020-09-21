@@ -145,11 +145,12 @@ public class Board {
     public boolean isClearPathway(Piece p,Square start,Square end){
         if (p instanceof Triangle){
             //Triangle pathway check
+		boolean move = false;
             if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
 			{
 				int counter = start.getX() - end.getX() - 1;
-				for (int i = 0;i < counter;i++){
-					Square temp = board[start.getX()-1][start.getY()+1]; 
+				for (int i = 1;i =< counter;i++){
+					Square temp = board[start.getX() - counter][start.getY() - counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
 						move = false;
@@ -162,8 +163,8 @@ public class Board {
 	    else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
 			{
 				int counter = end.getX() - start.getX() - 1;
-				for (int i = 0;i < counter;i++){
-					Square temp = board[start.getX()-1][start.getY()+1]; 
+				for (int i = 1;i =< counter;i++){
+					Square temp = board[start.getX()-counter][start.getY()+counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
 						move = false;
@@ -176,8 +177,8 @@ public class Board {
 	   else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
 			{
 				int counter = start.getX() - end.getX() - 1;
-				for (int i = 0;i < counter;i++){
-					Square temp = board[start.getX()-1][start.getY()+1]; 
+				for (int i = 1;i =< counter;i++){
+					Square temp = board[start.getX()+counter][start.getY()-counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
 						move = false;
@@ -190,8 +191,8 @@ public class Board {
 	  else if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
 			{
 				int counter = end.getX() - start.getX() - 1;
-				for (int i = 0;i < counter;i++){
-					Square temp = board[start.getX()-1][start.getY()+1]; 
+				for (int i = 1;i =< counter;i++){
+					Square temp = board[start.getX()+counter][start.getY()+counter]; 
 					if(temp.isOccupied()){
 						System.out.println("False reached.");
 						move = false;
@@ -204,6 +205,7 @@ public class Board {
 	  else{
 				move = false;
 		}
+		return move;
         }
         else if (p instanceof Plus){
             //Plus pathway check
