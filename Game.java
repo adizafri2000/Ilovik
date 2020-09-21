@@ -405,24 +405,4 @@ public class Game {
     public void setBoard(Board b){
         this.board = b;
     }
-
-    /*public static void main(String[] args) throws IOException {
-        Game g = new Game();
-        System.out.println(g.loadExists());
-        if (!g.loadExists())
-            g.createSaveFile();
-        System.out.println(g.loadExists());
-        Board load = g.load();
-        
-        g = new Game(load);
-
-        g.getBoard().debug();
-        System.out.print("\n\n\nJUMPER\n\n\n");
-        g.getBoard().getP1().setTurn(true);
-        g.getBoard().getP2().setTurn(false);
-        g.getBoard().flip();
-        g.getBoard().debug();
-        //g.save();
-
-    }*/
 }

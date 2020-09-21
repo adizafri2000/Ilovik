@@ -66,7 +66,7 @@ public class Controller implements ActionListener {
         
         String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
         view.getPlayer1Name().setText("Player 1: " + namePlayer1);
-        game.getBoard().getP1().setTurn(true);
+        game.getBoard().getP2().setTurn(true);
         
         String namePlayer2 = JOptionPane.showInputDialog("Enter name of player 2:");
         view.getPlayer2Name().setText("Player 2: " + namePlayer2);
@@ -162,6 +162,18 @@ public class Controller implements ActionListener {
         }
     }
     
+
+    public void setViewBoardIcons(){
+        Square temp;
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                temp = board.getSquareList()[i][j]
+                if (temp.isOccupied()){
+                    view.addIcon(i, j, temp.getPiece().getIconFile());
+                }
+            }
+        }
+    }
 
     public void changeTurns(){
         if(game.getBoard().getP1().isTurn()){

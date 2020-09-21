@@ -151,6 +151,33 @@ public class Board {
             //Plus pathway check
             //Aina letak sini
         }
+        else if(start.getPiece() instanceof Arrow){
+            Square temp;
+            Arrow tempArrow = (Arrow)start.getPiece();
+            //Check if Arrow piece is moving 2 squares
+            if(Math.abs(end.getY()-start.getY())==2){
+                if(tempArrow.getSide()=='r'){
+                    if(tempArrow.isRotating()){
+                        temp = squareList[start.getY()+1][start.getX()];
+                        return ((temp.isOccupied()) ? false : true);
+                    }
+                    else{
+                        temp = squareList[start.getY()-1][start.getX()];
+                        return ((temp.isOccupied()) ? false : true);
+                    }
+                }
+                else{
+                    if(tempArrow.isRotating()){
+                        temp = squareList[start.getY()-1][start.getX()];
+                        return ((temp.isOccupied()) ? false : true);
+                    }
+                    else{
+                        temp = squareList[start.getY()+1][start.getX()];
+                        return ((temp.isOccupied()) ? false : true);
+                    }
+                }
+            }
+        }
         return true;
     }
 
