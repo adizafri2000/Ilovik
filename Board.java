@@ -142,8 +142,8 @@ public class Board {
      * @param end Destination square
      * @return true if pathway from start to end is clear from any piece
      */
-    /*public boolean isClearPathway(Piece p,Square start,Square end){
-        if (p instanceof Triangle){
+    public boolean isClearPathway(Square start,Square end){
+        /*if (start.getPiece() instanceof Triangle){
             //Triangle pathway check
 		boolean move = false;
             if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
@@ -207,11 +207,11 @@ public class Board {
 		}
 		return move;
         }
-        else if (p instanceof Plus){
+        else if (start.getPiece() instanceof Plus){
             //Plus pathway check
             //Aina letak sini
         }
-        else if(start.getPiece() instanceof Arrow){
+        else*/ if(start.getPiece() instanceof Arrow){
             Square temp;
             Arrow tempArrow = (Arrow)start.getPiece();
             //Check if Arrow piece is moving 2 squares
@@ -239,7 +239,7 @@ public class Board {
             }
         }
         return true;
-    }*/
+    }
 
     public void swapPieces(){
         p1.swapPiece();

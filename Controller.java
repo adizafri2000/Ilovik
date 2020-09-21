@@ -216,7 +216,8 @@ public class Controller implements ActionListener {
                 else{
                 end = game.getBoard().getSquareList()[i][j];
                         boolean isMoveValid = start.getPiece().move(start, end); 
-                        if (isMoveValid){
+                        boolean pathwayCleared = game.getBoard().isClearPathway(start, end);
+                        if (isMoveValid&&pathwayCleared){
                             //selected square is empty
                             if (!end.isOccupied()){
                                 //add icon to board and set icon
@@ -234,8 +235,8 @@ public class Controller implements ActionListener {
                             }  //player blue turn and kill the opponent(red) piece
                             else if (end.isOccupied() && end.getPiece().getName().charAt(0) == 'r' && game.getBoard().getP1().isTurn() == true){
                                 //capture sun and player 1 wins
-                    if (end.getPiece().getName().equals("rSun")){
-                                     //set opponent piece to captured
+                                if (end.getPiece().getName().equals("rSun")){
+                                    //set opponent piece to captured
                                     game.getBoard().getSquareList()[end.getY()][end.getX()].getPiece().setCaptured(true);
                                     view.getSquareButton()[end.getY()][end.getX()].setIcon(null);
                                     
@@ -250,16 +251,16 @@ public class Controller implements ActionListener {
                                     view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE));
                                     System.out.println("RDEAD???");
                                     
-                                     JOptionPane.showMessageDialog(null, "!!PLAYER 2 WINS!!");
-                                     int dialogResult = JOptionPane.showConfirmDialog(null, "Create new game? Select no to exit game.", "Start new game?", JOptionPane.YES_NO_OPTION);
-                                     if (dialogResult == 0) {
-                                         System.out.println("Yes option");
-                                         createNewGame();
-                                     }
-                                     else {
-                                         System.out.println("No Option");
-                                         System.exit(0);
-                                     }
+                                    JOptionPane.showMessageDialog(null, "!!PLAYER 2 WINS!!");
+                                    int dialogResult = JOptionPane.showConfirmDialog(null, "Create new game? Select no to exit game.", "Start new game?", JOptionPane.YES_NO_OPTION);
+                                    if (dialogResult == 0) {
+                                        System.out.println("Yes option");
+                                        createNewGame();
+                                    }
+                                    else {
+                                        System.out.println("No Option");
+                                        System.exit(0);
+                                    }
                                 }
                                 else{
                                     //set opponent piece to captured
