@@ -36,7 +36,7 @@ public class Controller implements ActionListener {
       
     }
 
-    public void initNewController(){
+    /*public void initNewController(){
        view.getNewGameMenu().addActionListener(e -> createNewGame());
        view.getLoadMenu().addActionListener(e -> loadGame());
        view.getSaveMenu().addActionListener(e -> saveGame());
@@ -46,7 +46,7 @@ public class Controller implements ActionListener {
                 view.getSquareButton()[i][j].setActionCommand(i+""+j);
             }
         }
-    }
+    }*/
     
     private void createNewGame(){
         //view.setVisible(false); //close previous boar
@@ -56,6 +56,7 @@ public class Controller implements ActionListener {
                 view.getSquareButton()[i][j].setActionCommand(i+""+j);
             }
         }
+        //game.getBoard().emptyAllSquares();
         
         String namePlayer1 = JOptionPane.showInputDialog("Enter name of player 1:");
         Player blue = new Player(namePlayer1, 'b');
@@ -72,6 +73,7 @@ public class Controller implements ActionListener {
         setGame(game);
         enableBoardButtons(true);
         enableSaveButton(true);
+        emptyViewBoardIcons();
         setViewBoardIcons();
     }
     
@@ -192,16 +194,16 @@ public class Controller implements ActionListener {
     try{
         if (pieceClick == false){
             if (game.getBoard().getSquareList()[i][j].isOccupied()){ //occupied square
-                if (game.getBoard().getP2().isTurn() == true &&
-                game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'b'){
+                if (game.getBoard().getP2().isTurn() &&
+                game.getBoard().getSquareList()[i][j].getPiece().getSide() == 'b'){
                     start = game.getBoard().getSquareList()[i][j];
                     view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED, 4));
                     pieceClick = true;
                     System.out.println("HERE AT BLUE");
                     System.out.println(start.getPiece().getName());
                 }
-                else if (game.getBoard().getP1().isTurn() == true &&
-                game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'r'){
+                else if (game.getBoard().getP1().isTurn() &&
+                game.getBoard().getSquareList()[i][j].getPiece().getSide() == 'r'){
                     view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED, 4));
                     start = game.getBoard().getSquareList()[i][j];
                     pieceClick = true;
@@ -214,7 +216,7 @@ public class Controller implements ActionListener {
             else
                  System.out.println("click on empty square");
         }
-        else if (pieceClick == true){
+        else{
                 if(start.getY() == i && start.getX() == j ){ //deselect square
                     view.getSquareButton()[i][j].setBorder(new LineBorder(Color.WHITE));
                     pieceClick = false;

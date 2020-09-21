@@ -27,6 +27,7 @@ public class Board {
         this.p1 = p1;
         this.p2 = p2;
         initBoard();
+        emptyAllSquares();
         if(!load)
             startingArrangement();
     }
