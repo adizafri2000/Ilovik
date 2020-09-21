@@ -170,7 +170,7 @@ public class Controller implements ActionListener {
             game.getBoard().getP1().setTurn(true);
         }
 
-        game.getBoard().flip();
+        //game.getBoard().flip();
     }
     
     private void movePiece(int i, int j){
@@ -400,6 +400,7 @@ public class Controller implements ActionListener {
     
     private void swapPiece(){
         System.out.println("in SWAPAIECE()");
+        game.getBoard().swapPieces();
         /*for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 if (game.getBoard().getSquareList()[i][j].isOccupied() == true){

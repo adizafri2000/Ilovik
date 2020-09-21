@@ -167,7 +167,6 @@ public class Player{
 	 */
 	public void updateMoves(){
 		if(moves==2){
-			swapPiece();
 			moves=0;
 		}
 		moves++;

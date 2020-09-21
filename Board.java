@@ -240,6 +240,11 @@ public class Board {
         }
         return true;
     }
+
+    public void swapPieces(){
+        p1.swapPiece();
+        p2.swapPiece();
+    }
     
     /**
      * Flips the board.
