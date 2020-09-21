@@ -160,10 +160,11 @@ public class Game {
      * @throws FileNotFoundException
      */
     public Board load() throws FileNotFoundException {
-        saveFile = new File(fileName);
+        //saveFile = new File(fileName);
         Scanner fRead = new Scanner(saveFile);
+        System.out.println(saveFile.exists());
         String line = " ";
-        Board tempBoard = new Board();
+        Board tempBoard;
 
         //1st line: side(char) and name(String)
         //Line example: b George
@@ -172,6 +173,7 @@ public class Game {
         //Blue player's side and name
         if(fRead.hasNext())
             line = fRead.nextLine();
+        System.out.println(line);
 
         Player bluePlayer2 = new Player(line.substring(4), line.charAt(0));
         bluePlayer2.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
@@ -184,6 +186,7 @@ public class Game {
         //Red player's side and name
         if(fRead.hasNextLine())
             line = fRead.nextLine();
+        System.out.println(line);
 
         Player redPlayer1 = new Player(line.substring(4), line.charAt(0));
         redPlayer1.setMoves(Integer.parseInt(Character.toString(line.charAt(2))));
@@ -197,7 +200,7 @@ public class Game {
 
         if(fRead.hasNextLine())
             line = fRead.nextLine();
-
+        System.out.println(line);
 
         //Set whose turn it is for the NEXT turn
         if (line.equals("r"))
@@ -213,6 +216,7 @@ public class Game {
         Player tempPlayer;
         while(fRead.hasNextLine()){
             line = fRead.nextLine();
+            System.out.println(line);
 
             int row = Integer.parseInt(Character.toString(line.charAt(0)));
             int col = Integer.parseInt(Character.toString(line.charAt(1)));
@@ -269,9 +273,6 @@ public class Game {
                             break;
             }
         }
-            
-        
-
         fRead.close();
         return tempBoard;
     }
@@ -456,12 +457,23 @@ public class Game {
         //Board board = new Board(p1, p2);
         //board.getP1().setTurn(true);
         //g = new Game(board);
-        if(g.loadExists())
-            if(g.checkLoad())
-                g.load();
-        g.setBoard(g.load());
-        g = new Game(g.load());
-        g.getBoard().debug();
+        Board load = g.load();
+        /*
+        System.out.println(load.getP1().getName());
+        for(int i=0;i<11;i++){
+            System.out.printf("%s: %s\n",load.getP1().getPieceList().get(i).getName(),load.getP1().getPieceList().get(i).isCaptured());
+        }
+        System.out.println(load.getP2().getName());
+        for(int i=0;i<11;i++){
+            System.out.printf("%s: %s\n",load.getP2().getPieceList().get(i).getName(),load.getP2().getPieceList().get(i).isCaptured());
+        }
+        */
+        
+        load.debug();
+        System.out.print("\n\n\nJUMPER\n\n\n");
+        g = new Game(load);
+
+        //g.getBoard().debug();
         //g.save();
 
     }

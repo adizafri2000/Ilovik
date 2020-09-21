@@ -18,7 +18,7 @@ import java.awt.*;
 
 
 public class View extends JFrame {
-    private JFrame frame;
+    private JFrame frame;   //view ni dah memang jframe (subclass of jframe) so tak perlu line ni
 	private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
     public JButton[][] squares = new JButton[8][7];  // components
