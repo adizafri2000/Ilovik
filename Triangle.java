@@ -8,6 +8,12 @@ public class Triangle extends Piece{
 	 * e.g "Arrow.png" could be "RedArrow.png" or "BlueArrow.png"
 	 */
 	private static String fileName = "Triangle.png";
+	
+	/**
+	 * The orientation of the Triangle piece.
+	 * Triangle pieces are only allowed to move diagonally
+	 * boolean finalmove is set to false
+	 */
 
 	public Triangle(char side) {
 		super(side,fileName);
@@ -17,6 +23,19 @@ public class Triangle extends Piece{
 	
 	@Override
     public boolean move(Square start, Square end){
+	    
+	/**
+		* Triangle piece can move multiple squares diagonally  
+		*/
+	 
+		/*** How triangle move (Implementation)
+			1. check if the start and end square are located diagonally
+				1.1 if it is not diagonally, then return false
+			2. Check if the end square is accoupied or not and if occupied, check the side of the piece in end square
+				2.1 return false is occupied and the piece is the same side
+			3. Movement logic
+				3.1 number of square from x of start square to x of end square and number of square from y of start square to y of end square must be the same
+		***/
 
         int xStart = start.getX();
         int yStart = start.getY();
@@ -51,7 +70,8 @@ public class Triangle extends Piece{
             dx = 0;
             dy = 0;
         }
-        //CHECK IF PATHWAY CLEAR
+	    
+	//check if length of dx equal to dy   
         if (dx == dy)
         {
 		move1 = true;
@@ -60,28 +80,23 @@ public class Triangle extends Piece{
 		move1 = false;
 	}
 	
-        
-        //move1 = (Math.abs(xStart-yStart)==Math.abs(yEnd-xEnd));
-        
-       
-    
-		boolean move2 = false;
-		//check if the new square has another piece, same side or not
-		//same side = cannot, diff side = eat
+
+	boolean move2 = false;
+	//check if the end square has another piece, same side or not
 			
-		if ((end.isOccupied() && (start.getPiece().getSide())==(end.getPiece().getSide()))){
-			move2 = false;
-		}
-		else 
-		{
-			move2 = true;
-		}
+	if ((end.isOccupied() && (start.getPiece().getSide())==(end.getPiece().getSide()))){
+		move2 = false;
+	}
+	else 
+	{
+		move2 = true;
+	}
 		
-			//final move or not
-		boolean finalmove = false;
-		if (move1 && move2){
-			finalmove = true;
-		}
+	//final move validation of triangle piece
+	boolean finalmove = false;
+	if (move1 && move2){
+		finalmove = true;
+	}
 				
 		return finalmove;
 	}
