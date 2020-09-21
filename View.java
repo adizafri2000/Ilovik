@@ -1,17 +1,7 @@
-
-
-
-/* RESIZE FRAME, SET ICON CENTER , ADD LABEL PLAYER NAME , SET JPANEL1 ,JPANEL2 */
 /***
--set icon dalam jButton:
- --> controller return square.occupied jadi false, kosongkan icon
- --> the same to controller return apa2 piece to a newer location
-        -->set icon to new piece punya icon
--icon punya file name, controller bagi jgn set sendiri okay
 PLAYER 1 RED
 PLAYER 2 BLUE
 ***/
-
 
 import java.util.*;
 import javax.swing.*;
@@ -23,7 +13,7 @@ public class View extends JFrame {
     private JFrame frame;       // Main window
     private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
-    public JButton[][] squares = new JButton[8][7];  // components
+    public JButton[][] squares = new JButton[8][7];  /** components **/
     private JLabel instruction;
     /**
      * Holds the text for RED player's name
@@ -40,12 +30,11 @@ public class View extends JFrame {
         super("Ilovik Webale Chess");
         setSize(800, 800);
         setMinimumSize(getSize());
-        //getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
         player1Name = new JLabel("Select New Game to start!");
         player2Name = new JLabel("");
         
         boardPanel = new JPanel(new GridLayout(8,7));
-		boardPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        boardPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         home = new JPanel();
         home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
         
@@ -77,96 +66,32 @@ public class View extends JFrame {
         home.add(player2Name);
         add(home);
         
-        /*
-
-        String pathBP = "/icons/BluePlus.png";
-        String pathBT = "/icons/BlueTriangle.png";
-        String pathBC = "/icons/BlueChevron.png";
-        String pathBS = "/icons/BlueSun.png";
-        String pathBA = "/icons/BlueArrow.png";
         
-        String pathRP = "/icons/RedPlus.png";
-        String pathRT = "/icons/RedTriangle.png";
-        String pathRC = "/icons/RedChevron.png";
-        String pathRS = "/icons/RedSun.png";
-        String pathRA = "/icons/RedArrow.png"; 
+            squares[0][0].setIcon(getIcon("BluePlus.png"));      
+            squares[0][1].setIcon(getIcon("BlueTriangle.png"));
+            squares[0][2].setIcon(getIcon("BlueChevron.png"));
+            squares[0][3].setIcon(getIcon("BlueSun.png"));
+            squares[0][4].setIcon(getIcon("BlueChevron.png"));
+            squares[0][5].setIcon(getIcon("BlueTriangle.png"));
+            squares[0][6].setIcon(getIcon("BluePlus.png"));
+            squares[1][0].setIcon(getIcon("BlueArrow.png"));
+            squares[1][2].setIcon(getIcon("BlueArrow.png"));
+            squares[1][4].setIcon(getIcon("BlueArrow.png"));
+            squares[1][6].setIcon(getIcon("BlueArrow.png"));
+            
+            squares[7][0].setIcon(getIcon("RedPlus.png"));
+            squares[7][1].setIcon(getIcon("RedTriangle.png"));
+            squares[7][2].setIcon(getIcon("RedChevron.png"));
+            squares[7][3].setIcon(getIcon("RedSun.png"));
+            squares[7][4].setIcon(getIcon("RedChevron.png"));
+            squares[7][5].setIcon(getIcon("RedTriangle.png"));
+            squares[7][6].setIcon(getIcon("RedPlus.png"));
+            squares[6][0].setIcon(getIcon("RedArrow.png"));
+            squares[6][2].setIcon(getIcon("RedArrow.png"));
+            squares[6][4].setIcon(getIcon("RedArrow.png"));
+            squares[6][6].setIcon(getIcon("RedArrow.png"));
         
-        // Blue Icon Pieces
-        ImageIcon BluePlus = new ImageIcon(getClass().getResource(pathBP)); // load the image to imageIcon
-        Image bluePlus = BluePlus.getImage(); //transform it 
-        Image newBluePlus = bluePlus.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        BluePlus = new ImageIcon(newBluePlus); //transfer it back
         
-        ImageIcon BlueTriangle = new ImageIcon(getClass().getResource(pathBT)); // load the image to imageIcon
-        Image blueTriangle = BlueTriangle.getImage(); //transform it 
-        Image newBlueTriangle = blueTriangle.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        BlueTriangle = new ImageIcon(newBlueTriangle); //transfer it back
-        
-        ImageIcon BlueChevron = new ImageIcon(getClass().getResource(pathBC));// load the image to imageIcon
-        Image blueChevron = BlueChevron.getImage(); //transform it 
-        Image newBlueChevron = blueChevron.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        BlueChevron = new ImageIcon(newBlueChevron); //transfer it back
-        
-        ImageIcon BlueSun = new ImageIcon(getClass().getResource(pathBS));// load the image to imageIcon
-        Image blueSun = BlueSun.getImage(); //transform it 
-        Image newBlueSun = blueSun.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        BlueSun = new ImageIcon(newBlueSun); //transfer it back
-        
-        ImageIcon BlueArrow = new ImageIcon(getClass().getResource(pathBA));// load the image to imageIcon
-        Image blueArrow = BlueArrow.getImage(); //transform it 
-        Image newBlueArrow = blueArrow.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        BlueArrow = new ImageIcon(newBlueArrow); //transfer it back
-        
-        // Red Icon Pieces
-        ImageIcon RedPlus = new ImageIcon(getClass().getResource(pathRP));// load the image to imageIcon
-        Image redPlus = RedPlus.getImage(); //transform it 
-        Image newRedPlus = redPlus.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        RedPlus = new ImageIcon(newRedPlus); //transfer it back
-        
-        ImageIcon RedTriangle = new ImageIcon(getClass().getResource(pathRT));// load the image to imageIcon
-        Image redTriangle = RedTriangle.getImage(); //transform it 
-        Image newRedTriangle = redTriangle.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        RedTriangle = new ImageIcon(newRedTriangle); //transfer it back
-        
-        ImageIcon RedChevron = new ImageIcon(getClass().getResource(pathRC)); // load the image to imageIcon
-        Image redChevron = RedChevron.getImage(); //transform it 
-        Image newRedChevron = redChevron.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        RedChevron = new ImageIcon(newRedChevron); //transfer it back
-        
-        ImageIcon RedSun = new ImageIcon(getClass().getResource(pathRS)); // load the image to imageIcon
-        Image redSun = RedSun.getImage(); //transform it 
-        Image newRedSun = redSun.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        RedSun = new ImageIcon(newRedSun); //transfer it back
-        
-        ImageIcon RedArrow = new ImageIcon(getClass().getResource(pathRA));// load the image to imageIcon
-        Image redArrow = RedArrow.getImage(); //transform it 
-        Image newRedArrow = redArrow.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
-        RedArrow = new ImageIcon(newRedArrow); //transfer it back
-        
-        squares[0][0].setIcon(BluePlus);      
-        squares[0][1].setIcon(BlueTriangle);
-        squares[0][2].setIcon(BlueChevron);
-        squares[0][3].setIcon(BlueSun);
-        squares[0][4].setIcon(BlueChevron);
-        squares[0][5].setIcon(BlueTriangle);
-        squares[0][6].setIcon(BluePlus);
-        squares[1][0].setIcon(BlueArrow);
-        squares[1][2].setIcon(BlueArrow);
-        squares[1][4].setIcon(BlueArrow);
-        squares[1][6].setIcon(BlueArrow);
-        
-        squares[7][0].setIcon(RedPlus);
-        squares[7][1].setIcon(RedTriangle);
-        squares[7][2].setIcon(RedChevron);
-        squares[7][3].setIcon(RedSun);
-        squares[7][4].setIcon(RedChevron);
-        squares[7][5].setIcon(RedTriangle);
-        squares[7][6].setIcon(RedPlus);
-        squares[6][0].setIcon(RedArrow);
-        squares[6][2].setIcon(RedArrow);
-        squares[6][4].setIcon(RedArrow);
-        squares[6][6].setIcon(RedArrow);
-        */
         
         setLocationRelativeTo(null);
         setVisible(true); // set the frame visible
