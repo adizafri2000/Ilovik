@@ -16,18 +16,23 @@ public class View extends JFrame {
     private JMenuBar menuBar;
     private JButton newGameMenu, loadMenu, saveMenu;
     public JButton[][] squares = new JButton[8][7];  /** components **/
-    private JLabel instruction;
+    
     /**
-     * Holds the text for RED player's name
+     * Holds the text for BLUE player's name
      */
     private JLabel player1Name;
 
     /**
-     * Holds the text for BLUE player's name
+     * Holds the text for RED player's name
      */
     private JLabel player2Name; 
+    
     private JPanel boardPanel, home;
     
+    /**
+     * 1. Create board
+     * 2. Set respective icon to each button
+    **/
     public View() {
         super("Ilovik Webale Chess");
         setSize(800, 800);
@@ -99,6 +104,9 @@ public class View extends JFrame {
         setVisible(true); // set the frame visible
     }
     
+    /**
+     * Set icon to square by retrieving icon from file path
+    **/
     public void addIcon(int row, int col, String iconFile){
         String iconPath = "/icons/";
         iconPath = iconPath+iconFile;
@@ -109,6 +117,9 @@ public class View extends JFrame {
         squares[row][col].setIcon(icon);
     }
 
+     /**
+     * Set square empty and remove an icon
+    **/
     public void emptyIcon(){
         for(int i=0;i<8;i++){
             for(int j=0;j<7;j++){
@@ -117,6 +128,9 @@ public class View extends JFrame {
         }
     }
     
+    /**
+     * Return icon to square by retrieving icon file name
+    **/
     public ImageIcon getIcon(String file){
         String path = "/icons/";
         path = path+file;
