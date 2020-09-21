@@ -35,13 +35,13 @@ public class View extends JFrame {
     public View() {
         super("Ilovik Webale Chess");
         setSize(800, 800);
-		//setPreferredSize(new Dimension(800, 800));
         setMinimumSize(getSize());
         //getContentPane().setLayout(new xBoxLayout(getContentPane(),BoxLayout.Y_AXIS));
         player1Name = new JLabel("Kamal");
         player2Name = new JLabel("Ali");
         
         boardPanel = new JPanel(new GridLayout(8,7));
+		boardPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         home = new JPanel();
         home.setLayout(new BoxLayout(home,BoxLayout.Y_AXIS));
         setBackground(Color.BLACK);
@@ -69,7 +69,7 @@ public class View extends JFrame {
                 boardPanel.add(squares[i][j]);
             }
         }
-        home.add(boardPanel);
+        home.add(boardPanel, BorderLayout.CENTER);
         home.add(player2Name);
         add(home);
         
