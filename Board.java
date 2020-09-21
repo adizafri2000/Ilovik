@@ -146,7 +146,7 @@ public class Board {
         if (start.getPiece() instanceof Triangle){
             //Triangle pathway check
 	    boolean move = false;
-            if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
+            if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
 			{
 				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
@@ -160,7 +160,7 @@ public class Board {
 							}
 				}
 			}
-	    else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
+	    else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
 			{
 				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
@@ -174,7 +174,7 @@ public class Board {
 							}
 				}
 			}
-	   else if ((end.getX() < start.getX()) && (end.getY() > start.getY()))
+	   else if ((end.getX() > start.getX()) && (end.getY() < start.getY()))
 			{
 				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
@@ -188,7 +188,7 @@ public class Board {
 							}
 				}
 			}
-	  else if ((end.getX() > start.getX()) && (end.getY() > start.getY()))
+	  else if ((end.getX() < start.getX()) && (end.getY() < start.getY()))
 			{
 				Square temp = squareList[start.getY()][start.getX()];
 				while(temp.getX() != (end.getX()+1)){
