@@ -1,3 +1,6 @@
+/**
+ * @author Aina, Puteri, Iffah, Adi
+ */
 /***
 PLAYER 1 RED
 PLAYER 2 BLUE
@@ -44,7 +47,7 @@ public class View extends JFrame {
         createMenu();
         addMenuBarMenus();          // Add Menu to MenuBar
         add(menuBar);   
-        setJMenuBar(menuBar);  // Add MenuBar to the Frame
+        setJMenuBar(menuBar);  		// Add MenuBar to the Frame
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         home.add(player1Name);
