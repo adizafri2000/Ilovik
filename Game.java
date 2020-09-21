@@ -77,7 +77,7 @@ public class Game {
     }
 
     public Game() {
-        this.board = new Board();
+
     }
 
     /**
@@ -451,9 +451,14 @@ public class Game {
             g.createSaveFile();
         System.out.println(g.loadExists());
         Board load = g.load();
-        System.out.print("\n\n\nJUMPER\n\n\n");
+        
         g = new Game(load);
 
+        g.getBoard().debug();
+        System.out.print("\n\n\nJUMPER\n\n\n");
+        g.getBoard().getP1().setTurn(true);
+        g.getBoard().getP2().setTurn(false);
+        g.getBoard().flip();
         g.getBoard().debug();
         //g.save();
 

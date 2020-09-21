@@ -1,5 +1,5 @@
 b 0 Bobby
 r 0 Zafirullah
 r
-10 rSun
-12 bSun
+00 rSun
+76 bSun

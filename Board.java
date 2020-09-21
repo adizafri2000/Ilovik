@@ -32,6 +32,10 @@ public class Board {
             startingArrangement();
     }
 
+    public Board(){
+        initBoard();
+    }
+
     /**
      * Initializes all the squares in the squareList, setting each to empty(unoccupied) status
      */
@@ -194,11 +198,14 @@ public class Board {
      */
     public void flip(){
         Square[][] temp = new Square[8][7];
+
         for(int i=0;i<8;i++){
             for(int j=0;j<7;j++){
                 temp[i][j] = squareList[7-i][6-j];
             }
         }
+
+        squareList = temp;
     }
 
     public void debug(){

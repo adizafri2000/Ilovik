@@ -129,3 +129,4 @@ public class Square {
         System.out.printf("sq: (%d,%d),%s\n",sq.getX(),sq.getY(),sq.isOccupied());
     }
 }
+
