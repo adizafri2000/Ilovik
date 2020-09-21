@@ -159,72 +159,81 @@ public class Controller implements ActionListener {
         }
     }
     
-    
+    public void flipBoard(){
+        if(game.getBoard().getP1().isTurn()){
+            
+        }
+            //flip, blue player bottom, red up
+        else{
+
+        }
+            //flip, red player bottom, blue up
+    }
 
     
     private void movePiece(int i, int j){
         //&&  board.squareList[i][j] != null
         
-    try{
-        if (pieceClick == false){
-            if (game.getBoard().getSquareList()[i][j].isOccupied()){ //occupied square
-                if (game.getBoard().getP1().getSide() == 'b' && game.getBoard().getP1().isTurn() == true &&
-                game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'b'){
-                    start = game.getBoard().getSquareList()[i][j];
-                    pieceClick = true;
-                    view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED));
-                    System.out.println("HERE AT BLUE");
-                    System.out.println(start.getPiece().getName());
-                    System.out.println("This is an arrow: "+(start.getPiece() instanceof Arrow));
-                    //System.out.println(start.getY() + " " + start.getX());
-                }
-                else if (game.getBoard().getP2().getSide() == 'r' && game.getBoard().getP2().isTurn() == true &&
-                game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'r'){
-                    start = game.getBoard().getSquareList()[i][j];
-                    pieceClick = true;
-                    view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED));
-                    System.out.println("HERE AT RED");
-                }
-                else
-                    JOptionPane.showMessageDialog(null, "Not your turn yet!");
-            }
-            else
-                 System.out.println("click on empty square");
-        }
-        else if (pieceClick == true){
-            if(start.getY() == i && start.getX() == j ){ //deselect square
-                view.getSquareButton()[i][j].setBorder(new LineBorder(Color.WHITE));
-                pieceClick = false;
-                System.out.println("DESELECT");
-                
-            } 
-            else{
-                    end = game.getBoard().getSquareList()[i][j];
-
-                    if (end.isOccupied()){
-                        System.out.println(end.getPiece().getName());
-                        JOptionPane.showMessageDialog(null, "The square is occupied!");
+        try{
+            if (pieceClick == false){
+                if (game.getBoard().getSquareList()[i][j].isOccupied()){ //occupied square
+                    if (game.getBoard().getP1().getSide() == 'b' && game.getBoard().getP1().isTurn() == true &&
+                    game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'b'){
+                        start = game.getBoard().getSquareList()[i][j];
+                        pieceClick = true;
+                        view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED));
+                        System.out.println("HERE AT BLUE");
+                        System.out.println(start.getPiece().getName());
+                        System.out.println("This is an arrow: "+(start.getPiece() instanceof Arrow));
+                        //System.out.println(start.getY() + " " + start.getX());
                     }
-                    else{
-                        System.out.println("Selected square is empty");
-                    }
-                    
-                    boolean isMoveValid = start.getPiece().move(start, end); 
-                    if(isMoveValid){
-                        pieceClick = false;
-                        System.out.println("Valid Move");
+                    else if (game.getBoard().getP2().getSide() == 'r' && game.getBoard().getP2().isTurn() == true &&
+                    game.getBoard().getSquareList()[i][j].getPiece().getName().charAt(0) == 'r'){
+                        start = game.getBoard().getSquareList()[i][j];
+                        pieceClick = true;
+                        view.getSquareButton()[i][j].setBorder(new LineBorder(Color.RED));
+                        System.out.println("HERE AT RED");
                     }
                     else
-                        System.out.println("Invalid Move");
-                    
-                    view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE));
-                                System.out.println("start: " + start.getY() + "," + start.getX()
-                                + " end: " + end.getY() + "," + end.getX());
+                        JOptionPane.showMessageDialog(null, "Not your turn yet!");
+                }
+                else
+                    System.out.println("click on empty square");
             }
-                   
-        }
-    }catch (NullPointerException ex){ex.printStackTrace();}
-}
+            else if (pieceClick == true){
+                if(start.getY() == i && start.getX() == j ){ //deselect square
+                    view.getSquareButton()[i][j].setBorder(new LineBorder(Color.WHITE));
+                    pieceClick = false;
+                    System.out.println("DESELECT");
+                    
+                } 
+                else{
+                        end = game.getBoard().getSquareList()[i][j];
+
+                        if (end.isOccupied()){
+                            System.out.println(end.getPiece().getName());
+                            JOptionPane.showMessageDialog(null, "The square is occupied!");
+                        }
+                        else{
+                            System.out.println("Selected square is empty");
+                        }
+                        
+                        boolean isMoveValid = start.getPiece().move(start, end); 
+                        if(isMoveValid){
+                            pieceClick = false;
+                            System.out.println("Valid Move");
+                        }
+                        else
+                            System.out.println("Invalid Move");
+                        
+                        view.getSquareButton()[start.getY()][start.getX()].setBorder(new LineBorder(Color.WHITE));
+                                    System.out.println("start: " + start.getY() + "," + start.getX()
+                                    + " end: " + end.getY() + "," + end.getX());
+                }
+                    
+            }
+        }catch (NullPointerException ex){ex.printStackTrace();}
+    }
 
     //test controller
     public static void main(String[] args){

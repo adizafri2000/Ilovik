@@ -187,7 +187,19 @@ public class Board {
                 return pathwayClear1(temp, end);
             }
         }
-	}*/
+    }*/
+    
+    /**
+     * Flips the board.
+     */
+    public void flip(){
+        Square[][] temp = new Square[8][7];
+        for(int i=0;i<8;i++){
+            for(int j=0;j<7;j++){
+                temp[i][j] = squareList[7-i][6-j];
+            }
+        }
+    }
 
     public void debug(){
         Square temp;
