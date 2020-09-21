@@ -120,13 +120,5 @@ public class Square {
     public boolean isNearDestination(Square end){
         return ((Math.abs(this.getX()-end.getX())<2)&&(Math.abs(this.getY()-end.getY())<2));
     }
-
-    public static void main(String[] args) {
-        Square sq = new Square.Builder().x(5).y(5).occupied(false).build();
-        System.out.printf("sq: (%d,%d),%s\n",sq.getX(),sq.getY(),sq.isOccupied());
-
-        sq.setX(23);
-        System.out.printf("sq: (%d,%d),%s\n",sq.getX(),sq.getY(),sq.isOccupied());
-    }
 }
 
